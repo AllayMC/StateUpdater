@@ -1,6 +1,7 @@
 package org.cloudburstmc.updater.block;
 
 import org.cloudburstmc.updater.block.context.BlockUpdaterContext;
+import org.cloudburstmc.updater.block.context.RemapValue;
 
 public class BlockStateUpdater_1_16_0 extends BlockStateUpdater {
     public static final BlockStateUpdater INSTANCE = new BlockStateUpdater_1_16_0();
@@ -36,6 +37,10 @@ public class BlockStateUpdater_1_16_0 extends BlockStateUpdater {
         context.removeProperty("minecraft:polished_blackstone_brick_wall", "wall_block_type");
         context.removeProperty("minecraft:polished_blackstone_wall", "wall_block_type");
 
-        // TODO: remappedPropertyValues
+        context.remapValues("minecraft:cobblestone_wall", "wall_block_type",
+                new RemapValue("blackstone", "cobblestone"),
+                new RemapValue("polished_blackstone", "cobblestone"),
+                new RemapValue("polished_blackstone_brick", "cobblestone")
+        );
     }
 }

@@ -1,6 +1,7 @@
 package org.cloudburstmc.updater.block;
 
 import org.cloudburstmc.updater.block.context.BlockUpdaterContext;
+import org.cloudburstmc.updater.block.context.RemapValue;
 
 public class BlockStateUpdater_1_20_0 extends BlockStateUpdater {
     public static final BlockStateUpdater INSTANCE = new BlockStateUpdater_1_20_0();
@@ -22,7 +23,20 @@ public class BlockStateUpdater_1_20_0 extends BlockStateUpdater {
 
         context.removeProperty("minecraft:calibrated_sculk_sensor", "powered_bit");
 
-        // TODO: remappedPropertyValues
+        var direction_00 = new RemapValue[]{
+                new RemapValue(0, "south"),
+                new RemapValue(1, "west"),
+                new RemapValue(2, "north"),
+                new RemapValue(3, "east")
+        };
+        context.remapValues("minecraft:carved_pumpkin", "direction", direction_00);
+        context.remapValues("minecraft:lit_pumpkin", "direction", direction_00);
+        context.remapValues("minecraft:pumpkin", "direction", direction_00);
+        context.remapValues("minecraft:sculk_sensor", "powered_bit",
+                new RemapValue((byte) 0, 0),
+                new RemapValue((byte) 1, 1)
+        );
+
         // TODO: remappedStates
     }
 }

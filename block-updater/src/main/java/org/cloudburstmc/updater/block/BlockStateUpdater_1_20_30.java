@@ -1,6 +1,7 @@
 package org.cloudburstmc.updater.block;
 
 import org.cloudburstmc.updater.block.context.BlockUpdaterContext;
+import org.cloudburstmc.updater.block.context.RemapValue;
 
 public class BlockStateUpdater_1_20_30 extends BlockStateUpdater {
     public static final BlockStateUpdater INSTANCE = new BlockStateUpdater_1_20_30();
@@ -31,7 +32,41 @@ public class BlockStateUpdater_1_20_30 extends BlockStateUpdater {
         context.renameProperty("minecraft:unpowered_comparator", "direction", "minecraft:cardinal_direction");
         context.renameProperty("minecraft:unpowered_repeater", "direction", "minecraft:cardinal_direction");
 
-        // TODO: remappedPropertyValues
+        var direction_00 = new RemapValue[]{
+                new RemapValue(0, "south"),
+                new RemapValue(1, "west"),
+                new RemapValue(2, "north"),
+                new RemapValue(3, "east")
+        };
+        context.remapValues("minecraft:anvil", "direction", direction_00);
+        context.remapValues("minecraft:big_dripleaf", "direction", direction_00);
+        context.remapValues("minecraft:calibrated_sculk_sensor", "direction", direction_00);
+        context.remapValues("minecraft:campfire", "direction", direction_00);
+        context.remapValues("minecraft:end_portal_frame", "direction", direction_00);
+        context.remapValues("minecraft:lectern", "direction", direction_00);
+        context.remapValues("minecraft:pink_petals", "direction", direction_00);
+        context.remapValues("minecraft:powered_comparator", "direction", direction_00);
+        context.remapValues("minecraft:powered_repeater", "direction", direction_00);
+        context.remapValues("minecraft:small_dripleaf_block", "direction", direction_00);
+        context.remapValues("minecraft:soul_campfire", "direction", direction_00);
+        context.remapValues("minecraft:unpowered_comparator", "direction", direction_00);
+        context.remapValues("minecraft:unpowered_repeater", "direction", direction_00);
+
+        var facing_direction_00 = new RemapValue[]{
+                new RemapValue(0, "south"),
+                new RemapValue(1, "west"),
+                new RemapValue(2, "north"),
+                new RemapValue(3, "south"),
+                new RemapValue(4, "west"),
+                new RemapValue(5, "east")
+        };
+        context.remapValues("minecraft:blast_furnace", "facing_direction", facing_direction_00);
+        context.remapValues("minecraft:furnace", "facing_direction", facing_direction_00);
+        context.remapValues("minecraft:lit_blast_furnace", "facing_direction", facing_direction_00);
+        context.remapValues("minecraft:lit_furnace", "facing_direction", facing_direction_00);
+        context.remapValues("minecraft:lit_smoker", "facing_direction", facing_direction_00);
+        context.remapValues("minecraft:smoker", "facing_direction", facing_direction_00);
+
         // TODO: remappedStates
     }
 }

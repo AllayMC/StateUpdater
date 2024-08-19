@@ -1,6 +1,7 @@
 package org.cloudburstmc.updater.block;
 
 import org.cloudburstmc.updater.block.context.BlockUpdaterContext;
+import org.cloudburstmc.updater.block.context.RemapValue;
 
 public class BlockStateUpdater_1_12_0 extends BlockStateUpdater {
     public static final BlockStateUpdater INSTANCE = new BlockStateUpdater_1_12_0();
@@ -23,6 +24,18 @@ public class BlockStateUpdater_1_12_0 extends BlockStateUpdater {
         context.addProperty("minecraft:campfire", "extinguished", (byte) 0);
         context.addProperty("minecraft:lectern", "powered_bit", (byte) 0);
 
-        // TODO: remappedPropertyValues
+        context.remapValues("minecraft:barrel", "facing_direction",
+                new RemapValue(6, 0),
+                new RemapValue(7, 0)
+        );
+
+        var direction_00 = new RemapValue[]{
+                new RemapValue(0, 3),
+                new RemapValue(1, 4),
+                new RemapValue(3, 5)
+        };
+        context.remapValues("minecraft:blast_furnace", "direction", direction_00);
+        context.remapValues("minecraft:smoker", "direction", direction_00);
+
     }
 }

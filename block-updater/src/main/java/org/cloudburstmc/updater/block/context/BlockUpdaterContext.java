@@ -2,6 +2,8 @@ package org.cloudburstmc.updater.block.context;
 
 import org.cloudburstmc.updater.common.context.UpdaterContext;
 
+import java.util.Arrays;
+
 /**
  * StateUpdater Project 19/08/2024
  *
@@ -47,5 +49,20 @@ public class BlockUpdaterContext extends UpdaterContext<BlockUpdater, BlockUpdat
 
     public void renameId(String oldId, String newId) {
         this.addUpdater().renameId("Name", oldId, newId);
+    }
+
+    public void remapValues(String name, String property, RemapValue... remapValues) {
+        this.addUpdater()
+                .match("name", name)
+                .visit("states")
+                .tryEdit(property, helper -> {
+                    var oldValue = helper.getTag();
+                    var remapValue = Arrays.stream(remapValues)
+                            .filter(entry -> entry.oldValue().equals(oldValue))
+                            .findFirst()
+                            .orElseThrow(() -> new IllegalStateException("Unexpected remap value '%s' for '%s'".formatted(oldValue, name)));
+
+                    helper.replaceWith(property, remapValue.newValue());
+                });
     }
 }

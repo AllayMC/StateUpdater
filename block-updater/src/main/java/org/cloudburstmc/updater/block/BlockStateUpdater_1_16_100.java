@@ -1,6 +1,7 @@
 package org.cloudburstmc.updater.block;
 
 import org.cloudburstmc.updater.block.context.BlockUpdaterContext;
+import org.cloudburstmc.updater.block.context.RemapValue;
 
 /**
  * StateUpdater Project 19/08/2024
@@ -21,6 +22,13 @@ public class BlockStateUpdater_1_16_100 extends BlockStateUpdater {
 
         context.addProperty("minecraft:chain", "pillar_axis", "y");
 
-        // TODO: remappedPropertyValues
+        var facing_direction_00 = new RemapValue[]{
+                new RemapValue(1, 0),
+                new RemapValue(3, 0),
+                new RemapValue(4, 1),
+                new RemapValue(5, 3)
+        };
+        context.remapValues("minecraft:bee_nest", "facing_direction", facing_direction_00);
+        context.remapValues("minecraft:beehive", "facing_direction", facing_direction_00);
     }
 }
