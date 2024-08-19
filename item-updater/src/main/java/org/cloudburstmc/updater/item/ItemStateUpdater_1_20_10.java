@@ -1,9 +1,6 @@
 package org.cloudburstmc.updater.item;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import org.cloudburstmc.updater.common.context.UpdaterContext;
-import org.cloudburstmc.updater.item.context.ItemUpdater;
+import org.cloudburstmc.updater.item.context.ItemUpdaterContext;
 import org.cloudburstmc.updater.item.context.RemapMetaEntry;
 
 /**
@@ -11,13 +8,16 @@ import org.cloudburstmc.updater.item.context.RemapMetaEntry;
  *
  * @author IWareQ
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ItemStateUpdater_1_20_10 implements ItemStateUpdater {
+public class ItemStateUpdater_1_20_10 extends ItemStateUpdater {
     public static final ItemStateUpdater INSTANCE = new ItemStateUpdater_1_20_10();
 
+    private ItemStateUpdater_1_20_10() {
+        super(1, 20, 10);
+    }
+
     @Override
-    public void registerUpdaters(UpdaterContext<ItemUpdater, ItemUpdater.Builder> context) {
-        context.addUpdater(1, 20, 10).remapMeta(
+    public void registerUpdaters(ItemUpdaterContext context) {
+        context.remapMeta(
                 "minecraft:concrete",
                 new RemapMetaEntry(0, "minecraft:white_concrete"),
                 new RemapMetaEntry(1, "minecraft:orange_concrete"),
@@ -35,7 +35,8 @@ public class ItemStateUpdater_1_20_10 implements ItemStateUpdater {
                 new RemapMetaEntry(13, "minecraft:green_concrete"),
                 new RemapMetaEntry(14, "minecraft:red_concrete"),
                 new RemapMetaEntry(15, "minecraft:black_concrete")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:shulker_box",
                 new RemapMetaEntry(0, "minecraft:white_shulker_box"),
                 new RemapMetaEntry(1, "minecraft:orange_shulker_box"),

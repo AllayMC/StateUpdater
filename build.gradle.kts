@@ -10,7 +10,6 @@ subprojects {
     apply(plugin = "signing")
 
     group = "org.cloudburstmc"
-    version = "1.21.0"
     description = "Updates Minecraft: Bedrock Edition states to the latest revision"
 
     repositories {
@@ -19,7 +18,7 @@ subprojects {
 
     dependencies {
         implementation("com.fasterxml.jackson.core:jackson-databind:2.17.2")
-        implementation("org.cloudburstmc:nbt:3.0.0.Final")
+        implementation("org.cloudburstmc:nbt:3.0.3.Final")
 
         compileOnly("org.projectlombok:lombok:1.18.34")
         annotationProcessor("org.projectlombok:lombok:1.18.34")

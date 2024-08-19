@@ -1,9 +1,6 @@
 package org.cloudburstmc.updater.item;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import org.cloudburstmc.updater.common.context.UpdaterContext;
-import org.cloudburstmc.updater.item.context.ItemUpdater;
+import org.cloudburstmc.updater.item.context.ItemUpdaterContext;
 import org.cloudburstmc.updater.item.context.RemapMetaEntry;
 
 /**
@@ -11,13 +8,16 @@ import org.cloudburstmc.updater.item.context.RemapMetaEntry;
  *
  * @author IWareQ
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ItemStateUpdater_1_20_60 implements ItemStateUpdater {
+public class ItemStateUpdater_1_20_60 extends ItemStateUpdater {
     public static final ItemStateUpdater INSTANCE = new ItemStateUpdater_1_20_60();
 
+    private ItemStateUpdater_1_20_60() {
+        super(1, 20, 60);
+    }
+
     @Override
-    public void registerUpdaters(UpdaterContext<ItemUpdater, ItemUpdater.Builder> context) {
-        context.addUpdater(1, 20, 60).remapMeta(
+    public void registerUpdaters(ItemUpdaterContext context) {
+        context.remapMeta(
                 "minecraft:hard_stained_glass",
                 new RemapMetaEntry(0, "minecraft:hard_white_stained_glass"),
                 new RemapMetaEntry(1, "minecraft:hard_orange_stained_glass"),
@@ -35,7 +35,8 @@ public class ItemStateUpdater_1_20_60 implements ItemStateUpdater {
                 new RemapMetaEntry(13, "minecraft:hard_green_stained_glass"),
                 new RemapMetaEntry(14, "minecraft:hard_red_stained_glass"),
                 new RemapMetaEntry(15, "minecraft:hard_black_stained_glass")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:hard_stained_glass_pane",
                 new RemapMetaEntry(0, "minecraft:hard_white_stained_glass_pane"),
                 new RemapMetaEntry(1, "minecraft:hard_orange_stained_glass_pane"),
@@ -53,13 +54,13 @@ public class ItemStateUpdater_1_20_60 implements ItemStateUpdater {
                 new RemapMetaEntry(13, "minecraft:hard_green_stained_glass_pane"),
                 new RemapMetaEntry(14, "minecraft:hard_red_stained_glass_pane"),
                 new RemapMetaEntry(15, "minecraft:hard_black_stained_glass_pane")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:spawn_egg",
                 new RemapMetaEntry(140, "minecraft:breeze_spawn_egg"),
                 new RemapMetaEntry(142, "minecraft:armadillo_spawn_egg")
         );
 
-        context.addUpdater(1, 20, 60)
-                .renameId("minecraft:scute", "minecraft:turtle_scute");
+        context.renameId("minecraft:scute", "minecraft:turtle_scute");
     }
 }

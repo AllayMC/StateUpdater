@@ -1,9 +1,6 @@
 package org.cloudburstmc.updater.item;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import org.cloudburstmc.updater.common.context.UpdaterContext;
-import org.cloudburstmc.updater.item.context.ItemUpdater;
+import org.cloudburstmc.updater.item.context.ItemUpdaterContext;
 import org.cloudburstmc.updater.item.context.RemapMetaEntry;
 
 /**
@@ -11,19 +8,24 @@ import org.cloudburstmc.updater.item.context.RemapMetaEntry;
  *
  * @author IWareQ
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ItemStateUpdater_1_19_80 implements ItemStateUpdater {
+public class ItemStateUpdater_1_19_80 extends ItemStateUpdater {
     public static final ItemStateUpdater INSTANCE = new ItemStateUpdater_1_19_80();
 
+    private ItemStateUpdater_1_19_80() {
+        super(1, 19, 80);
+    }
+
     @Override
-    public void registerUpdaters(UpdaterContext<ItemUpdater, ItemUpdater.Builder> context) {
-        context.addUpdater(1, 19, 80).remapMeta(
+    public void registerUpdaters(ItemUpdaterContext context) {
+        context.remapMeta(
                 "minecraft:boat",
                 new RemapMetaEntry(8, "minecraft:cherry_boat")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:chest_boat",
                 new RemapMetaEntry(8, "minecraft:cherry_chest_boat")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:fence",
                 new RemapMetaEntry(0, "minecraft:oak_fence"),
                 new RemapMetaEntry(1, "minecraft:spruce_fence"),
@@ -31,7 +33,8 @@ public class ItemStateUpdater_1_19_80 implements ItemStateUpdater {
                 new RemapMetaEntry(3, "minecraft:jungle_fence"),
                 new RemapMetaEntry(4, "minecraft:acacia_fence"),
                 new RemapMetaEntry(5, "minecraft:dark_oak_fence")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:log",
                 new RemapMetaEntry(0, "minecraft:oak_log"),
                 new RemapMetaEntry(1, "minecraft:spruce_log"),
@@ -43,7 +46,8 @@ public class ItemStateUpdater_1_19_80 implements ItemStateUpdater {
                 new RemapMetaEntry(9, "minecraft:spruce_log"),
                 new RemapMetaEntry(10, "minecraft:birch_log"),
                 new RemapMetaEntry(11, "minecraft:jungle_log")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:log2",
                 new RemapMetaEntry(0, "minecraft:acacia_log"),
                 new RemapMetaEntry(1, "minecraft:dark_oak_log"),

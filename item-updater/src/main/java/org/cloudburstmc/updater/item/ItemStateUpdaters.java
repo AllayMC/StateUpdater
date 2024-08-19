@@ -2,8 +2,7 @@ package org.cloudburstmc.updater.item;
 
 import lombok.experimental.UtilityClass;
 import org.cloudburstmc.nbt.NbtMap;
-import org.cloudburstmc.updater.common.context.UpdaterContext;
-import org.cloudburstmc.updater.item.context.ItemUpdater;
+import org.cloudburstmc.updater.item.context.ItemUpdaterContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +16,12 @@ import java.util.List;
 public class ItemStateUpdaters {
     public static final int LATEST_VERSION;
 
-    private static final UpdaterContext<ItemUpdater, ItemUpdater.Builder> CONTEXT;
+    private static final ItemUpdaterContext CONTEXT;
 
     static {
         List<ItemStateUpdater> updaters = new ArrayList<>();
         updaters.add(ItemStateUpdaterBase.INSTANCE);
+        updaters.add(ItemStateUpdater_1_6_0.INSTANCE);
         updaters.add(ItemStateUpdater_1_12_0.INSTANCE);
         updaters.add(ItemStateUpdater_1_16_100.INSTANCE);
         updaters.add(ItemStateUpdater_1_16_200.INSTANCE);
@@ -42,8 +42,11 @@ public class ItemStateUpdaters {
         updaters.add(ItemStateUpdater_1_20_80.INSTANCE);
         updaters.add(ItemStateUpdater_1_21_0.INSTANCE);
 
-        var context = new UpdaterContext<>(ItemUpdater::new);
-        updaters.forEach(updater -> updater.registerUpdaters(context));
+        var context = new ItemUpdaterContext();
+        updaters.forEach(updater -> {
+            context.setVersion(updater.getVersion());
+            updater.registerUpdaters(context);
+        });
 
         CONTEXT = context;
         LATEST_VERSION = context.getLatestVersion();

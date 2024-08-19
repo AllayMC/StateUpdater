@@ -1,9 +1,6 @@
 package org.cloudburstmc.updater.item;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import org.cloudburstmc.updater.common.context.UpdaterContext;
-import org.cloudburstmc.updater.item.context.ItemUpdater;
+import org.cloudburstmc.updater.item.context.ItemUpdaterContext;
 import org.cloudburstmc.updater.item.context.RemapMetaEntry;
 
 /**
@@ -11,13 +8,16 @@ import org.cloudburstmc.updater.item.context.RemapMetaEntry;
  *
  * @author IWareQ
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ItemStateUpdater_1_20_0 implements ItemStateUpdater {
+public class ItemStateUpdater_1_20_0 extends ItemStateUpdater {
     public static final ItemStateUpdater INSTANCE = new ItemStateUpdater_1_20_0();
 
+    private ItemStateUpdater_1_20_0() {
+        super(1, 20, 0);
+    }
+
     @Override
-    public void registerUpdaters(UpdaterContext<ItemUpdater, ItemUpdater.Builder> context) {
-        context.addUpdater(1, 20, 0).remapMeta(
+    public void registerUpdaters(ItemUpdaterContext context) {
+        context.remapMeta(
                 "minecraft:carpet",
                 new RemapMetaEntry(0, "minecraft:white_carpet"),
                 new RemapMetaEntry(1, "minecraft:orange_carpet"),
@@ -35,7 +35,8 @@ public class ItemStateUpdater_1_20_0 implements ItemStateUpdater {
                 new RemapMetaEntry(13, "minecraft:green_carpet"),
                 new RemapMetaEntry(14, "minecraft:red_carpet"),
                 new RemapMetaEntry(15, "minecraft:black_carpet")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:coral",
                 new RemapMetaEntry(0, "minecraft:tube_coral"),
                 new RemapMetaEntry(1, "minecraft:brain_coral"),
@@ -49,7 +50,6 @@ public class ItemStateUpdater_1_20_0 implements ItemStateUpdater {
                 new RemapMetaEntry(12, "minecraft:dead_horn_coral")
         );
 
-        context.addUpdater(1, 20, 0)
-                .renameId("minecraft:record_relic", "minecraft:music_disc_relic");
+        context.renameId("minecraft:record_relic", "minecraft:music_disc_relic");
     }
 }

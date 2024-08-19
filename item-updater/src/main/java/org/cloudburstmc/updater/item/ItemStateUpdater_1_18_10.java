@@ -1,9 +1,6 @@
 package org.cloudburstmc.updater.item;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import org.cloudburstmc.updater.common.context.UpdaterContext;
-import org.cloudburstmc.updater.item.context.ItemUpdater;
+import org.cloudburstmc.updater.item.context.ItemUpdaterContext;
 import org.cloudburstmc.updater.item.context.RemapMetaEntry;
 
 /**
@@ -11,19 +8,24 @@ import org.cloudburstmc.updater.item.context.RemapMetaEntry;
  *
  * @author IWareQ
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ItemStateUpdater_1_18_10 implements ItemStateUpdater {
+public class ItemStateUpdater_1_18_10 extends ItemStateUpdater {
     public static final ItemStateUpdater INSTANCE = new ItemStateUpdater_1_18_10();
 
+    private ItemStateUpdater_1_18_10() {
+        super(1, 18, 10);
+    }
+
     @Override
-    public void registerUpdaters(UpdaterContext<ItemUpdater, ItemUpdater.Builder> context) {
-        context.addUpdater(1, 18, 10).remapMeta(
+    public void registerUpdaters(ItemUpdaterContext context) {
+        context.remapMeta(
                 "minecraft:banner_pattern",
                 new RemapMetaEntry(7, "minecraft:globe_banner_pattern")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:bucket",
                 new RemapMetaEntry(13, "minecraft:tadpole_bucket")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:spawn_egg",
                 new RemapMetaEntry(132, "minecraft:frog_spawn_egg"),
                 new RemapMetaEntry(133, "minecraft:tadpole_spawn_egg"),

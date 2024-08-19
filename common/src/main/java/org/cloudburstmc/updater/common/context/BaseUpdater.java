@@ -82,7 +82,7 @@ public abstract class BaseUpdater<UPDATER extends BaseUpdater<UPDATER, BUILDER>,
             return self();
         }
 
-        protected BUILDER renameId(String key, String oldId, String newId) {
+        public BUILDER renameId(String key, String oldId, String newId) {
             return this.match(key, oldId).edit(key, helper -> helper.replaceWith(key, newId));
         }
 

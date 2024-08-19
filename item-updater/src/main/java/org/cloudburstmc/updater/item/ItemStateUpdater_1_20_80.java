@@ -1,9 +1,6 @@
 package org.cloudburstmc.updater.item;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import org.cloudburstmc.updater.common.context.UpdaterContext;
-import org.cloudburstmc.updater.item.context.ItemUpdater;
+import org.cloudburstmc.updater.item.context.ItemUpdaterContext;
 import org.cloudburstmc.updater.item.context.RemapMetaEntry;
 
 /**
@@ -11,27 +8,32 @@ import org.cloudburstmc.updater.item.context.RemapMetaEntry;
  *
  * @author IWareQ
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ItemStateUpdater_1_20_80 implements ItemStateUpdater {
+public class ItemStateUpdater_1_20_80 extends ItemStateUpdater {
     public static final ItemStateUpdater INSTANCE = new ItemStateUpdater_1_20_80();
 
+    private ItemStateUpdater_1_20_80() {
+        super(1, 20, 80);
+    }
+
     @Override
-    public void registerUpdaters(UpdaterContext<ItemUpdater, ItemUpdater.Builder> context) {
-        context.addUpdater(1, 20, 80).remapMeta(
+    public void registerUpdaters(ItemUpdaterContext context) {
+        context.remapMeta(
                 "minecraft:coral_fan",
                 new RemapMetaEntry(0, "minecraft:tube_coral_fan"),
                 new RemapMetaEntry(1, "minecraft:brain_coral_fan"),
                 new RemapMetaEntry(2, "minecraft:bubble_coral_fan"),
                 new RemapMetaEntry(3, "minecraft:fire_coral_fan"),
                 new RemapMetaEntry(4, "minecraft:horn_coral_fan")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:coral_fan_dead",
                 new RemapMetaEntry(0, "minecraft:dead_tube_coral_fan"),
                 new RemapMetaEntry(1, "minecraft:dead_brain_coral_fan"),
                 new RemapMetaEntry(2, "minecraft:dead_bubble_coral_fan"),
                 new RemapMetaEntry(3, "minecraft:dead_fire_coral_fan"),
                 new RemapMetaEntry(4, "minecraft:dead_horn_coral_fan")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:red_flower",
                 new RemapMetaEntry(0, "minecraft:poppy"),
                 new RemapMetaEntry(1, "minecraft:blue_orchid"),
@@ -44,7 +46,8 @@ public class ItemStateUpdater_1_20_80 implements ItemStateUpdater {
                 new RemapMetaEntry(8, "minecraft:oxeye_daisy"),
                 new RemapMetaEntry(9, "minecraft:cornflower"),
                 new RemapMetaEntry(10, "minecraft:lily_of_the_valley")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:sapling",
                 new RemapMetaEntry(0, "minecraft:oak_sapling"),
                 new RemapMetaEntry(1, "minecraft:spruce_sapling"),

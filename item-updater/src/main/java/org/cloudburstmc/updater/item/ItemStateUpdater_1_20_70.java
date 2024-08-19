@@ -1,9 +1,6 @@
 package org.cloudburstmc.updater.item;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import org.cloudburstmc.updater.common.context.UpdaterContext;
-import org.cloudburstmc.updater.item.context.ItemUpdater;
+import org.cloudburstmc.updater.item.context.ItemUpdaterContext;
 import org.cloudburstmc.updater.item.context.RemapMetaEntry;
 
 /**
@@ -11,26 +8,32 @@ import org.cloudburstmc.updater.item.context.RemapMetaEntry;
  *
  * @author IWareQ
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ItemStateUpdater_1_20_70 implements ItemStateUpdater {
+public class ItemStateUpdater_1_20_70 extends ItemStateUpdater {
     public static final ItemStateUpdater INSTANCE = new ItemStateUpdater_1_20_70();
 
+    private ItemStateUpdater_1_20_70() {
+        super(1, 20, 70);
+    }
+
     @Override
-    public void registerUpdaters(UpdaterContext<ItemUpdater, ItemUpdater.Builder> context) {
-        context.addUpdater(1, 20, 70).remapMeta(
+    public void registerUpdaters(ItemUpdaterContext context) {
+        context.remapMeta(
                 "minecraft:leaves",
                 new RemapMetaEntry(0, "minecraft:oak_leaves"),
                 new RemapMetaEntry(1, "minecraft:spruce_leaves"),
                 new RemapMetaEntry(2, "minecraft:birch_leaves"),
                 new RemapMetaEntry(3, "minecraft:jungle_leaves")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:leaves2",
                 new RemapMetaEntry(0, "minecraft:acacia_leaves"),
                 new RemapMetaEntry(1, "minecraft:dark_oak_leaves")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:spawn_egg",
                 new RemapMetaEntry(144, "minecraft:bogged_spawn_egg")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:wood",
                 new RemapMetaEntry(0, "minecraft:oak_wood"),
                 new RemapMetaEntry(1, "minecraft:spruce_wood"),
@@ -44,7 +47,8 @@ public class ItemStateUpdater_1_20_70 implements ItemStateUpdater {
                 new RemapMetaEntry(11, "minecraft:stripped_jungle_wood"),
                 new RemapMetaEntry(12, "minecraft:stripped_acacia_wood"),
                 new RemapMetaEntry(13, "minecraft:stripped_dark_oak_wood")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:wooden_slab",
                 new RemapMetaEntry(0, "minecraft:oak_slab"),
                 new RemapMetaEntry(1, "minecraft:spruce_slab"),
@@ -54,7 +58,6 @@ public class ItemStateUpdater_1_20_70 implements ItemStateUpdater {
                 new RemapMetaEntry(5, "minecraft:dark_oak_slab")
         );
 
-        context.addUpdater(1, 20, 70)
-                .renameId("minecraft:grass", "minecraft:grass_block");
+        context.renameId("minecraft:grass", "minecraft:grass_block");
     }
 }

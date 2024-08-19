@@ -1,6 +1,6 @@
 package org.cloudburstmc.updater.block;
 
-import org.cloudburstmc.updater.block.context.BlockUpdater;
+import org.cloudburstmc.updater.block.context.BlockUpdaterContext;
 import org.cloudburstmc.updater.common.StateUpdater;
 
 /**
@@ -8,4 +8,8 @@ import org.cloudburstmc.updater.common.StateUpdater;
  *
  * @author IWareQ
  */
-public interface BlockStateUpdater extends StateUpdater<BlockUpdater, BlockUpdater.Builder> {}
+public abstract class BlockStateUpdater extends StateUpdater<BlockUpdaterContext> {
+    public BlockStateUpdater(int major, int minor, int patch) {
+        super(major, minor, patch);
+    }
+}

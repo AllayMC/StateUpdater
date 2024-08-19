@@ -1,6 +1,7 @@
 package org.cloudburstmc.updater.common.context;
 
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.cloudburstmc.nbt.NbtMap;
 import org.cloudburstmc.updater.common.util.TagUtils;
 
@@ -14,11 +15,14 @@ import java.util.function.IntFunction;
  *
  * @author IWareQ
  */
+@Setter
 @RequiredArgsConstructor
-public class UpdaterContext<UPDATER extends BaseUpdater<UPDATER, BUILDER>, BUILDER extends BaseUpdater<UPDATER, BUILDER>.Builder> {
+public abstract class UpdaterContext<UPDATER extends BaseUpdater<UPDATER, BUILDER>, BUILDER extends BaseUpdater<UPDATER, BUILDER>.Builder> {
     private final List<UPDATER> updaters = new ArrayList<>();
 
     private final IntFunction<UPDATER> updaterConstructor;
+
+    protected int version;
 
     private static int mergeVersions(int baseVersion, int updaterVersion) {
         return updaterVersion | baseVersion;
@@ -46,6 +50,14 @@ public class UpdaterContext<UPDATER extends BaseUpdater<UPDATER, BUILDER>, BUILD
 
     public BUILDER addUpdater(int major, int minor, int patch, boolean resetVersion, boolean bumpVersion) {
         var version = makeVersion(major, minor, patch);
+        return this.addUpdater(version, resetVersion, bumpVersion);
+    }
+
+    public BUILDER addUpdater() {
+        return this.addUpdater(this.version, false, true);
+    }
+
+    public BUILDER addUpdater(int version, boolean resetVersion, boolean bumpVersion) {
         var prevUpdater = this.getLatestUpdater();
 
         var updaterVersion = 0;
@@ -73,7 +85,7 @@ public class UpdaterContext<UPDATER extends BaseUpdater<UPDATER, BUILDER>, BUILD
         Map<String, Object> mutableTag = null;
         boolean updated = false;
         for (var updater : this.updaters) {
-            if (updater.getVersion() < updateToVersion) continue;
+            if (updater.getVersion() > updateToVersion) continue;
 
             if (mutableTag == null) {
                 mutableTag = (Map<String, Object>) TagUtils.toMutable(tag);

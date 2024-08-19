@@ -1,21 +1,17 @@
 package org.cloudburstmc.updater.block;
 
-import org.cloudburstmc.updater.common.CompoundTagUpdaterContext;
-import org.cloudburstmc.updater.common.StateUpdater;
+import org.cloudburstmc.updater.block.context.BlockUpdaterContext;
 
-public class BlockStateUpdater_1_17_30 implements StateUpdater {
-    public static final StateUpdater INSTANCE = new BlockStateUpdater_1_17_30();
+public class BlockStateUpdater_1_17_30 extends BlockStateUpdater {
+    public static final BlockStateUpdater INSTANCE = new BlockStateUpdater_1_17_30();
 
-    @Override
-    public void registerUpdaters(CompoundTagUpdaterContext context) {
-        this.updateItemFrame("minecraft:frame", context);
-        this.updateItemFrame("minecraft:glow_frame", context);
+    private BlockStateUpdater_1_17_30() {
+        super(1, 16, 210); // IDK why schema use this version
     }
 
-    private void updateItemFrame(String name, CompoundTagUpdaterContext context) {
-        context.addUpdater(1, 16, 210, true) // Palette version wasn't bumped so far
-                .match("name", name)
-                .visit("states")
-                .tryAdd("item_frame_photo_bit", (byte) 0);
+    @Override
+    public void registerUpdaters(BlockUpdaterContext context) {
+        context.addProperty("minecraft:frame", "item_frame_photo_bit", (byte) 0);
+        context.addProperty("minecraft:glow_frame", "item_frame_photo_bit", (byte) 0);
     }
 }

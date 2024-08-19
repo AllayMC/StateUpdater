@@ -68,13 +68,12 @@ class ItemStateUpdaterTest {
     void rename_id_for_record_creator() {
         var result = ItemStateUpdaters.updateItemState(
                 NbtMap.builder()
-                        .putString("Name", "minecraft:record_creator")
-                        // Meta ignored because record_creator only renamed
+                        .putString("Name", "minecraft:record_creator_music_box")
                         .build(),
                 ItemStateUpdaters.LATEST_VERSION
         );
 
-        assertEquals(result.getString("Name"), "minecraft:music_disc_creator");
+        assertEquals("minecraft:music_disc_creator_music_box", result.getString("Name"));
     }
 
     @Test

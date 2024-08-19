@@ -2,17 +2,13 @@ package org.cloudburstmc.updater.block;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import org.cloudburstmc.updater.block.context.BlockUpdater;
-import org.cloudburstmc.updater.common.context.UpdaterContext;
+import org.cloudburstmc.updater.block.context.BlockUpdaterContext;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class BlockStateUpdaterBase implements BlockStateUpdater {
+public class BlockStateUpdaterBase extends BlockStateUpdater {
     public static final BlockStateUpdater INSTANCE = new BlockStateUpdaterBase();
 
     public static final Map<String, Map<String, Object>[]> LEGACY_BLOCK_DATA_MAP = new HashMap<>();
@@ -38,6 +34,10 @@ public class BlockStateUpdaterBase implements BlockStateUpdater {
         }
     }
 
+    private BlockStateUpdaterBase() {
+        super(0, 0, 0);
+    }
+
     private static Map<String, Object> convertStateToCompound(JsonNode node) {
         Map<String, Object> tag = new HashMap<>();
         node.fields().forEachRemaining(entry -> {
@@ -55,8 +55,8 @@ public class BlockStateUpdaterBase implements BlockStateUpdater {
     }
 
     @Override
-    public void registerUpdaters(UpdaterContext<BlockUpdater, BlockUpdater.Builder> context) {
-        context.addUpdater(0, 0, 0)
+    public void registerUpdaters(BlockUpdaterContext context) {
+        context.addUpdater()
                 .match("name", "minecraft:.+", true)
                 .match("val", "[0-9]+", true)
                 .addCompound("states")
@@ -72,6 +72,6 @@ public class BlockStateUpdaterBase implements BlockStateUpdater {
                         tag.putAll(statesArray[val]);
                     }
                 })
-                .remove("val");
+                .removeProperty("val");
     }
 }

@@ -1,9 +1,6 @@
 package org.cloudburstmc.updater.item;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import org.cloudburstmc.updater.common.context.UpdaterContext;
-import org.cloudburstmc.updater.item.context.ItemUpdater;
+import org.cloudburstmc.updater.item.context.ItemUpdaterContext;
 import org.cloudburstmc.updater.item.context.RemapMetaEntry;
 
 /**
@@ -11,13 +8,16 @@ import org.cloudburstmc.updater.item.context.RemapMetaEntry;
  *
  * @author IWareQ
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ItemStateUpdater_1_16_100 implements ItemStateUpdater {
+public class ItemStateUpdater_1_16_100 extends ItemStateUpdater {
     public static final ItemStateUpdater INSTANCE = new ItemStateUpdater_1_16_100();
 
+    private ItemStateUpdater_1_16_100() {
+        super(1, 16, 100);
+    }
+
     @Override
-    public void registerUpdaters(UpdaterContext<ItemUpdater, ItemUpdater.Builder> context) {
-        context.addUpdater(1, 16, 100).remapMeta(
+    public void registerUpdaters(ItemUpdaterContext context) {
+        context.remapMeta(
                 "minecraft:banner_pattern",
                 new RemapMetaEntry(0, "minecraft:creeper_banner_pattern"),
                 new RemapMetaEntry(1, "minecraft:skull_banner_pattern"),
@@ -26,7 +26,8 @@ public class ItemStateUpdater_1_16_100 implements ItemStateUpdater {
                 new RemapMetaEntry(4, "minecraft:field_masoned_banner_pattern"),
                 new RemapMetaEntry(5, "minecraft:bordure_indented_banner_pattern"),
                 new RemapMetaEntry(6, "minecraft:piglin_banner_pattern")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:boat",
                 new RemapMetaEntry(0, "minecraft:oak_boat"),
                 new RemapMetaEntry(1, "minecraft:spruce_boat"),
@@ -34,7 +35,8 @@ public class ItemStateUpdater_1_16_100 implements ItemStateUpdater {
                 new RemapMetaEntry(3, "minecraft:jungle_boat"),
                 new RemapMetaEntry(4, "minecraft:acacia_boat"),
                 new RemapMetaEntry(5, "minecraft:dark_oak_boat")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:bucket",
                 new RemapMetaEntry(1, "minecraft:milk_bucket"),
                 new RemapMetaEntry(2, "minecraft:cod_bucket"),
@@ -43,10 +45,12 @@ public class ItemStateUpdater_1_16_100 implements ItemStateUpdater {
                 new RemapMetaEntry(5, "minecraft:pufferfish_bucket"),
                 new RemapMetaEntry(8, "minecraft:water_bucket"),
                 new RemapMetaEntry(10, "minecraft:lava_bucket")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:coal",
                 new RemapMetaEntry(1, "minecraft:charcoal")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:dye",
                 new RemapMetaEntry(0, "minecraft:ink_sac"),
                 new RemapMetaEntry(1, "minecraft:red_dye"),
@@ -68,7 +72,8 @@ public class ItemStateUpdater_1_16_100 implements ItemStateUpdater {
                 new RemapMetaEntry(17, "minecraft:brown_dye"),
                 new RemapMetaEntry(18, "minecraft:blue_dye"),
                 new RemapMetaEntry(19, "minecraft:white_dye")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:spawn_egg",
                 new RemapMetaEntry(10, "minecraft:chicken_spawn_egg"),
                 new RemapMetaEntry(11, "minecraft:cow_spawn_egg"),
@@ -117,48 +122,66 @@ public class ItemStateUpdater_1_16_100 implements ItemStateUpdater {
                 new RemapMetaEntry(58, "minecraft:phantom_spawn_egg"),
                 new RemapMetaEntry(59, "minecraft:ravager_spawn_egg"),
                 new RemapMetaEntry(74, "minecraft:turtle_spawn_egg"),
-                new RemapMetaEntry(75, "minecraft:cat_spawn_egg")
+                new RemapMetaEntry(75, "minecraft:cat_spawn_egg"),
+                new RemapMetaEntry(104, "minecraft:evoker_spawn_egg"),
+                new RemapMetaEntry(105, "minecraft:vex_spawn_egg"),
+                new RemapMetaEntry(108, "minecraft:pufferfish_spawn_egg"),
+                new RemapMetaEntry(109, "minecraft:salmon_spawn_egg"),
+                new RemapMetaEntry(110, "minecraft:drowned_spawn_egg"),
+                new RemapMetaEntry(111, "minecraft:tropical_fish_spawn_egg"),
+                new RemapMetaEntry(112, "minecraft:cod_spawn_egg"),
+                new RemapMetaEntry(113, "minecraft:panda_spawn_egg"),
+                new RemapMetaEntry(114, "minecraft:pillager_spawn_egg"),
+                new RemapMetaEntry(115, "minecraft:villager_spawn_egg"),
+                new RemapMetaEntry(116, "minecraft:zombie_villager_spawn_egg"),
+                new RemapMetaEntry(118, "minecraft:wandering_trader_spawn_egg"),
+                new RemapMetaEntry(121, "minecraft:fox_spawn_egg"),
+                new RemapMetaEntry(122, "minecraft:bee_spawn_egg"),
+                new RemapMetaEntry(123, "minecraft:piglin_spawn_egg"),
+                new RemapMetaEntry(124, "minecraft:hoglin_spawn_egg"),
+                new RemapMetaEntry(125, "minecraft:strider_spawn_egg"),
+                new RemapMetaEntry(126, "minecraft:zoglin_spawn_egg"),
+                new RemapMetaEntry(127, "minecraft:piglin_brute_spawn_egg")
         );
 
-        context.addUpdater(1, 16, 100)
-                .renameId("minecraft:appleenchanted", "minecraft:enchanted_golden_apple")
-                .renameId("minecraft:carrotonastick", "minecraft:carrot_on_a_stick")
-                .renameId("minecraft:chorus_fruit_popped", "minecraft:popped_chorus_fruit")
-                .renameId("minecraft:clownfish", "minecraft:tropical_fish")
-                .renameId("minecraft:cooked_fish", "minecraft:cooked_cod")
-                .renameId("minecraft:darkoak_sign", "minecraft:dark_oak_sign")
-                .renameId("minecraft:emptymap", "minecraft:empty_map")
-                .renameId("minecraft:fireball", "minecraft:fire_charge")
-                .renameId("minecraft:fireworks", "minecraft:firework_rocket")
-                .renameId("minecraft:fireworkscharge", "minecraft:firework_star")
-                .renameId("minecraft:fish", "minecraft:cod")
-                .renameId("minecraft:horsearmordiamond", "minecraft:diamond_horse_armor")
-                .renameId("minecraft:horsearmorgold", "minecraft:golden_horse_armor")
-                .renameId("minecraft:horsearmoriron", "minecraft:iron_horse_armor")
-                .renameId("minecraft:horsearmorleather", "minecraft:leather_horse_armor")
-                .renameId("minecraft:lodestonecompass", "minecraft:lodestone_compass")
-                .renameId("minecraft:map", "minecraft:filled_map")
-                .renameId("minecraft:melon", "minecraft:melon_slice")
-                .renameId("minecraft:muttoncooked", "minecraft:cooked_mutton")
-                .renameId("minecraft:muttonraw", "minecraft:mutton")
-                .renameId("minecraft:netherstar", "minecraft:nether_star")
-                .renameId("minecraft:record_11", "minecraft:music_disc_11")
-                .renameId("minecraft:record_13", "minecraft:music_disc_13")
-                .renameId("minecraft:record_blocks", "minecraft:music_disc_blocks")
-                .renameId("minecraft:record_cat", "minecraft:music_disc_cat")
-                .renameId("minecraft:record_chirp", "minecraft:music_disc_chirp")
-                .renameId("minecraft:record_far", "minecraft:music_disc_far")
-                .renameId("minecraft:record_mall", "minecraft:music_disc_mall")
-                .renameId("minecraft:record_mellohi", "minecraft:music_disc_mellohi")
-                .renameId("minecraft:record_pigstep", "minecraft:music_disc_pigstep")
-                .renameId("minecraft:record_stal", "minecraft:music_disc_stal")
-                .renameId("minecraft:record_strad", "minecraft:music_disc_strad")
-                .renameId("minecraft:record_wait", "minecraft:music_disc_wait")
-                .renameId("minecraft:record_ward", "minecraft:music_disc_ward")
-                .renameId("minecraft:reeds", "minecraft:sugar_cane")
-                .renameId("minecraft:sign", "minecraft:oak_sign")
-                .renameId("minecraft:speckled_melon", "minecraft:glistering_melon_slice")
-                .renameId("minecraft:totem", "minecraft:totem_of_undying")
-                .renameId("minecraft:turtle_shell_piece", "minecraft:scute");
+        context.renameId("minecraft:appleenchanted", "minecraft:enchanted_golden_apple");
+        context.renameId("minecraft:carrotonastick", "minecraft:carrot_on_a_stick");
+        context.renameId("minecraft:chorus_fruit_popped", "minecraft:popped_chorus_fruit");
+        context.renameId("minecraft:clownfish", "minecraft:tropical_fish");
+        context.renameId("minecraft:cooked_fish", "minecraft:cooked_cod");
+        context.renameId("minecraft:darkoak_sign", "minecraft:dark_oak_sign");
+        context.renameId("minecraft:emptymap", "minecraft:empty_map");
+        context.renameId("minecraft:fireball", "minecraft:fire_charge");
+        context.renameId("minecraft:fireworks", "minecraft:firework_rocket");
+        context.renameId("minecraft:fireworkscharge", "minecraft:firework_star");
+        context.renameId("minecraft:fish", "minecraft:cod");
+        context.renameId("minecraft:horsearmordiamond", "minecraft:diamond_horse_armor");
+        context.renameId("minecraft:horsearmorgold", "minecraft:golden_horse_armor");
+        context.renameId("minecraft:horsearmoriron", "minecraft:iron_horse_armor");
+        context.renameId("minecraft:horsearmorleather", "minecraft:leather_horse_armor");
+        context.renameId("minecraft:lodestonecompass", "minecraft:lodestone_compass");
+        context.renameId("minecraft:map", "minecraft:filled_map");
+        context.renameId("minecraft:melon", "minecraft:melon_slice");
+        context.renameId("minecraft:muttoncooked", "minecraft:cooked_mutton");
+        context.renameId("minecraft:muttonraw", "minecraft:mutton");
+        context.renameId("minecraft:netherstar", "minecraft:nether_star");
+        context.renameId("minecraft:record_11", "minecraft:music_disc_11");
+        context.renameId("minecraft:record_13", "minecraft:music_disc_13");
+        context.renameId("minecraft:record_blocks", "minecraft:music_disc_blocks");
+        context.renameId("minecraft:record_cat", "minecraft:music_disc_cat");
+        context.renameId("minecraft:record_chirp", "minecraft:music_disc_chirp");
+        context.renameId("minecraft:record_far", "minecraft:music_disc_far");
+        context.renameId("minecraft:record_mall", "minecraft:music_disc_mall");
+        context.renameId("minecraft:record_mellohi", "minecraft:music_disc_mellohi");
+        context.renameId("minecraft:record_pigstep", "minecraft:music_disc_pigstep");
+        context.renameId("minecraft:record_stal", "minecraft:music_disc_stal");
+        context.renameId("minecraft:record_strad", "minecraft:music_disc_strad");
+        context.renameId("minecraft:record_wait", "minecraft:music_disc_wait");
+        context.renameId("minecraft:record_ward", "minecraft:music_disc_ward");
+        context.renameId("minecraft:reeds", "minecraft:sugar_cane");
+        context.renameId("minecraft:sign", "minecraft:oak_sign");
+        context.renameId("minecraft:speckled_melon", "minecraft:glistering_melon_slice");
+        context.renameId("minecraft:totem", "minecraft:totem_of_undying");
+        context.renameId("minecraft:turtle_shell_piece", "minecraft:scute");
     }
 }

@@ -1,37 +1,24 @@
 package org.cloudburstmc.updater.block;
 
-import org.cloudburstmc.updater.common.CompoundTagUpdaterContext;
-import org.cloudburstmc.updater.common.StateUpdater;
+import org.cloudburstmc.updater.block.context.BlockUpdaterContext;
 
-public class BlockStateUpdater_1_18_30 implements StateUpdater {
-    public static final StateUpdater INSTANCE = new BlockStateUpdater_1_18_30();
+public class BlockStateUpdater_1_18_30 extends BlockStateUpdater {
+    public static final BlockStateUpdater INSTANCE = new BlockStateUpdater_1_18_30();
+
+    private BlockStateUpdater_1_18_30() {
+        super(1, 18, 10); // IDK why schema use this version
+    }
 
     @Override
-    public void registerUpdaters(CompoundTagUpdaterContext context) {
-        this.renameIdentifier(context, "minecraft:concretePowder", "minecraft:concrete_powder");
-        this.renameIdentifier(context, "minecraft:frog_egg", "minecraft:frog_spawn");
-        this.renameIdentifier(context, "minecraft:invisibleBedrock", "minecraft:invisible_bedrock");
-        this.renameIdentifier(context, "minecraft:movingBlock", "minecraft:moving_block");
-        this.renameIdentifier(context, "minecraft:pistonArmCollision", "minecraft:piston_arm_collision");
-        this.renameIdentifier(context, "minecraft:seaLantern", "minecraft:sea_lantern");
-        this.renameIdentifier(context, "minecraft:stickyPistonArmCollision", "minecraft:sticky_piston_arm_collision");
-        this.renameIdentifier(context, "minecraft:tripWire", "minecraft:trip_wire");
-
-        this.addPillarAxis(context, "minecraft:ochre_froglight");
-        this.addPillarAxis(context, "minecraft:pearlescent_froglight");
-        this.addPillarAxis(context, "minecraft:verdant_froglight");
-    }
-
-    private void renameIdentifier(CompoundTagUpdaterContext context, String from, String to) {
-        context.addUpdater(1, 18, 10, true) // Here we go again Mojang
-                .match("name", from)
-                .edit("name", helper -> helper.replaceWith("name", to));
-    }
-
-    private void addPillarAxis(CompoundTagUpdaterContext context, String from) {
-        context.addUpdater(1, 18, 10, true) // Here we go again Mojang
-                .match("name", from)
-                .visit("states")
-                .tryAdd("pillar_axis", "y");
+    public void registerUpdaters(BlockUpdaterContext context) {
+        context.renameId("minecraft:concretePowder", "minecraft:concrete_powder");
+        context.renameId("minecraft:invisibleBedrock", "minecraft:invisible_bedrock");
+        context.renameId("minecraft:movingBlock", "minecraft:moving_block");
+        context.renameId("minecraft:mysterious_frame", "minecraft:reinforced_deepslate");
+        context.renameId("minecraft:mysterious_frame_slot", "minecraft:reinforced_deepslate");
+        context.renameId("minecraft:pistonArmCollision", "minecraft:piston_arm_collision");
+        context.renameId("minecraft:seaLantern", "minecraft:sea_lantern");
+        context.renameId("minecraft:stickyPistonArmCollision", "minecraft:sticky_piston_arm_collision");
+        context.renameId("minecraft:tripWire", "minecraft:trip_wire");
     }
 }

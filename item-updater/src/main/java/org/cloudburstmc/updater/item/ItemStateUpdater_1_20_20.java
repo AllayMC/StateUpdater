@@ -1,9 +1,6 @@
 package org.cloudburstmc.updater.item;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import org.cloudburstmc.updater.common.context.UpdaterContext;
-import org.cloudburstmc.updater.item.context.ItemUpdater;
+import org.cloudburstmc.updater.item.context.ItemUpdaterContext;
 import org.cloudburstmc.updater.item.context.RemapMetaEntry;
 
 /**
@@ -11,13 +8,16 @@ import org.cloudburstmc.updater.item.context.RemapMetaEntry;
  *
  * @author IWareQ
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ItemStateUpdater_1_20_20 implements ItemStateUpdater {
+public class ItemStateUpdater_1_20_20 extends ItemStateUpdater {
     public static final ItemStateUpdater INSTANCE = new ItemStateUpdater_1_20_20();
 
+    private ItemStateUpdater_1_20_20() {
+        super(1, 20, 20);
+    }
+
     @Override
-    public void registerUpdaters(UpdaterContext<ItemUpdater, ItemUpdater.Builder> context) {
-        context.addUpdater(1, 20, 20).remapMeta(
+    public void registerUpdaters(ItemUpdaterContext context) {
+        context.remapMeta(
                 "minecraft:stained_glass",
                 new RemapMetaEntry(0, "minecraft:white_stained_glass"),
                 new RemapMetaEntry(1, "minecraft:orange_stained_glass"),
@@ -35,7 +35,8 @@ public class ItemStateUpdater_1_20_20 implements ItemStateUpdater {
                 new RemapMetaEntry(13, "minecraft:green_stained_glass"),
                 new RemapMetaEntry(14, "minecraft:red_stained_glass"),
                 new RemapMetaEntry(15, "minecraft:black_stained_glass")
-        ).remapMeta(
+        );
+        context.remapMeta(
                 "minecraft:stained_glass_pane",
                 new RemapMetaEntry(0, "minecraft:white_stained_glass_pane"),
                 new RemapMetaEntry(1, "minecraft:orange_stained_glass_pane"),

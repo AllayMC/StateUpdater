@@ -1,26 +1,19 @@
 package org.cloudburstmc.updater.block;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import org.cloudburstmc.updater.common.CompoundTagUpdaterContext;
-import org.cloudburstmc.updater.common.StateUpdater;
+import org.cloudburstmc.updater.block.context.BlockUpdaterContext;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class BlockStateUpdater_1_16_210 implements StateUpdater {
-    public static final StateUpdater INSTANCE = new BlockStateUpdater_1_16_210();
+public class BlockStateUpdater_1_16_210 extends BlockStateUpdater {
+    public static final BlockStateUpdater INSTANCE = new BlockStateUpdater_1_16_210();
 
-    private static void registerUpdater(CompoundTagUpdaterContext context, String name) {
-        context.addUpdater(1, 16, 210)
-                .match("name", name)
-                .visit("states")
-                .remove("deprecated");
+    private BlockStateUpdater_1_16_210() {
+        super(1, 16, 210);
     }
 
     @Override
-    public void registerUpdaters(CompoundTagUpdaterContext context) {
-        registerUpdater(context, "minecraft:stripped_crimson_stem");
-        registerUpdater(context, "minecraft:stripped_warped_stem");
-        registerUpdater(context, "minecraft:stripped_crimson_hyphae");
-        registerUpdater(context, "minecraft:stripped_warped_hyphae");
+    public void registerUpdaters(BlockUpdaterContext context) {
+        context.removeProperty("minecraft:stripped_crimson_hyphae", "deprecated");
+        context.removeProperty("minecraft:stripped_crimson_stem", "deprecated");
+        context.removeProperty("minecraft:stripped_warped_hyphae", "deprecated");
+        context.removeProperty("minecraft:stripped_warped_stem", "deprecated");
     }
 }

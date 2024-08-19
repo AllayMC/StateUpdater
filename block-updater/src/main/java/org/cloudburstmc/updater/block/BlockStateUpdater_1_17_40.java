@@ -1,16 +1,16 @@
 package org.cloudburstmc.updater.block;
 
-import org.cloudburstmc.updater.common.CompoundTagUpdaterContext;
-import org.cloudburstmc.updater.common.StateUpdater;
+import org.cloudburstmc.updater.block.context.BlockUpdaterContext;
 
-public class BlockStateUpdater_1_17_40 implements StateUpdater {
-    public static final StateUpdater INSTANCE = new BlockStateUpdater_1_17_40();
+public class BlockStateUpdater_1_17_40 extends BlockStateUpdater {
+    public static final BlockStateUpdater INSTANCE = new BlockStateUpdater_1_17_40();
+
+    private BlockStateUpdater_1_17_40() {
+        super(1, 16, 210); // IDK why schema use this version
+    }
 
     @Override
-    public void registerUpdaters(CompoundTagUpdaterContext context) {
-        context.addUpdater(1, 16, 210, true) // Palette version wasn't bumped so far
-                .match("name", "minecraft:sculk_catalyst")
-                .visit("states")
-                .tryAdd("bloom", (byte) 0);
+    public void registerUpdaters(BlockUpdaterContext context) {
+        context.addProperty("minecraft:sculk_catalyst", "bloom", (byte) 0);
     }
 }
