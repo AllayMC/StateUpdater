@@ -60,7 +60,7 @@ public class BlockStateUpdaterBase extends BlockStateUpdater {
                 .match("name", "minecraft:.+", true)
                 .match("val", "[0-9]+", true)
                 .addCompound("states")
-                .edit("states", helper -> {
+                .tryEdit("states", helper -> {
                     var tag = helper.getCompoundTag();
                     var parent = helper.getParent();
 

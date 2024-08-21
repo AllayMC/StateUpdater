@@ -36,6 +36,7 @@ public class BlockUpdater extends BaseUpdater<BlockUpdater, BlockUpdater.Builder
         }
 
         public Builder removeProperty(String key) {
+            filters.add(COMPOUND_FILTER);
             filters.add(new HasKeyFilter(key));
             updaters.add(helper -> helper.getCompoundTag().remove(key));
             return self();
@@ -58,7 +59,15 @@ public class BlockUpdater extends BaseUpdater<BlockUpdater, BlockUpdater.Builder
         }
 
         public Builder visit(String key) {
-            filters.add(new HasKeyFilter(key));
+            filters.add(helper -> {
+                var tag = helper.getTag();
+                if (tag instanceof Map && ((Map<String, Object>) tag).containsKey(key)) {
+                    helper.pushChild(key);
+                    return true;
+                }
+
+                return false;
+            });
             updaters.add(helper -> helper.pushChild(key));
             return self();
         }

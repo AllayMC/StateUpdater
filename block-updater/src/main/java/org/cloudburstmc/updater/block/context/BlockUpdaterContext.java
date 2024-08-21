@@ -60,10 +60,8 @@ public class BlockUpdaterContext extends UpdaterContext<BlockUpdater, BlockUpdat
                     var oldValue = helper.getTag();
                     var remapValue = Arrays.stream(remaps)
                             .filter(entry -> entry.oldValue().equals(oldValue))
-                            .findFirst()
-                            .orElseThrow(() -> new IllegalStateException("Unexpected remap value '%s' for '%s'".formatted(oldValue, name)));
-
-                    helper.replaceWith(property, remapValue.newValue());
+                            .findFirst();
+                    remapValue.ifPresent(value -> helper.replaceWith(property, value.newValue()));
                 });
     }
 
@@ -79,15 +77,13 @@ public class BlockUpdaterContext extends UpdaterContext<BlockUpdater, BlockUpdat
         var updater = this.addUpdater().match("name", name);
         filter.accept(updater);
 
-        updater.visit("states")
-                .tryEdit(property, helper -> {
-                    var oldValue = helper.getTag();
-                    var remapValue = Arrays.stream(remaps)
-                            .filter(entry -> entry.oldValue().equals(oldValue))
-                            .findFirst();
-                    var newValue = remapValue.isPresent() ? remapValue.get() : oldValue;
-                    helper.replaceWith("name", prefix + newValue + suffix);
-                })
-                .removeProperty(property);
+        updater.visit("states").edit(property, helper -> {
+            var oldValue = helper.getTag();
+            var remapValue = Arrays.stream(remaps)
+                    .filter(entry -> entry.oldValue().equals(oldValue))
+                    .findFirst();
+            var newValue = remapValue.isPresent() ? remapValue.get().newValue() : oldValue;
+            helper.getRootTag().put("name", prefix + newValue + suffix);
+        }).removeProperty(property);
     }
 }
