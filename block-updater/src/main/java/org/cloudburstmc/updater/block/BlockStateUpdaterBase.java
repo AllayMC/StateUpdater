@@ -71,7 +71,6 @@ public class BlockStateUpdaterBase extends BlockStateUpdater {
                         if (val >= statesArray.length) val = 0;
                         tag.putAll(statesArray[val]);
                     }
-                })
-                .removeProperty("val");
+                }).removeProperty("val");
     }
 }

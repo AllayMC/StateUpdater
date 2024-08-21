@@ -12,8 +12,6 @@ public class BlockStateUpdater_1_18_10 extends BlockStateUpdater {
 
     @Override
     public void registerUpdaters(BlockUpdaterContext context) {
-        context.removeProperty("minecraft:skull", "no_drop_bit");
-
         var multi_face_direction_bits_00 = new RemapValue[]{
                 new RemapValue(4, 16),
                 new RemapValue(5, 17),
@@ -66,5 +64,7 @@ public class BlockStateUpdater_1_18_10 extends BlockStateUpdater {
         };
         context.remapValues("minecraft:glow_lichen", "multi_face_direction_bits", multi_face_direction_bits_00);
         context.remapValues("minecraft:sculk_vein", "multi_face_direction_bits", multi_face_direction_bits_00);
+
+        context.removeProperty("minecraft:skull", "no_drop_bit");
     }
 }

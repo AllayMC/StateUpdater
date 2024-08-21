@@ -12,11 +12,6 @@ public class BlockStateUpdater_1_20_40 extends BlockStateUpdater {
 
     @Override
     public void registerUpdaters(BlockUpdaterContext context) {
-        context.renameProperty("minecraft:chest", "facing_direction", "minecraft:cardinal_direction");
-        context.renameProperty("minecraft:ender_chest", "facing_direction", "minecraft:cardinal_direction");
-        context.renameProperty("minecraft:stonecutter_block", "facing_direction", "minecraft:cardinal_direction");
-        context.renameProperty("minecraft:trapped_chest", "facing_direction", "minecraft:cardinal_direction");
-
         var facing_direction_00 = new RemapValue[]{
                 new RemapValue(0, "north"),
                 new RemapValue(1, "north"),
@@ -29,5 +24,10 @@ public class BlockStateUpdater_1_20_40 extends BlockStateUpdater {
         context.remapValues("minecraft:ender_chest", "facing_direction", facing_direction_00);
         context.remapValues("minecraft:stonecutter_block", "facing_direction", facing_direction_00);
         context.remapValues("minecraft:trapped_chest", "facing_direction", facing_direction_00);
+
+        context.renameProperty("minecraft:chest", "facing_direction", "minecraft:cardinal_direction");
+        context.renameProperty("minecraft:ender_chest", "facing_direction", "minecraft:cardinal_direction");
+        context.renameProperty("minecraft:stonecutter_block", "facing_direction", "minecraft:cardinal_direction");
+        context.renameProperty("minecraft:trapped_chest", "facing_direction", "minecraft:cardinal_direction");
     }
 }

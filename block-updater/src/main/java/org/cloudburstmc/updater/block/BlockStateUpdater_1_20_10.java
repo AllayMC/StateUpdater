@@ -12,8 +12,6 @@ public class BlockStateUpdater_1_20_10 extends BlockStateUpdater {
 
     @Override
     public void registerUpdaters(BlockUpdaterContext context) {
-        context.renameProperty("minecraft:observer", "facing_direction", "minecraft:facing_direction");
-
         context.remapValues("minecraft:observer", "facing_direction",
                 new RemapValue(0, "down"),
                 new RemapValue(1, "up"),
@@ -26,9 +24,10 @@ public class BlockStateUpdater_1_20_10 extends BlockStateUpdater {
         context.remapState("minecraft:concrete", "minecraft:", "color", "_concrete",
                 new RemapValue("silver", "light_gray")
         );
-
         context.remapState("minecraft:shulker_box", "minecraft:", "color", "_shulker_box",
                 new RemapValue("silver", "light_gray")
         );
+
+        context.renameProperty("minecraft:observer", "facing_direction", "minecraft:facing_direction");
     }
 }

@@ -15,7 +15,6 @@ public class BlockStateUpdater_1_20_60 extends BlockStateUpdater {
         context.remapState("minecraft:hard_stained_glass", "minecraft:hard_", "color", "_stained_glass",
                 new RemapValue("silver", "light_gray")
         );
-
         context.remapState("minecraft:hard_stained_glass_pane", "minecraft:hard_", "color", "_stained_glass_pane",
                 new RemapValue("silver", "light_gray")
         );

@@ -12,22 +12,6 @@ public class BlockStateUpdater_1_13_0 extends BlockStateUpdater {
 
     @Override
     public void registerUpdaters(BlockUpdaterContext context) {
-        context.renameProperty("minecraft:bone_block", "direction", "pillar_axis");
-        context.renameProperty("minecraft:frame", "weirdo_direction", "facing_direction");
-        context.renameProperty("minecraft:hay_block", "direction", "pillar_axis");
-        context.renameProperty("minecraft:lever", "facing_direction", "lever_direction");
-        context.renameProperty("minecraft:purpur_block", "direction", "pillar_axis");
-        context.renameProperty("minecraft:quartz_block", "direction", "pillar_axis");
-        context.renameProperty("minecraft:stripped_acacia_log", "direction", "pillar_axis");
-        context.renameProperty("minecraft:stripped_birch_log", "direction", "pillar_axis");
-        context.renameProperty("minecraft:stripped_dark_oak_log", "direction", "pillar_axis");
-        context.renameProperty("minecraft:stripped_jungle_log", "direction", "pillar_axis");
-        context.renameProperty("minecraft:stripped_oak_log", "direction", "pillar_axis");
-        context.renameProperty("minecraft:stripped_spruce_log", "direction", "pillar_axis");
-
-        context.addProperty("minecraft:coral", "dead_bit", (byte) 0);
-        context.addProperty("minecraft:wood", "pillar_axis", "y");
-
         var facing_direction_00 = new RemapValue[]{
                 new RemapValue(6, 0),
                 new RemapValue(7, 0)
@@ -265,5 +249,21 @@ public class BlockStateUpdater_1_13_0 extends BlockStateUpdater {
                 .match("direction", "2")
                 .addProperty("pillar_axis", "z")
                 .removeProperty("direction");
+
+        context.addProperty("minecraft:coral", "dead_bit", (byte) 0);
+        context.addProperty("minecraft:wood", "pillar_axis", "y");
+
+        context.renameProperty("minecraft:bone_block", "direction", "pillar_axis");
+        context.renameProperty("minecraft:frame", "weirdo_direction", "facing_direction");
+        context.renameProperty("minecraft:hay_block", "direction", "pillar_axis");
+        context.renameProperty("minecraft:lever", "facing_direction", "lever_direction");
+        context.renameProperty("minecraft:purpur_block", "direction", "pillar_axis");
+        context.renameProperty("minecraft:quartz_block", "direction", "pillar_axis");
+        context.renameProperty("minecraft:stripped_acacia_log", "direction", "pillar_axis");
+        context.renameProperty("minecraft:stripped_birch_log", "direction", "pillar_axis");
+        context.renameProperty("minecraft:stripped_dark_oak_log", "direction", "pillar_axis");
+        context.renameProperty("minecraft:stripped_jungle_log", "direction", "pillar_axis");
+        context.renameProperty("minecraft:stripped_oak_log", "direction", "pillar_axis");
+        context.renameProperty("minecraft:stripped_spruce_log", "direction", "pillar_axis");
     }
 }

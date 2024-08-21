@@ -12,17 +12,6 @@ public class BlockStateUpdater_1_20_0 extends BlockStateUpdater {
 
     @Override
     public void registerUpdaters(BlockUpdaterContext context) {
-        context.renameId("minecraft:lava_cauldron", "minecraft:cauldron");
-
-        context.renameProperty("minecraft:carved_pumpkin", "direction", "minecraft:cardinal_direction");
-        context.renameProperty("minecraft:lit_pumpkin", "direction", "minecraft:cardinal_direction");
-        context.renameProperty("minecraft:pumpkin", "direction", "minecraft:cardinal_direction");
-        context.renameProperty("minecraft:sculk_sensor", "powered_bit", "sculk_sensor_phase");
-
-        context.addProperty("minecraft:calibrated_sculk_sensor", "sculk_sensor_phase", 0);
-
-        context.removeProperty("minecraft:calibrated_sculk_sensor", "powered_bit");
-
         var direction_00 = new RemapValue[]{
                 new RemapValue(0, "south"),
                 new RemapValue(1, "west"),
@@ -40,7 +29,6 @@ public class BlockStateUpdater_1_20_0 extends BlockStateUpdater {
         context.remapState("minecraft:carpet", "minecraft:", "color", "_carpet",
                 new RemapValue("silver", "light_gray")
         );
-
         context.remapState("minecraft:coral", oldState -> oldState.match("dead_bit", "0"), "minecraft:", "coral_color", "_coral",
                 new RemapValue("blue", "tube"),
                 new RemapValue("pink", "brain"),
@@ -55,5 +43,16 @@ public class BlockStateUpdater_1_20_0 extends BlockStateUpdater {
                 new RemapValue("red", "fire"),
                 new RemapValue("yellow", "horn")
         );
+
+        context.addProperty("minecraft:calibrated_sculk_sensor", "sculk_sensor_phase", 0);
+
+        context.removeProperty("minecraft:calibrated_sculk_sensor", "powered_bit");
+
+        context.renameProperty("minecraft:carved_pumpkin", "direction", "minecraft:cardinal_direction");
+        context.renameProperty("minecraft:lit_pumpkin", "direction", "minecraft:cardinal_direction");
+        context.renameProperty("minecraft:pumpkin", "direction", "minecraft:cardinal_direction");
+        context.renameProperty("minecraft:sculk_sensor", "powered_bit", "sculk_sensor_phase");
+
+        context.renameId("minecraft:lava_cauldron", "minecraft:cauldron");
     }
 }

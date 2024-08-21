@@ -17,8 +17,6 @@ public class BlockStateUpdater_1_21_20 extends BlockStateUpdater {
 
     @Override
     public void registerUpdaters(BlockUpdaterContext context) {
-        context.renameId("minecraft:yellow_flower", "minecraft:dandelion");
-
         context.addUpdater()
                 .match("name", "minecraft:coral_fan_hang")
                 .match("coral_hang_type_bit", "0")
@@ -219,73 +217,63 @@ public class BlockStateUpdater_1_21_20 extends BlockStateUpdater {
                 new RemapValue("undamaged", ""),
                 new RemapValue("very_damaged", "damaged_")
         );
-
         context.remapState("minecraft:dirt", "minecraft:", "dirt_type", "dirt",
                 new RemapValue("coarse", "coarse_"),
                 new RemapValue("normal", "")
         );
-
         context.remapState("minecraft:double_stone_block_slab", "minecraft:", "stone_slab_type", "_double_slab",
                 new RemapValue("wood", "petrified_oak")
         );
-
         context.remapState("minecraft:double_stone_block_slab2", "minecraft:", "stone_slab_type_2", "_double_slab",
                 new RemapValue("prismarine_dark", "dark_prismarine"),
                 new RemapValue("prismarine_rough", "prismarine")
         );
-
         context.remapState("minecraft:double_stone_block_slab3", "minecraft:", "stone_slab_type_3", "_double_slab");
         context.remapState("minecraft:double_stone_block_slab4", "minecraft:", "stone_slab_type_4", "_double_slab",
                 new RemapValue("stone", "normal_stone")
         );
-
         context.remapState("minecraft:monster_egg", "minecraft:infested_", "monster_egg_stone_type", "",
                 new RemapValue("chiseled_stone_brick", "chiseled_stone_bricks"),
                 new RemapValue("cracked_stone_brick", "cracked_stone_bricks"),
                 new RemapValue("mossy_stone_brick", "mossy_stone_bricks"),
                 new RemapValue("stone_brick", "stone_bricks")
         );
-
         context.remapState("minecraft:prismarine", "minecraft:", "prismarine_block_type", "",
                 new RemapValue("bricks", "prismarine_bricks"),
                 new RemapValue("dark", "dark_prismarine"),
                 new RemapValue("default", "prismarine")
         );
-
         context.remapState("minecraft:quartz_block", "minecraft:", "chisel_type", "",
                 new RemapValue("chiseled", "chiseled_quartz_block"),
                 new RemapValue("default", "quartz_block"),
                 new RemapValue("lines", "quartz_pillar"),
                 new RemapValue("smooth", "smooth_quartz")
         );
-
         context.remapState("minecraft:red_sandstone", "minecraft:", "sand_stone_type", "red_sandstone",
                 new RemapValue("cut", "cut_"),
                 new RemapValue("default", ""),
                 new RemapValue("heiroglyphs", "chiseled_"),
                 new RemapValue("smooth", "smooth_")
         );
-
         context.remapState("minecraft:sand", "minecraft:", "sand_type", "sand",
                 new RemapValue("normal", ""),
                 new RemapValue("red", "red_")
         );
-
         context.remapState("minecraft:sandstone", "minecraft:", "sand_stone_type", "sandstone",
                 new RemapValue("cut", "cut_"),
                 new RemapValue("default", ""),
                 new RemapValue("heiroglyphs", "chiseled_"),
                 new RemapValue("smooth", "smooth_")
         );
-
         context.remapState("minecraft:stone_block_slab2", "minecraft:", "stone_slab_type_2", "_slab",
                 new RemapValue("prismarine_dark", "dark_prismarine"),
                 new RemapValue("prismarine_rough", "prismarine")
         );
-
         context.remapState("minecraft:stone_block_slab3", "minecraft:", "stone_slab_type_3", "_slab");
         context.remapState("minecraft:stone_block_slab4", "minecraft:", "stone_slab_type_4", "_slab",
                 new RemapValue("stone", "normal_stone")
         );
+
+        context.renameId("minecraft:yellow_flower", "minecraft:dandelion");
     }
 }

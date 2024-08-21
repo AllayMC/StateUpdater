@@ -12,8 +12,6 @@ public class BlockStateUpdater_1_20_80 extends BlockStateUpdater {
 
     @Override
     public void registerUpdaters(BlockUpdaterContext context) {
-        context.removeProperty("minecraft:bamboo_sapling", "sapling_type");
-
         context.remapState("minecraft:coral_fan", "minecraft:", "coral_color", "_coral_fan",
                 new RemapValue("blue", "tube"),
                 new RemapValue("pink", "brain"),
@@ -21,7 +19,6 @@ public class BlockStateUpdater_1_20_80 extends BlockStateUpdater {
                 new RemapValue("red", "fire"),
                 new RemapValue("yellow", "horn")
         );
-
         context.remapState("minecraft:coral_fan_dead", "minecraft:dead_", "coral_color", "_coral_fan",
                 new RemapValue("blue", "tube"),
                 new RemapValue("pink", "brain"),
@@ -29,7 +26,6 @@ public class BlockStateUpdater_1_20_80 extends BlockStateUpdater {
                 new RemapValue("red", "fire"),
                 new RemapValue("yellow", "horn")
         );
-
         context.remapState("minecraft:red_flower", "minecraft:", "flower_type", "",
                 new RemapValue("houstonia", "azure_bluet"),
                 new RemapValue("orchid", "blue_orchid"),
@@ -39,7 +35,8 @@ public class BlockStateUpdater_1_20_80 extends BlockStateUpdater {
                 new RemapValue("tulip_red", "red_tulip"),
                 new RemapValue("tulip_white", "white_tulip")
         );
-
         context.remapState("minecraft:sapling", "minecraft:", "sapling_type", "_sapling");
+
+        context.removeProperty("minecraft:bamboo_sapling", "sapling_type");
     }
 }

@@ -12,17 +12,11 @@ public class BlockStateUpdater_1_16_0 extends BlockStateUpdater {
 
     @Override
     public void registerUpdaters(BlockUpdaterContext context) {
-        context.renameId("minecraft:basalt_block", "minecraft:basalt");
-        context.renameId("minecraft:blue_fire", "minecraft:soul_fire");
-        context.renameId("minecraft:blue_nether_wart_block", "minecraft:warped_wart_block");
-        context.renameId("minecraft:crimson_trap_door", "minecraft:crimson_trapdoor");
-        context.renameId("minecraft:polished_basalt_block", "minecraft:polished_basalt");
-        context.renameId("minecraft:shroomlight_block", "minecraft:shroomlight");
-        context.renameId("minecraft:soul_soil_block", "minecraft:soul_soil");
-        context.renameId("minecraft:target_block", "minecraft:target");
-        context.renameId("minecraft:weeping_vines_block", "minecraft:weeping_vines");
-        context.renameId("minecraft:lodestone_block", "minecraft:lodestone");
-        context.renameId("minecraft:twisting_vines_block", "minecraft:twisting_vines");
+        context.remapValues("minecraft:cobblestone_wall", "wall_block_type",
+                new RemapValue("blackstone", "cobblestone"),
+                new RemapValue("polished_blackstone", "cobblestone"),
+                new RemapValue("polished_blackstone_brick", "cobblestone")
+        );
 
         context.addProperty("minecraft:cobblestone_wall", "wall_connection_type_east", "none");
         context.addProperty("minecraft:cobblestone_wall", "wall_connection_type_north", "none");
@@ -37,10 +31,16 @@ public class BlockStateUpdater_1_16_0 extends BlockStateUpdater {
         context.removeProperty("minecraft:polished_blackstone_brick_wall", "wall_block_type");
         context.removeProperty("minecraft:polished_blackstone_wall", "wall_block_type");
 
-        context.remapValues("minecraft:cobblestone_wall", "wall_block_type",
-                new RemapValue("blackstone", "cobblestone"),
-                new RemapValue("polished_blackstone", "cobblestone"),
-                new RemapValue("polished_blackstone_brick", "cobblestone")
-        );
+        context.renameId("minecraft:basalt_block", "minecraft:basalt");
+        context.renameId("minecraft:blue_fire", "minecraft:soul_fire");
+        context.renameId("minecraft:blue_nether_wart_block", "minecraft:warped_wart_block");
+        context.renameId("minecraft:crimson_trap_door", "minecraft:crimson_trapdoor");
+        context.renameId("minecraft:polished_basalt_block", "minecraft:polished_basalt");
+        context.renameId("minecraft:shroomlight_block", "minecraft:shroomlight");
+        context.renameId("minecraft:soul_soil_block", "minecraft:soul_soil");
+        context.renameId("minecraft:target_block", "minecraft:target");
+        context.renameId("minecraft:weeping_vines_block", "minecraft:weeping_vines");
+        context.renameId("minecraft:lodestone_block", "minecraft:lodestone");
+        context.renameId("minecraft:twisting_vines_block", "minecraft:twisting_vines");
     }
 }

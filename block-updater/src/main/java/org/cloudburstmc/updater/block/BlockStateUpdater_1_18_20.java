@@ -16,10 +16,10 @@ public class BlockStateUpdater_1_18_20 extends BlockStateUpdater {
 
     @Override
     public void registerUpdaters(BlockUpdaterContext context) {
-        context.renameId("minecraft:frog_egg", "minecraft:frog_spawn");
-
         context.addProperty("minecraft:ochre_froglight", "pillar_axis", "y");
         context.addProperty("minecraft:pearlescent_froglight", "pillar_axis", "y");
         context.addProperty("minecraft:verdant_froglight", "pillar_axis", "y");
+
+        context.renameId("minecraft:frog_egg", "minecraft:frog_spawn");
     }
 }
