@@ -23,6 +23,12 @@ public class BlockStateUpdater_1_20_10 extends BlockStateUpdater {
                 new RemapValue(5, "east")
         );
 
-        // TODO: remappedStates
+        context.remapState("minecraft:concrete", "minecraft:", "color", "_concrete",
+                new RemapValue("silver", "light_gray")
+        );
+
+        context.remapState("minecraft:shulker_box", "minecraft:", "color", "_shulker_box",
+                new RemapValue("silver", "light_gray")
+        );
     }
 }

@@ -36,6 +36,5 @@ public class BlockStateUpdater_1_12_0 extends BlockStateUpdater {
         };
         context.remapValues("minecraft:blast_furnace", "direction", direction_00);
         context.remapValues("minecraft:smoker", "direction", direction_00);
-
     }
 }

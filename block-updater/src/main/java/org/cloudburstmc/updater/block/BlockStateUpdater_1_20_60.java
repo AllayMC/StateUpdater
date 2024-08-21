@@ -1,6 +1,7 @@
 package org.cloudburstmc.updater.block;
 
 import org.cloudburstmc.updater.block.context.BlockUpdaterContext;
+import org.cloudburstmc.updater.block.context.RemapValue;
 
 public class BlockStateUpdater_1_20_60 extends BlockStateUpdater {
     public static final BlockStateUpdater INSTANCE = new BlockStateUpdater_1_20_60();
@@ -11,6 +12,12 @@ public class BlockStateUpdater_1_20_60 extends BlockStateUpdater {
 
     @Override
     public void registerUpdaters(BlockUpdaterContext context) {
-        // TODO: remappedStates
+        context.remapState("minecraft:hard_stained_glass", "minecraft:hard_", "color", "_stained_glass",
+                new RemapValue("silver", "light_gray")
+        );
+
+        context.remapState("minecraft:hard_stained_glass_pane", "minecraft:hard_", "color", "_stained_glass_pane",
+                new RemapValue("silver", "light_gray")
+        );
     }
 }

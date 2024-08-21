@@ -148,6 +148,12 @@ public class BlockStateUpdater_1_20_20 extends BlockStateUpdater {
         context.remapValues("minecraft:weathered_double_cut_copper_slab", "top_slot_bit", top_slot_bit_00);
         context.remapValues("minecraft:wooden_slab", "top_slot_bit", top_slot_bit_00);
 
-        // TODO: remappedStates
+        context.remapState("minecraft:stained_glass", "minecraft:", "color", "_stained_glass",
+                new RemapValue("silver", "light_gray")
+        );
+
+        context.remapState("minecraft:stained_glass_pane", "minecraft:", "color", "_stained_glass_pane",
+                new RemapValue("silver", "light_gray")
+        );
     }
 }

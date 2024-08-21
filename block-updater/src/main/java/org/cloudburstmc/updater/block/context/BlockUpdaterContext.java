@@ -3,6 +3,7 @@ package org.cloudburstmc.updater.block.context;
 import org.cloudburstmc.updater.common.context.UpdaterContext;
 
 import java.util.Arrays;
+import java.util.function.Consumer;
 
 /**
  * StateUpdater Project 19/08/2024
@@ -51,18 +52,42 @@ public class BlockUpdaterContext extends UpdaterContext<BlockUpdater, BlockUpdat
         this.addUpdater().renameId("Name", oldId, newId);
     }
 
-    public void remapValues(String name, String property, RemapValue... remapValues) {
+    public void remapValues(String name, String property, RemapValue... remaps) {
         this.addUpdater()
                 .match("name", name)
                 .visit("states")
                 .tryEdit(property, helper -> {
                     var oldValue = helper.getTag();
-                    var remapValue = Arrays.stream(remapValues)
+                    var remapValue = Arrays.stream(remaps)
                             .filter(entry -> entry.oldValue().equals(oldValue))
                             .findFirst()
                             .orElseThrow(() -> new IllegalStateException("Unexpected remap value '%s' for '%s'".formatted(oldValue, name)));
 
                     helper.replaceWith(property, remapValue.newValue());
                 });
+    }
+
+    public void remapState(String name, String prefix, String property, String suffix) {
+        this.remapState(name, prefix, property, suffix, new RemapValue[0]);
+    }
+
+    public void remapState(String name, String prefix, String property, String suffix, RemapValue... remaps) {
+        remapState(name, $ -> {}, prefix, property, suffix, remaps);
+    }
+
+    public void remapState(String name, Consumer<BlockUpdater.Builder> filter, String prefix, String property, String suffix, RemapValue... remaps) {
+        var updater = this.addUpdater().match("name", name);
+        filter.accept(updater);
+
+        updater.visit("states")
+                .tryEdit(property, helper -> {
+                    var oldValue = helper.getTag();
+                    var remapValue = Arrays.stream(remaps)
+                            .filter(entry -> entry.oldValue().equals(oldValue))
+                            .findFirst();
+                    var newValue = remapValue.isPresent() ? remapValue.get() : oldValue;
+                    helper.replaceWith("name", prefix + newValue + suffix);
+                })
+                .removeProperty(property);
     }
 }

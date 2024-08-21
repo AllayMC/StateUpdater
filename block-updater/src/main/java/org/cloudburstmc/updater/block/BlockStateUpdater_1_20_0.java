@@ -37,6 +37,23 @@ public class BlockStateUpdater_1_20_0 extends BlockStateUpdater {
                 new RemapValue((byte) 1, 1)
         );
 
-        // TODO: remappedStates
+        context.remapState("minecraft:carpet", "minecraft:", "color", "_carpet",
+                new RemapValue("silver", "light_gray")
+        );
+
+        context.remapState("minecraft:coral", oldState -> oldState.match("dead_bit", "0"), "minecraft:", "coral_color", "_coral",
+                new RemapValue("blue", "tube"),
+                new RemapValue("pink", "brain"),
+                new RemapValue("purple", "bubble"),
+                new RemapValue("red", "fire"),
+                new RemapValue("yellow", "horn")
+        );
+        context.remapState("minecraft:coral", oldState -> oldState.match("dead_bit", "1"), "minecraft:dead_", "coral_color", "_coral",
+                new RemapValue("blue", "tube"),
+                new RemapValue("pink", "brain"),
+                new RemapValue("purple", "bubble"),
+                new RemapValue("red", "fire"),
+                new RemapValue("yellow", "horn")
+        );
     }
 }

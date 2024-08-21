@@ -78,6 +78,16 @@ public class BlockUpdater extends BaseUpdater<BlockUpdater, BlockUpdater.Builder
             return self();
         }
 
+        public Builder replaceValue(String property, Object newValue) {
+            filters.add(COMPOUND_FILTER);
+            filters.add(new HasKeyFilter(property));
+            updaters.add(helper -> {
+                var tag = helper.getCompoundTag();
+                tag.put(property, newValue);
+            });
+            return self();
+        }
+
         @Override
         protected Builder self() {
             return this;

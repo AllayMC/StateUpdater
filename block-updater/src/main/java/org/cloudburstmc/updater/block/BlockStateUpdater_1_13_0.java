@@ -161,6 +161,109 @@ public class BlockStateUpdater_1_13_0 extends BlockStateUpdater {
                 new RemapValue(15, 0)
         );
 
-        // TODO: remappedStates
+        context.addUpdater()
+                .match("name", "minecraft:end_rod")
+                .match("facing_direction", "6")
+                .replaceValue("name", "minecraft:light_block")
+                .addProperty("block_light_level", 14)
+                .removeProperty("facing_direction");
+        context.addUpdater()
+                .match("name", "minecraft:end_rod")
+                .match("facing_direction", "7")
+                .replaceValue("name", "minecraft:light_block")
+                .addProperty("block_light_level", 14)
+                .removeProperty("facing_direction");
+
+        context.addUpdater()
+                .match("name", "minecraft:log")
+                .match("direction", "3")
+                .match("old_log_type", "birch")
+                .replaceValue("name", "minecraft:wood")
+                .addProperty("pillar_axis", "y")
+                .addProperty("stripped_bit", (byte) 0)
+                .addProperty("wood_type", "birch")
+                .removeProperty("direction")
+                .removeProperty("old_log_type");
+        context.addUpdater()
+                .match("name", "minecraft:log")
+                .match("direction", "3")
+                .match("old_log_type", "jungle")
+                .replaceValue("name", "minecraft:wood")
+                .addProperty("pillar_axis", "y")
+                .addProperty("stripped_bit", (byte) 0)
+                .addProperty("wood_type", "jungle")
+                .removeProperty("direction")
+                .removeProperty("old_log_type");
+        context.addUpdater()
+                .match("name", "minecraft:log")
+                .match("direction", "3")
+                .match("old_log_type", "oak")
+                .replaceValue("name", "minecraft:wood")
+                .addProperty("pillar_axis", "y")
+                .addProperty("stripped_bit", (byte) 0)
+                .addProperty("wood_type", "oak")
+                .removeProperty("direction")
+                .removeProperty("old_log_type");
+        context.addUpdater()
+                .match("name", "minecraft:log")
+                .match("direction", "3")
+                .match("old_log_type", "spruce")
+                .replaceValue("name", "minecraft:wood")
+                .addProperty("pillar_axis", "y")
+                .addProperty("stripped_bit", (byte) 0)
+                .addProperty("wood_type", "spruce")
+                .removeProperty("direction")
+                .removeProperty("old_log_type");
+        context.addUpdater()
+                .match("name", "minecraft:log")
+                .match("direction", "0")
+                .addProperty("pillar_axis", "y")
+                .removeProperty("direction");
+        context.addUpdater()
+                .match("name", "minecraft:log")
+                .match("direction", "1")
+                .addProperty("pillar_axis", "x")
+                .removeProperty("direction");
+        context.addUpdater()
+                .match("name", "minecraft:log")
+                .match("direction", "2")
+                .addProperty("pillar_axis", "z")
+                .removeProperty("direction");
+
+        context.addUpdater()
+                .match("name", "minecraft:log2")
+                .match("direction", "3")
+                .match("new_log_type", "acacia")
+                .replaceValue("name", "minecraft:wood")
+                .addProperty("pillar_axis", "y")
+                .addProperty("stripped_bit", (byte) 0)
+                .addProperty("wood_type", "acacia")
+                .removeProperty("direction")
+                .removeProperty("new_log_type");
+        context.addUpdater()
+                .match("name", "minecraft:log2")
+                .match("direction", "3")
+                .match("new_log_type", "dark_oak")
+                .replaceValue("name", "minecraft:wood")
+                .addProperty("pillar_axis", "y")
+                .addProperty("stripped_bit", (byte) 0)
+                .addProperty("wood_type", "dark_oak")
+                .removeProperty("direction")
+                .removeProperty("new_log_type");
+        context.addUpdater()
+                .match("name", "minecraft:log2")
+                .match("direction", "0")
+                .addProperty("pillar_axis", "y")
+                .removeProperty("direction");
+        context.addUpdater()
+                .match("name", "minecraft:log2")
+                .match("direction", "1")
+                .addProperty("pillar_axis", "x")
+                .removeProperty("direction");
+        context.addUpdater()
+                .match("name", "minecraft:log2")
+                .match("direction", "2")
+                .addProperty("pillar_axis", "z")
+                .removeProperty("direction");
     }
 }

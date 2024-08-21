@@ -67,6 +67,12 @@ public class BlockStateUpdater_1_20_30 extends BlockStateUpdater {
         context.remapValues("minecraft:lit_smoker", "facing_direction", facing_direction_00);
         context.remapValues("minecraft:smoker", "facing_direction", facing_direction_00);
 
-        // TODO: remappedStates
+        context.remapState("minecraft:concrete_powder", "minecraft:", "color", "_concrete_powder",
+                new RemapValue("silver", "light_gray")
+        );
+
+        context.remapState("minecraft:stained_hardened_clay", "minecraft:", "color", "_terracotta",
+                new RemapValue("silver", "light_gray")
+        );
     }
 }

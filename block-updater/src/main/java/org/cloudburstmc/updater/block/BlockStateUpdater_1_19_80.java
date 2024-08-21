@@ -11,6 +11,8 @@ public class BlockStateUpdater_1_19_80 extends BlockStateUpdater {
 
     @Override
     public void registerUpdaters(BlockUpdaterContext context) {
-        // TODO: remappedStates
+        context.remapState("minecraft:fence", "minecraft:", "wood_type", "_fence");
+        context.remapState("minecraft:log", "minecraft:", "old_log_type", "_log");
+        context.remapState("minecraft:log2", "minecraft:", "new_log_type", "_log");
     }
 }
