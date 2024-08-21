@@ -17,6 +17,10 @@ public class ItemStateUpdater_1_21_0 extends ItemStateUpdater {
 
     @Override
     public void registerUpdaters(ItemUpdaterContext context) {
+        context.renameId("minecraft:record_creator", "minecraft:music_disc_creator");
+        context.renameId("minecraft:record_creator_music_box", "minecraft:music_disc_creator_music_box");
+        context.renameId("minecraft:record_precipice", "minecraft:music_disc_precipice");
+
         context.remapMeta(
                 "minecraft:coral_block",
                 new RemapMetaEntry(0, "minecraft:tube_coral_block"),
@@ -56,9 +60,5 @@ public class ItemStateUpdater_1_21_0 extends ItemStateUpdater {
                 new RemapMetaEntry(2, "minecraft:fern"),
                 new RemapMetaEntry(3, "minecraft:fern")
         );
-
-        context.renameId("minecraft:record_creator", "minecraft:music_disc_creator");
-        context.renameId("minecraft:record_creator_music_box", "minecraft:music_disc_creator_music_box");
-        context.renameId("minecraft:record_precipice", "minecraft:music_disc_precipice");
     }
 }

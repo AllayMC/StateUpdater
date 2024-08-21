@@ -17,6 +17,8 @@ public class ItemStateUpdater_1_20_60 extends ItemStateUpdater {
 
     @Override
     public void registerUpdaters(ItemUpdaterContext context) {
+        context.renameId("minecraft:scute", "minecraft:turtle_scute");
+
         context.remapMeta(
                 "minecraft:hard_stained_glass",
                 new RemapMetaEntry(0, "minecraft:hard_white_stained_glass"),
@@ -60,7 +62,5 @@ public class ItemStateUpdater_1_20_60 extends ItemStateUpdater {
                 new RemapMetaEntry(140, "minecraft:breeze_spawn_egg"),
                 new RemapMetaEntry(142, "minecraft:armadillo_spawn_egg")
         );
-
-        context.renameId("minecraft:scute", "minecraft:turtle_scute");
     }
 }

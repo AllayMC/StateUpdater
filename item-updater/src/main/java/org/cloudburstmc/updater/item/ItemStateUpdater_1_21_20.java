@@ -17,6 +17,8 @@ public class ItemStateUpdater_1_21_20 extends ItemStateUpdater {
 
     @Override
     public void registerUpdaters(ItemUpdaterContext context) {
+        context.renameId("minecraft:yellow_flower", "minecraft:dandelion");
+
         context.remapMeta(
                 "minecraft:anvil",
                 new RemapMetaEntry(4, "minecraft:chipped_anvil"),
@@ -165,7 +167,5 @@ public class ItemStateUpdater_1_21_20 extends ItemStateUpdater {
                 new RemapMetaEntry(2, "minecraft:cracked_stone_bricks"),
                 new RemapMetaEntry(3, "minecraft:chiseled_stone_bricks")
         );
-
-        context.renameId("minecraft:yellow_flower", "minecraft:dandelion");
     }
 }

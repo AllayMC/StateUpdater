@@ -17,6 +17,13 @@ public class ItemStateUpdater_1_18_30 extends ItemStateUpdater {
 
     @Override
     public void registerUpdaters(ItemUpdaterContext context) {
+        context.renameId("minecraft:concretepowder", "minecraft:concrete_powder");
+        context.renameId("minecraft:invisiblebedrock", "minecraft:invisible_bedrock");
+        context.renameId("minecraft:movingblock", "minecraft:moving_block");
+        context.renameId("minecraft:pistonarmcollision", "minecraft:piston_arm_collision");
+        context.renameId("minecraft:sealantern", "minecraft:sea_lantern");
+        context.renameId("minecraft:stickypistonarmcollision", "minecraft:sticky_piston_arm_collision");
+
         context.remapMeta(
                 "minecraft:chest_boat",
                 new RemapMetaEntry(0, "minecraft:oak_chest_boat"),
@@ -30,12 +37,5 @@ public class ItemStateUpdater_1_18_30 extends ItemStateUpdater {
                 "minecraft:spawn_egg",
                 new RemapMetaEntry(131, "minecraft:warden_spawn_egg")
         );
-
-        context.renameId("minecraft:concretepowder", "minecraft:concrete_powder");
-        context.renameId("minecraft:invisiblebedrock", "minecraft:invisible_bedrock");
-        context.renameId("minecraft:movingblock", "minecraft:moving_block");
-        context.renameId("minecraft:pistonarmcollision", "minecraft:piston_arm_collision");
-        context.renameId("minecraft:sealantern", "minecraft:sea_lantern");
-        context.renameId("minecraft:stickypistonarmcollision", "minecraft:sticky_piston_arm_collision");
     }
 }

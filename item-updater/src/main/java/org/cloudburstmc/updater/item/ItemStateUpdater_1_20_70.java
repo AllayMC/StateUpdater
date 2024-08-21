@@ -17,6 +17,8 @@ public class ItemStateUpdater_1_20_70 extends ItemStateUpdater {
 
     @Override
     public void registerUpdaters(ItemUpdaterContext context) {
+        context.renameId("minecraft:grass", "minecraft:grass_block");
+
         context.remapMeta(
                 "minecraft:leaves",
                 new RemapMetaEntry(0, "minecraft:oak_leaves"),
@@ -57,7 +59,5 @@ public class ItemStateUpdater_1_20_70 extends ItemStateUpdater {
                 new RemapMetaEntry(4, "minecraft:acacia_slab"),
                 new RemapMetaEntry(5, "minecraft:dark_oak_slab")
         );
-
-        context.renameId("minecraft:grass", "minecraft:grass_block");
     }
 }
