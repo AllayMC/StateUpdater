@@ -50,6 +50,6 @@ class BlockStateUpdaterTest {
                 BlockStateUpdaters.LATEST_VERSION
         );
         assertEquals(anvil.getString("name"), "minecraft:damaged_anvil");
-        assertEquals(anvil.getCompound("states").getInt("minecraft:cardinal_direction"), 3);
+        assertEquals(anvil.getCompound("states").getString("minecraft:cardinal_direction"), "east");
     }
 }
