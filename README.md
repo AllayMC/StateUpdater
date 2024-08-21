@@ -1,7 +1,8 @@
 # StateUpdater
 
-Extracted block state mappings from the Minecraft: Bedrock Edition used to update versioned NBT tags found in LevelDB
-worlds to the latest version.
+Extracted state mappings from the Minecraft: Bedrock Edition used to update state NBT tags to the latest version.
+
+All updaters auto-generated!
 
 ### Usage
 
@@ -30,7 +31,7 @@ NbtMap updatedNbt = ItemStateUpdaters.updateItemState(
 #### Update Block
 
 ```java
-// Update legacy block to new latest items (example for update jungle planks)
+// Update legacy block
 NbtMap updatedNbt = BlockStateUpdaters.updateBlockState(
                 NbtMap.builder()
                         .putString("name", "minecraft:stone")
@@ -39,23 +40,17 @@ NbtMap updatedNbt = BlockStateUpdaters.updateBlockState(
                 BlockStateUpdaters.LATEST_VERSION
 );
 
-// or update new items to latest
+// or update block
 NbtMap updatedNbt = BlockStateUpdaters.updateBlockState(
         NbtMap.builder()
-                .putString("Name", "minecraft:coal")
-                .putInt("Damage", 1) // You can use int, short, long and byte
+                .putString("name", "minecraft:anvil")
+                .putCompound("states", NbtMap.builder()
+                        .putString("damage", "very_damaged")
+                        .putInt("direction", 3)
+                        .build())
                 .build(),
         BlockStateUpdaters.LATEST_VERSION
 );
-```
-
-Updating legacy meta values to block states
-
-```java
-NbtMap updatedTag = BlockStateUpdaters.updateBlockState(NbtMap.builder()
-        .putString("name", "minecraft:stone")
-        .putShort("val", (short) 1)
-        .build(), 0);
 ```
 
 ## Acknowledgements
