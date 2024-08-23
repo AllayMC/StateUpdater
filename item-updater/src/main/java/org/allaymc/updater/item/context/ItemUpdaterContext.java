@@ -21,10 +21,11 @@ public class ItemUpdaterContext extends UpdaterContext<ItemUpdater, ItemUpdater.
                     var meta = (int) helper.getTag();
                     var remap = Arrays.stream(remaps)
                             .filter(entry -> entry.meta() == meta)
-                            .findFirst()
-                            .orElseThrow(() -> new IllegalStateException("Unexpected remap meta '%d' for '%s'".formatted(meta, name)));
+                            .findFirst();
 
-                    helper.replaceWith("Name", remap.name());
+                    if (remap.isEmpty()) return;
+
+                    helper.replaceWith("Name", remap.get().name());
                 });
     }
 

@@ -5,6 +5,7 @@ import org.cloudburstmc.nbt.NbtMap;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -87,5 +88,19 @@ class ItemStateUpdaterTest {
         );
 
         assertEquals(result.getString("Name"), "minecraft:grass_block");
+    }
+
+    @Test
+    void remap_meta_for_stone() {
+        assertDoesNotThrow(() -> {
+            ItemStateUpdaters.updateItemState(
+                NbtMap.builder()
+                        .putString("Name", "minecraft:stone")
+                        .putInt("Damage", 0)
+                        .build(),
+                ItemStateUpdaters.LATEST_VERSION
+        );
+        });
+
     }
 }
