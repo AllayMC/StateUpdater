@@ -74,10 +74,12 @@ public class BlockUpdaterContext extends UpdaterContext<BlockUpdater, BlockUpdat
     }
 
     public void remapState(String name, Consumer<BlockUpdater.Builder> filter, String prefix, String property, String suffix, RemapValue... remaps) {
-        var updater = this.addUpdater().match("name", name);
+        var updater = this.addUpdater()
+                .match("name", name)
+                .visit("states");
         filter.accept(updater);
 
-        updater.visit("states").edit(property, helper -> {
+        updater.edit(property, helper -> {
             var oldValue = helper.getTag();
             var remapValue = Arrays.stream(remaps)
                     .filter(entry -> entry.oldValue().equals(oldValue))

@@ -23,9 +23,7 @@ public class ItemUpdaterContext extends UpdaterContext<ItemUpdater, ItemUpdater.
                             .filter(entry -> entry.meta() == meta)
                             .findFirst();
 
-                    if (remap.isEmpty()) return;
-
-                    helper.replaceWith("Name", remap.get().name());
+                    remap.ifPresent(entry -> helper.replaceWith("Name", entry.name()));
                 });
     }
 

@@ -3,6 +3,11 @@ package org.allaymc.updater.block;
 import org.allaymc.updater.block.context.BlockUpdaterContext;
 import org.allaymc.updater.block.context.RemapValue;
 
+/**
+ * StateUpdater Project 23/08/2024
+ *
+ * @author IWareQ
+ */
 public class BlockStateUpdater_1_21_0 extends BlockStateUpdater {
     public static final BlockStateUpdater INSTANCE = new BlockStateUpdater_1_21_0();
 
@@ -14,24 +19,32 @@ public class BlockStateUpdater_1_21_0 extends BlockStateUpdater {
     public void registerUpdaters(BlockUpdaterContext context) {
         context.addUpdater()
                 .match("name", "minecraft:tallgrass")
+                .visit("states")
                 .match("tall_grass_type", "default")
-                .replaceValue("name", "minecraft:short_grass")
-                .removeProperty("tall_grass_type");
+                .removeProperty("tall_grass_type")
+                .popVisit()
+                .replaceValue("name", "minecraft:short_grass");
         context.addUpdater()
                 .match("name", "minecraft:tallgrass")
+                .visit("states")
                 .match("tall_grass_type", "fern")
-                .replaceValue("name", "minecraft:fern")
-                .removeProperty("tall_grass_type");
+                .removeProperty("tall_grass_type")
+                .popVisit()
+                .replaceValue("name", "minecraft:fern");
         context.addUpdater()
                 .match("name", "minecraft:tallgrass")
+                .visit("states")
                 .match("tall_grass_type", "snow")
-                .replaceValue("name", "minecraft:fern")
-                .removeProperty("tall_grass_type");
+                .removeProperty("tall_grass_type")
+                .popVisit()
+                .replaceValue("name", "minecraft:fern");
         context.addUpdater()
                 .match("name", "minecraft:tallgrass")
+                .visit("states")
                 .match("tall_grass_type", "tall")
-                .replaceValue("name", "minecraft:short_grass")
-                .removeProperty("tall_grass_type");
+                .removeProperty("tall_grass_type")
+                .popVisit()
+                .replaceValue("name", "minecraft:short_grass");
 
         context.remapState("minecraft:coral_block", oldState -> oldState.match("dead_bit", "0"), "minecraft:", "coral_color", "_coral_block",
                 new RemapValue("blue", "tube"),

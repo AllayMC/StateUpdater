@@ -93,11 +93,11 @@ class ItemStateUpdaterTest {
     void remap_meta_for_stone() {
         assertDoesNotThrow(() -> {
             ItemStateUpdaters.updateItemState(
-                NbtMap.builder()
-                        .putString("Name", "minecraft:stone")
-                        .putInt("Damage", 0)
-                        .build(),
-                ItemStateUpdaters.LATEST_VERSION
+                    NbtMap.builder()
+                            .putString("Name", "minecraft:stone")
+                            .putInt("Damage", 0)
+                            .build(),
+                    ItemStateUpdaters.LATEST_VERSION
             );
         });
     }

@@ -77,7 +77,37 @@ class BlockStateUpdaterTest {
                         .build(),
                 BlockStateUpdaters.LATEST_VERSION
         );
+        assertEquals("minecraft:stone_bricks", defaultStoneBricks.getString("name"));
+    }
 
-        assertEquals("minecraft:stone_brick", defaultStoneBricks.getString("name"));
+    @Test
+    void testRemapWood() {
+        var wood0 = BlockStateUpdaters.updateBlockState(
+                NbtMap.builder()
+                        .putString("name", "minecraft:wood")
+                        .putCompound("states", NbtMap.builder()
+                                .putInt("stripped_bit", 0)
+                                .putString("wood_type", "birch")
+                                .build()
+                        )
+                        .build(),
+                BlockStateUpdaters.LATEST_VERSION
+        );
+        assertEquals("minecraft:birch_wood", wood0.getString("name"));
+        assertTrue(wood0.getCompound("states").containsKey("pillar_axis"));
+
+        var wood1 = BlockStateUpdaters.updateBlockState(
+                NbtMap.builder()
+                        .putString("name", "minecraft:wood")
+                        .putCompound("states", NbtMap.builder()
+                                .putInt("stripped_bit", 1)
+                                .putString("wood_type", "birch")
+                                .build()
+                        )
+                        .build(),
+                BlockStateUpdaters.LATEST_VERSION
+        );
+        assertEquals("minecraft:stripped_birch_wood", wood1.getString("name"));
+        assertTrue(wood1.getCompound("states").containsKey("pillar_axis"));
     }
 }

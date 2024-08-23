@@ -72,6 +72,20 @@ public class BlockUpdater extends BaseUpdater<BlockUpdater, BlockUpdater.Builder
             return self();
         }
 
+        public Builder popVisit() {
+            filters.add(helper -> {
+                if (helper.canPopChild()) {
+                    helper.popChild();
+                    return true;
+                }
+
+                return false;
+            });
+            updaters.add(CompoundTagEditHelper::popChild);
+            return this;
+        }
+
+
         public Builder tryEdit(String name, Consumer<CompoundTagEditHelper> function) {
             updaters.add(helper -> {
                 var tag = helper.getTag();
