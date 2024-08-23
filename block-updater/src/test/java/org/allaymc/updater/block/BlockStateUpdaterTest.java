@@ -33,8 +33,8 @@ class BlockStateUpdaterTest {
         );
         assertEquals(goldenRail.getString("name"), "minecraft:golden_rail");
         var goldenRailStates = goldenRail.getCompound("states");
-        assertEquals(goldenRailStates.getByte("rail_data_bit"), 0);
-        assertEquals(goldenRailStates.getInt("rail_direction"), 0);
+        assertEquals(0, goldenRailStates.getByte("rail_data_bit"));
+        assertEquals(0, goldenRailStates.getInt("rail_direction"));
     }
 
     @Test
@@ -49,8 +49,8 @@ class BlockStateUpdaterTest {
                         .build(),
                 BlockStateUpdaters.LATEST_VERSION
         );
-        assertEquals(anvil.getString("name"), "minecraft:damaged_anvil");
-        assertEquals(anvil.getCompound("states").getString("minecraft:cardinal_direction"), "east");
+        assertEquals("minecraft:damaged_anvil", anvil.getString("name"));
+        assertEquals("east", anvil.getCompound("states").getString("minecraft:cardinal_direction"));
     }
 
     @Test
@@ -63,5 +63,21 @@ class BlockStateUpdaterTest {
                 BlockStateUpdaters.LATEST_VERSION
         );
         assertEquals("minecraft:dandelion", dandelion.getString("name"));
+    }
+
+    @Test
+    void testStonebrick() {
+        var defaultStoneBricks = BlockStateUpdaters.updateBlockState(
+                NbtMap.builder()
+                        .putString("name", "minecraft:stonebrick")
+                        .putCompound("states", NbtMap.builder()
+                                .putString("stone_brick_type", "default")
+                                .build()
+                        )
+                        .build(),
+                BlockStateUpdaters.LATEST_VERSION
+        );
+
+        assertEquals("minecraft:stone_brick", defaultStoneBricks.getString("name"));
     }
 }

@@ -1,6 +1,5 @@
 package org.allaymc.updater.item;
 
-import org.allaymc.updater.item.ItemStateUpdaters;
 import org.cloudburstmc.nbt.NbtMap;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -32,11 +31,11 @@ class ItemStateUpdaterTest {
                 ItemStateUpdaters.LATEST_VERSION
         );
 
-        assertEquals(result2.getString("Name"), "minecraft:jungle_planks");
-        assertEquals(result2.getInt("Damage"), 0);
+        assertEquals("minecraft:jungle_planks", result2.getString("Name"));
+        assertEquals(0, result2.getInt("Damage"));
 
         assertEquals(result.getString("Name"), "minecraft:jungle_planks");
-        assertEquals(result.getInt("Damage"), 0);
+        assertEquals(0, result.getInt("Damage"));
     }
 
     @Test
@@ -49,8 +48,8 @@ class ItemStateUpdaterTest {
                 ItemStateUpdaters.LATEST_VERSION
         );
 
-        assertEquals(result.getString("Name"), "minecraft:charcoal");
-        assertEquals(result.getInt("Damage"), 0);
+        assertEquals("minecraft:charcoal", result.getString("Name"));
+        assertEquals(0, result.getInt("Damage"));
     }
 
     @Test
@@ -87,7 +86,7 @@ class ItemStateUpdaterTest {
                 ItemStateUpdaters.LATEST_VERSION
         );
 
-        assertEquals(result.getString("Name"), "minecraft:grass_block");
+        assertEquals("minecraft:grass_block", result.getString("Name"));
     }
 
     @Test
@@ -99,9 +98,8 @@ class ItemStateUpdaterTest {
                         .putInt("Damage", 0)
                         .build(),
                 ItemStateUpdaters.LATEST_VERSION
-        );
+            );
         });
-
     }
 
     @Test
@@ -114,8 +112,8 @@ class ItemStateUpdaterTest {
                 ItemStateUpdaters.LATEST_VERSION
         );
 
-        assertEquals(resultInt.getString("Name"), "minecraft:charcoal");
-        assertEquals(resultInt.getInt("Damage"), 0);
+        assertEquals("minecraft:charcoal", resultInt.getString("Name"));
+        assertEquals(0, resultInt.getInt("Damage"));
 
         var resultShort = ItemStateUpdaters.updateItemState(
                 NbtMap.builder()
@@ -125,7 +123,7 @@ class ItemStateUpdaterTest {
                 ItemStateUpdaters.LATEST_VERSION
         );
 
-        assertEquals(resultShort.getString("Name"), "minecraft:charcoal");
-        assertEquals(resultShort.getShort("Damage"), 0);
+        assertEquals("minecraft:charcoal", resultShort.getString("Name"));
+        assertEquals(0, resultShort.getShort("Damage"));
     }
 }
