@@ -17,8 +17,7 @@ public class ItemStateUpdater_1_20_10 extends ItemStateUpdater {
 
     @Override
     public void registerUpdaters(ItemUpdaterContext context) {
-        context.remapMeta(
-                "minecraft:concrete",
+        context.remapMeta("minecraft:concrete",
                 new RemapMetaEntry(0, "minecraft:white_concrete"),
                 new RemapMetaEntry(1, "minecraft:orange_concrete"),
                 new RemapMetaEntry(2, "minecraft:magenta_concrete"),
@@ -36,8 +35,7 @@ public class ItemStateUpdater_1_20_10 extends ItemStateUpdater {
                 new RemapMetaEntry(14, "minecraft:red_concrete"),
                 new RemapMetaEntry(15, "minecraft:black_concrete")
         );
-        context.remapMeta(
-                "minecraft:shulker_box",
+        context.remapMeta("minecraft:shulker_box",
                 new RemapMetaEntry(0, "minecraft:white_shulker_box"),
                 new RemapMetaEntry(1, "minecraft:orange_shulker_box"),
                 new RemapMetaEntry(2, "minecraft:magenta_shulker_box"),

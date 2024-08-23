@@ -24,8 +24,7 @@ public class ItemStateUpdater_1_18_30 extends ItemStateUpdater {
         context.renameId("minecraft:sealantern", "minecraft:sea_lantern");
         context.renameId("minecraft:stickypistonarmcollision", "minecraft:sticky_piston_arm_collision");
 
-        context.remapMeta(
-                "minecraft:chest_boat",
+        context.remapMeta("minecraft:chest_boat",
                 new RemapMetaEntry(0, "minecraft:oak_chest_boat"),
                 new RemapMetaEntry(1, "minecraft:spruce_chest_boat"),
                 new RemapMetaEntry(2, "minecraft:birch_chest_boat"),
@@ -33,8 +32,7 @@ public class ItemStateUpdater_1_18_30 extends ItemStateUpdater {
                 new RemapMetaEntry(4, "minecraft:acacia_chest_boat"),
                 new RemapMetaEntry(5, "minecraft:dark_oak_chest_boat")
         );
-        context.remapMeta(
-                "minecraft:spawn_egg",
+        context.remapMeta("minecraft:spawn_egg",
                 new RemapMetaEntry(131, "minecraft:warden_spawn_egg")
         );
     }

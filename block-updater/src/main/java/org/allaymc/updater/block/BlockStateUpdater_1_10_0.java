@@ -84,6 +84,14 @@ public class BlockStateUpdater_1_10_0 extends BlockStateUpdater {
         context.remapValues("minecraft:coral_block", "mapped_type", mapped_type_03);
         context.remapValues("minecraft:coral_fan", "mapped_type", mapped_type_03);
         context.remapValues("minecraft:coral_fan_dead", "mapped_type", mapped_type_03);
+
+        var mapped_type_04 = new RemapValue[]{
+                new RemapValue(0, (byte) 0),
+                new RemapValue(1, (byte) 1)
+        };
+        context.remapValues("minecraft:coral_fan_hang", "mapped_type", mapped_type_04);
+        context.remapValues("minecraft:coral_fan_hang2", "mapped_type", mapped_type_04);
+        context.remapValues("minecraft:coral_fan_hang3", "mapped_type", mapped_type_04);
         context.remapValues("minecraft:dirt", "mapped_type",
                 new RemapValue(0, "normal"),
                 new RemapValue(1, "coarse")
@@ -98,6 +106,91 @@ public class BlockStateUpdater_1_10_0 extends BlockStateUpdater {
                 new RemapValue(6, "sunflower"),
                 new RemapValue(7, "sunflower")
         );
+
+        var mapped_type_07 = new RemapValue[]{
+                new RemapValue(0, "smooth_stone"),
+                new RemapValue(1, "sandstone"),
+                new RemapValue(2, "wood"),
+                new RemapValue(3, "cobblestone"),
+                new RemapValue(4, "brick"),
+                new RemapValue(5, "stone_brick"),
+                new RemapValue(6, "quartz"),
+                new RemapValue(7, "nether_brick")
+        };
+        context.remapValues("minecraft:double_stone_slab", "mapped_type", mapped_type_07);
+        context.remapValues("minecraft:stone_slab", "mapped_type", mapped_type_07);
+
+        var mapped_type_08 = new RemapValue[]{
+                new RemapValue(0, "red_sandstone"),
+                new RemapValue(1, "purpur"),
+                new RemapValue(2, "prismarine_rough"),
+                new RemapValue(3, "prismarine_dark"),
+                new RemapValue(4, "prismarine_brick"),
+                new RemapValue(5, "mossy_cobblestone"),
+                new RemapValue(6, "smooth_sandstone"),
+                new RemapValue(7, "red_nether_brick")
+        };
+        context.remapValues("minecraft:double_stone_slab2", "mapped_type", mapped_type_08);
+        context.remapValues("minecraft:stone_slab2", "mapped_type", mapped_type_08);
+
+        var mapped_type_09 = new RemapValue[]{
+                new RemapValue(0, "end_stone_brick"),
+                new RemapValue(1, "smooth_red_sandstone"),
+                new RemapValue(2, "polished_andesite"),
+                new RemapValue(3, "andesite"),
+                new RemapValue(4, "diorite"),
+                new RemapValue(5, "polished_diorite"),
+                new RemapValue(6, "granite"),
+                new RemapValue(7, "polished_granite")
+        };
+        context.remapValues("minecraft:double_stone_slab3", "mapped_type", mapped_type_09);
+        context.remapValues("minecraft:stone_slab3", "mapped_type", mapped_type_09);
+
+        var mapped_type_10 = new RemapValue[]{
+                new RemapValue(0, "mossy_stone_brick"),
+                new RemapValue(1, "smooth_quartz"),
+                new RemapValue(2, "stone"),
+                new RemapValue(3, "cut_sandstone"),
+                new RemapValue(4, "cut_red_sandstone"),
+                new RemapValue(5, "mossy_stone_brick"),
+                new RemapValue(6, "mossy_stone_brick"),
+                new RemapValue(7, "mossy_stone_brick")
+        };
+        context.remapValues("minecraft:double_stone_slab4", "mapped_type", mapped_type_10);
+        context.remapValues("minecraft:stone_slab4", "mapped_type", mapped_type_10);
+
+        var mapped_type_11 = new RemapValue[]{
+                new RemapValue(0, "oak"),
+                new RemapValue(1, "spruce"),
+                new RemapValue(2, "birch"),
+                new RemapValue(3, "jungle"),
+                new RemapValue(4, "acacia"),
+                new RemapValue(5, "dark_oak"),
+                new RemapValue(6, "oak"),
+                new RemapValue(7, "oak")
+        };
+        context.remapValues("minecraft:double_wooden_slab", "mapped_type", mapped_type_11);
+        context.remapValues("minecraft:fence", "mapped_type", mapped_type_11);
+        context.remapValues("minecraft:planks", "mapped_type", mapped_type_11);
+        context.remapValues("minecraft:wooden_slab", "mapped_type", mapped_type_11);
+
+        var mapped_type_12 = new RemapValue[]{
+                new RemapValue(0, "oak"),
+                new RemapValue(1, "spruce"),
+                new RemapValue(2, "birch"),
+                new RemapValue(3, "jungle")
+        };
+        context.remapValues("minecraft:leaves", "mapped_type", mapped_type_12);
+        context.remapValues("minecraft:log", "mapped_type", mapped_type_12);
+
+        var mapped_type_13 = new RemapValue[]{
+                new RemapValue(0, "acacia"),
+                new RemapValue(1, "dark_oak"),
+                new RemapValue(2, "acacia"),
+                new RemapValue(3, "acacia")
+        };
+        context.remapValues("minecraft:leaves2", "mapped_type", mapped_type_13);
+        context.remapValues("minecraft:log2", "mapped_type", mapped_type_13);
         context.remapValues("minecraft:monster_egg", "mapped_type",
                 new RemapValue(0, "stone"),
                 new RemapValue(1, "cobblestone"),
@@ -114,6 +207,15 @@ public class BlockStateUpdater_1_10_0 extends BlockStateUpdater {
                 new RemapValue(2, "bricks"),
                 new RemapValue(3, "default")
         );
+
+        var mapped_type_16 = new RemapValue[]{
+                new RemapValue(0, "default"),
+                new RemapValue(1, "chiseled"),
+                new RemapValue(2, "lines"),
+                new RemapValue(3, "smooth")
+        };
+        context.remapValues("minecraft:purpur_block", "mapped_type", mapped_type_16);
+        context.remapValues("minecraft:quartz_block", "mapped_type", mapped_type_16);
         context.remapValues("minecraft:red_flower", "mapped_type",
                 new RemapValue(0, "poppy"),
                 new RemapValue(1, "orchid"),
@@ -132,6 +234,15 @@ public class BlockStateUpdater_1_10_0 extends BlockStateUpdater {
                 new RemapValue(14, "poppy"),
                 new RemapValue(15, "poppy")
         );
+
+        var mapped_type_18 = new RemapValue[]{
+                new RemapValue(0, "default"),
+                new RemapValue(1, "heiroglyphs"),
+                new RemapValue(2, "cut"),
+                new RemapValue(3, "smooth")
+        };
+        context.remapValues("minecraft:red_sandstone", "mapped_type", mapped_type_18);
+        context.remapValues("minecraft:sandstone", "mapped_type", mapped_type_18);
         context.remapValues("minecraft:sand", "mapped_type",
                 new RemapValue(0, "normal"),
                 new RemapValue(1, "red")

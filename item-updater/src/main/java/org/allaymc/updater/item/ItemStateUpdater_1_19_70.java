@@ -17,16 +17,13 @@ public class ItemStateUpdater_1_19_70 extends ItemStateUpdater {
 
     @Override
     public void registerUpdaters(ItemUpdaterContext context) {
-        context.remapMeta(
-                "minecraft:boat",
+        context.remapMeta("minecraft:boat",
                 new RemapMetaEntry(7, "minecraft:bamboo_raft")
         );
-        context.remapMeta(
-                "minecraft:chest_boat",
+        context.remapMeta("minecraft:chest_boat",
                 new RemapMetaEntry(7, "minecraft:bamboo_chest_raft")
         );
-        context.remapMeta(
-                "minecraft:spawn_egg",
+        context.remapMeta("minecraft:spawn_egg",
                 new RemapMetaEntry(20, "minecraft:iron_golem_spawn_egg"),
                 new RemapMetaEntry(21, "minecraft:snow_golem_spawn_egg"),
                 new RemapMetaEntry(52, "minecraft:wither_spawn_egg"),
@@ -35,8 +32,7 @@ public class ItemStateUpdater_1_19_70 extends ItemStateUpdater {
                 new RemapMetaEntry(139, "minecraft:sniffer_spawn_egg"),
                 new RemapMetaEntry(157, "minecraft:trader_llama_spawn_egg")
         );
-        context.remapMeta(
-                "minecraft:wool",
+        context.remapMeta("minecraft:wool",
                 new RemapMetaEntry(0, "minecraft:white_wool"),
                 new RemapMetaEntry(1, "minecraft:orange_wool"),
                 new RemapMetaEntry(2, "minecraft:magenta_wool"),

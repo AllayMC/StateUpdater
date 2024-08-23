@@ -17,8 +17,7 @@ public class ItemStateUpdater_1_20_20 extends ItemStateUpdater {
 
     @Override
     public void registerUpdaters(ItemUpdaterContext context) {
-        context.remapMeta(
-                "minecraft:stained_glass",
+        context.remapMeta("minecraft:stained_glass",
                 new RemapMetaEntry(0, "minecraft:white_stained_glass"),
                 new RemapMetaEntry(1, "minecraft:orange_stained_glass"),
                 new RemapMetaEntry(2, "minecraft:magenta_stained_glass"),
@@ -36,8 +35,7 @@ public class ItemStateUpdater_1_20_20 extends ItemStateUpdater {
                 new RemapMetaEntry(14, "minecraft:red_stained_glass"),
                 new RemapMetaEntry(15, "minecraft:black_stained_glass")
         );
-        context.remapMeta(
-                "minecraft:stained_glass_pane",
+        context.remapMeta("minecraft:stained_glass_pane",
                 new RemapMetaEntry(0, "minecraft:white_stained_glass_pane"),
                 new RemapMetaEntry(1, "minecraft:orange_stained_glass_pane"),
                 new RemapMetaEntry(2, "minecraft:magenta_stained_glass_pane"),

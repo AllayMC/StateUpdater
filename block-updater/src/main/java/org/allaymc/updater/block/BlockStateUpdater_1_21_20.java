@@ -17,6 +17,13 @@ public class BlockStateUpdater_1_21_20 extends BlockStateUpdater {
 
     @Override
     public void registerUpdaters(BlockUpdaterContext context) {
+        context.remapState("minecraft:anvil", "minecraft:", "damage", "anvil",
+                new RemapValue("broken", "deprecated_"),
+                new RemapValue("slightly_damaged", "chipped_"),
+                new RemapValue("undamaged", ""),
+                new RemapValue("very_damaged", "damaged_")
+        );
+
         context.addUpdater()
                 .match("name", "minecraft:coral_fan_hang")
                 .visit("states")
@@ -127,6 +134,22 @@ public class BlockStateUpdater_1_21_20 extends BlockStateUpdater {
                 .removeProperty("dead_bit")
                 .popVisit()
                 .replaceValue("name", "minecraft:dead_horn_coral_wall_fan");
+
+        context.remapState("minecraft:dirt", "minecraft:", "dirt_type", "dirt",
+                new RemapValue("coarse", "coarse_"),
+                new RemapValue("normal", "")
+        );
+        context.remapState("minecraft:double_stone_block_slab", "minecraft:", "stone_slab_type", "_double_slab",
+                new RemapValue("wood", "petrified_oak")
+        );
+        context.remapState("minecraft:double_stone_block_slab2", "minecraft:", "stone_slab_type_2", "_double_slab",
+                new RemapValue("prismarine_dark", "dark_prismarine"),
+                new RemapValue("prismarine_rough", "prismarine")
+        );
+        context.remapState("minecraft:double_stone_block_slab3", "minecraft:", "stone_slab_type_3", "_double_slab");
+        context.remapState("minecraft:double_stone_block_slab4", "minecraft:", "stone_slab_type_4", "_double_slab",
+                new RemapValue("stone", "normal_stone")
+        );
 
         context.addUpdater()
                 .match("name", "minecraft:light_block")
@@ -241,63 +264,6 @@ public class BlockStateUpdater_1_21_20 extends BlockStateUpdater {
                 .popVisit()
                 .replaceValue("name", "minecraft:light_block_9");
 
-        context.addUpdater()
-                .match("name", "minecraft:stonebrick")
-                .visit("states")
-                .match("stone_brick_type", "chiseled")
-                .removeProperty("stone_brick_type")
-                .popVisit()
-                .replaceValue("name", "minecraft:chiseled_stone_bricks");
-        context.addUpdater()
-                .match("name", "minecraft:stonebrick")
-                .visit("states")
-                .match("stone_brick_type", "cracked")
-                .removeProperty("stone_brick_type")
-                .popVisit()
-                .replaceValue("name", "minecraft:cracked_stone_bricks");
-        context.addUpdater()
-                .match("name", "minecraft:stonebrick")
-                .visit("states")
-                .match("stone_brick_type", "default")
-                .removeProperty("stone_brick_type")
-                .popVisit()
-                .replaceValue("name", "minecraft:stone_bricks");
-        context.addUpdater()
-                .match("name", "minecraft:stonebrick")
-                .visit("states")
-                .match("stone_brick_type", "mossy")
-                .removeProperty("stone_brick_type")
-                .popVisit()
-                .replaceValue("name", "minecraft:mossy_stone_bricks");
-        context.addUpdater()
-                .match("name", "minecraft:stonebrick")
-                .visit("states")
-                .match("stone_brick_type", "smooth")
-                .removeProperty("stone_brick_type")
-                .popVisit()
-                .replaceValue("name", "minecraft:stone_bricks");
-
-        context.remapState("minecraft:anvil", "minecraft:", "damage", "anvil",
-                new RemapValue("broken", "deprecated_"),
-                new RemapValue("slightly_damaged", "chipped_"),
-                new RemapValue("undamaged", ""),
-                new RemapValue("very_damaged", "damaged_")
-        );
-        context.remapState("minecraft:dirt", "minecraft:", "dirt_type", "dirt",
-                new RemapValue("coarse", "coarse_"),
-                new RemapValue("normal", "")
-        );
-        context.remapState("minecraft:double_stone_block_slab", "minecraft:", "stone_slab_type", "_double_slab",
-                new RemapValue("wood", "petrified_oak")
-        );
-        context.remapState("minecraft:double_stone_block_slab2", "minecraft:", "stone_slab_type_2", "_double_slab",
-                new RemapValue("prismarine_dark", "dark_prismarine"),
-                new RemapValue("prismarine_rough", "prismarine")
-        );
-        context.remapState("minecraft:double_stone_block_slab3", "minecraft:", "stone_slab_type_3", "_double_slab");
-        context.remapState("minecraft:double_stone_block_slab4", "minecraft:", "stone_slab_type_4", "_double_slab",
-                new RemapValue("stone", "normal_stone")
-        );
         context.remapState("minecraft:monster_egg", "minecraft:infested_", "monster_egg_stone_type", "",
                 new RemapValue("chiseled_stone_brick", "chiseled_stone_bricks"),
                 new RemapValue("cracked_stone_brick", "cracked_stone_bricks"),
@@ -339,6 +305,42 @@ public class BlockStateUpdater_1_21_20 extends BlockStateUpdater {
         context.remapState("minecraft:stone_block_slab4", "minecraft:", "stone_slab_type_4", "_slab",
                 new RemapValue("stone", "normal_stone")
         );
+
+        context.addUpdater()
+                .match("name", "minecraft:stonebrick")
+                .visit("states")
+                .match("stone_brick_type", "chiseled")
+                .removeProperty("stone_brick_type")
+                .popVisit()
+                .replaceValue("name", "minecraft:chiseled_stone_bricks");
+        context.addUpdater()
+                .match("name", "minecraft:stonebrick")
+                .visit("states")
+                .match("stone_brick_type", "cracked")
+                .removeProperty("stone_brick_type")
+                .popVisit()
+                .replaceValue("name", "minecraft:cracked_stone_bricks");
+        context.addUpdater()
+                .match("name", "minecraft:stonebrick")
+                .visit("states")
+                .match("stone_brick_type", "default")
+                .removeProperty("stone_brick_type")
+                .popVisit()
+                .replaceValue("name", "minecraft:stone_bricks");
+        context.addUpdater()
+                .match("name", "minecraft:stonebrick")
+                .visit("states")
+                .match("stone_brick_type", "mossy")
+                .removeProperty("stone_brick_type")
+                .popVisit()
+                .replaceValue("name", "minecraft:mossy_stone_bricks");
+        context.addUpdater()
+                .match("name", "minecraft:stonebrick")
+                .visit("states")
+                .match("stone_brick_type", "smooth")
+                .removeProperty("stone_brick_type")
+                .popVisit()
+                .replaceValue("name", "minecraft:stone_bricks");
 
         context.renameId("minecraft:yellow_flower", "minecraft:dandelion");
     }

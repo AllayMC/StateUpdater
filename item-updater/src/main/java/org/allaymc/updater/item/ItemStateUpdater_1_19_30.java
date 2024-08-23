@@ -31,12 +31,10 @@ public class ItemStateUpdater_1_19_30 extends ItemStateUpdater {
         context.renameId("minecraft:stone_slab3", "minecraft:stone_block_slab3");
         context.renameId("minecraft:stone_slab4", "minecraft:stone_block_slab4");
 
-        context.remapMeta(
-                "minecraft:boat",
+        context.remapMeta("minecraft:boat",
                 new RemapMetaEntry(6, "minecraft:mangrove_boat")
         );
-        context.remapMeta(
-                "minecraft:chest_boat",
+        context.remapMeta("minecraft:chest_boat",
                 new RemapMetaEntry(6, "minecraft:mangrove_chest_boat")
         );
     }

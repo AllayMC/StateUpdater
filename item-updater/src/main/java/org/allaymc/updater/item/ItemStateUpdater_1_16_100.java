@@ -57,8 +57,7 @@ public class ItemStateUpdater_1_16_100 extends ItemStateUpdater {
         context.renameId("minecraft:totem", "minecraft:totem_of_undying");
         context.renameId("minecraft:turtle_shell_piece", "minecraft:scute");
 
-        context.remapMeta(
-                "minecraft:banner_pattern",
+        context.remapMeta("minecraft:banner_pattern",
                 new RemapMetaEntry(0, "minecraft:creeper_banner_pattern"),
                 new RemapMetaEntry(1, "minecraft:skull_banner_pattern"),
                 new RemapMetaEntry(2, "minecraft:flower_banner_pattern"),
@@ -67,8 +66,7 @@ public class ItemStateUpdater_1_16_100 extends ItemStateUpdater {
                 new RemapMetaEntry(5, "minecraft:bordure_indented_banner_pattern"),
                 new RemapMetaEntry(6, "minecraft:piglin_banner_pattern")
         );
-        context.remapMeta(
-                "minecraft:boat",
+        context.remapMeta("minecraft:boat",
                 new RemapMetaEntry(0, "minecraft:oak_boat"),
                 new RemapMetaEntry(1, "minecraft:spruce_boat"),
                 new RemapMetaEntry(2, "minecraft:birch_boat"),
@@ -76,8 +74,7 @@ public class ItemStateUpdater_1_16_100 extends ItemStateUpdater {
                 new RemapMetaEntry(4, "minecraft:acacia_boat"),
                 new RemapMetaEntry(5, "minecraft:dark_oak_boat")
         );
-        context.remapMeta(
-                "minecraft:bucket",
+        context.remapMeta("minecraft:bucket",
                 new RemapMetaEntry(1, "minecraft:milk_bucket"),
                 new RemapMetaEntry(2, "minecraft:cod_bucket"),
                 new RemapMetaEntry(3, "minecraft:salmon_bucket"),
@@ -86,12 +83,10 @@ public class ItemStateUpdater_1_16_100 extends ItemStateUpdater {
                 new RemapMetaEntry(8, "minecraft:water_bucket"),
                 new RemapMetaEntry(10, "minecraft:lava_bucket")
         );
-        context.remapMeta(
-                "minecraft:coal",
+        context.remapMeta("minecraft:coal",
                 new RemapMetaEntry(1, "minecraft:charcoal")
         );
-        context.remapMeta(
-                "minecraft:dye",
+        context.remapMeta("minecraft:dye",
                 new RemapMetaEntry(0, "minecraft:ink_sac"),
                 new RemapMetaEntry(1, "minecraft:red_dye"),
                 new RemapMetaEntry(2, "minecraft:green_dye"),
@@ -113,8 +108,7 @@ public class ItemStateUpdater_1_16_100 extends ItemStateUpdater {
                 new RemapMetaEntry(18, "minecraft:blue_dye"),
                 new RemapMetaEntry(19, "minecraft:white_dye")
         );
-        context.remapMeta(
-                "minecraft:spawn_egg",
+        context.remapMeta("minecraft:spawn_egg",
                 new RemapMetaEntry(10, "minecraft:chicken_spawn_egg"),
                 new RemapMetaEntry(11, "minecraft:cow_spawn_egg"),
                 new RemapMetaEntry(12, "minecraft:pig_spawn_egg"),

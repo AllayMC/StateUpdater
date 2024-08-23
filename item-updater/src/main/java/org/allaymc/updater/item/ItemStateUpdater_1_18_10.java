@@ -17,16 +17,13 @@ public class ItemStateUpdater_1_18_10 extends ItemStateUpdater {
 
     @Override
     public void registerUpdaters(ItemUpdaterContext context) {
-        context.remapMeta(
-                "minecraft:banner_pattern",
+        context.remapMeta("minecraft:banner_pattern",
                 new RemapMetaEntry(7, "minecraft:globe_banner_pattern")
         );
-        context.remapMeta(
-                "minecraft:bucket",
+        context.remapMeta("minecraft:bucket",
                 new RemapMetaEntry(13, "minecraft:tadpole_bucket")
         );
-        context.remapMeta(
-                "minecraft:spawn_egg",
+        context.remapMeta("minecraft:spawn_egg",
                 new RemapMetaEntry(132, "minecraft:frog_spawn_egg"),
                 new RemapMetaEntry(133, "minecraft:tadpole_spawn_egg"),
                 new RemapMetaEntry(134, "minecraft:allay_spawn_egg"),

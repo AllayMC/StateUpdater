@@ -19,8 +19,7 @@ public class ItemStateUpdater_1_20_60 extends ItemStateUpdater {
     public void registerUpdaters(ItemUpdaterContext context) {
         context.renameId("minecraft:scute", "minecraft:turtle_scute");
 
-        context.remapMeta(
-                "minecraft:hard_stained_glass",
+        context.remapMeta("minecraft:hard_stained_glass",
                 new RemapMetaEntry(0, "minecraft:hard_white_stained_glass"),
                 new RemapMetaEntry(1, "minecraft:hard_orange_stained_glass"),
                 new RemapMetaEntry(2, "minecraft:hard_magenta_stained_glass"),
@@ -38,8 +37,7 @@ public class ItemStateUpdater_1_20_60 extends ItemStateUpdater {
                 new RemapMetaEntry(14, "minecraft:hard_red_stained_glass"),
                 new RemapMetaEntry(15, "minecraft:hard_black_stained_glass")
         );
-        context.remapMeta(
-                "minecraft:hard_stained_glass_pane",
+        context.remapMeta("minecraft:hard_stained_glass_pane",
                 new RemapMetaEntry(0, "minecraft:hard_white_stained_glass_pane"),
                 new RemapMetaEntry(1, "minecraft:hard_orange_stained_glass_pane"),
                 new RemapMetaEntry(2, "minecraft:hard_magenta_stained_glass_pane"),
@@ -57,8 +55,7 @@ public class ItemStateUpdater_1_20_60 extends ItemStateUpdater {
                 new RemapMetaEntry(14, "minecraft:hard_red_stained_glass_pane"),
                 new RemapMetaEntry(15, "minecraft:hard_black_stained_glass_pane")
         );
-        context.remapMeta(
-                "minecraft:spawn_egg",
+        context.remapMeta("minecraft:spawn_egg",
                 new RemapMetaEntry(140, "minecraft:breeze_spawn_egg"),
                 new RemapMetaEntry(142, "minecraft:armadillo_spawn_egg")
         );

@@ -17,13 +17,11 @@ public class ItemStateUpdater_1_17_30 extends ItemStateUpdater {
 
     @Override
     public void registerUpdaters(ItemUpdaterContext context) {
-        context.remapMeta(
-                "minecraft:bucket",
+        context.remapMeta("minecraft:bucket",
                 new RemapMetaEntry(11, "minecraft:powder_snow_bucket"),
                 new RemapMetaEntry(12, "minecraft:axolotl_bucket")
         );
-        context.remapMeta(
-                "minecraft:spawn_egg",
+        context.remapMeta("minecraft:spawn_egg",
                 new RemapMetaEntry(129, "minecraft:glow_squid_spawn_egg"),
                 new RemapMetaEntry(130, "minecraft:axolotl_spawn_egg")
         );

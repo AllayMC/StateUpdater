@@ -220,19 +220,25 @@ public class BlockStateUpdater_1_13_0 extends BlockStateUpdater {
                 .visit("states")
                 .match("direction", "0")
                 .addProperty("pillar_axis", "y")
-                .removeProperty("direction");
+                .removeProperty("direction")
+                .popVisit()
+                .replaceValue("name", "minecraft:log");
         context.addUpdater()
                 .match("name", "minecraft:log")
                 .visit("states")
                 .match("direction", "1")
                 .addProperty("pillar_axis", "x")
-                .removeProperty("direction");
+                .removeProperty("direction")
+                .popVisit()
+                .replaceValue("name", "minecraft:log");
         context.addUpdater()
                 .match("name", "minecraft:log")
                 .visit("states")
                 .match("direction", "2")
                 .addProperty("pillar_axis", "z")
-                .removeProperty("direction");
+                .removeProperty("direction")
+                .popVisit()
+                .replaceValue("name", "minecraft:log");
 
         context.addUpdater()
                 .match("name", "minecraft:log2")
@@ -263,19 +269,26 @@ public class BlockStateUpdater_1_13_0 extends BlockStateUpdater {
                 .visit("states")
                 .match("direction", "0")
                 .addProperty("pillar_axis", "y")
-                .removeProperty("direction");
+                .removeProperty("direction")
+                .popVisit()
+                .replaceValue("name", "minecraft:log2");
         context.addUpdater()
                 .match("name", "minecraft:log2")
                 .visit("states")
                 .match("direction", "1")
                 .addProperty("pillar_axis", "x")
-                .removeProperty("direction");
+                .removeProperty("direction")
+                .popVisit()
+                .replaceValue("name", "minecraft:log2");
         context.addUpdater()
                 .match("name", "minecraft:log2")
                 .visit("states")
                 .match("direction", "2")
                 .addProperty("pillar_axis", "z")
-                .removeProperty("direction");
+                .removeProperty("direction")
+                .popVisit()
+                .replaceValue("name", "minecraft:log2");
+
 
         context.addProperty("minecraft:coral", "dead_bit", (byte) 0);
         context.addProperty("minecraft:wood", "pillar_axis", "y");

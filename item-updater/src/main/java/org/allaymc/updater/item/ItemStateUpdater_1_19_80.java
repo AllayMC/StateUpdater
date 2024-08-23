@@ -17,16 +17,13 @@ public class ItemStateUpdater_1_19_80 extends ItemStateUpdater {
 
     @Override
     public void registerUpdaters(ItemUpdaterContext context) {
-        context.remapMeta(
-                "minecraft:boat",
+        context.remapMeta("minecraft:boat",
                 new RemapMetaEntry(8, "minecraft:cherry_boat")
         );
-        context.remapMeta(
-                "minecraft:chest_boat",
+        context.remapMeta("minecraft:chest_boat",
                 new RemapMetaEntry(8, "minecraft:cherry_chest_boat")
         );
-        context.remapMeta(
-                "minecraft:fence",
+        context.remapMeta("minecraft:fence",
                 new RemapMetaEntry(0, "minecraft:oak_fence"),
                 new RemapMetaEntry(1, "minecraft:spruce_fence"),
                 new RemapMetaEntry(2, "minecraft:birch_fence"),
@@ -34,8 +31,7 @@ public class ItemStateUpdater_1_19_80 extends ItemStateUpdater {
                 new RemapMetaEntry(4, "minecraft:acacia_fence"),
                 new RemapMetaEntry(5, "minecraft:dark_oak_fence")
         );
-        context.remapMeta(
-                "minecraft:log",
+        context.remapMeta("minecraft:log",
                 new RemapMetaEntry(0, "minecraft:oak_log"),
                 new RemapMetaEntry(1, "minecraft:spruce_log"),
                 new RemapMetaEntry(2, "minecraft:birch_log"),
@@ -47,8 +43,7 @@ public class ItemStateUpdater_1_19_80 extends ItemStateUpdater {
                 new RemapMetaEntry(10, "minecraft:birch_log"),
                 new RemapMetaEntry(11, "minecraft:jungle_log")
         );
-        context.remapMeta(
-                "minecraft:log2",
+        context.remapMeta("minecraft:log2",
                 new RemapMetaEntry(0, "minecraft:acacia_log"),
                 new RemapMetaEntry(1, "minecraft:dark_oak_log"),
                 new RemapMetaEntry(5, "minecraft:dark_oak_log"),

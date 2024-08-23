@@ -19,8 +19,7 @@ public class ItemStateUpdater_1_20_0 extends ItemStateUpdater {
     public void registerUpdaters(ItemUpdaterContext context) {
         context.renameId("minecraft:record_relic", "minecraft:music_disc_relic");
 
-        context.remapMeta(
-                "minecraft:carpet",
+        context.remapMeta("minecraft:carpet",
                 new RemapMetaEntry(0, "minecraft:white_carpet"),
                 new RemapMetaEntry(1, "minecraft:orange_carpet"),
                 new RemapMetaEntry(2, "minecraft:magenta_carpet"),
@@ -38,8 +37,7 @@ public class ItemStateUpdater_1_20_0 extends ItemStateUpdater {
                 new RemapMetaEntry(14, "minecraft:red_carpet"),
                 new RemapMetaEntry(15, "minecraft:black_carpet")
         );
-        context.remapMeta(
-                "minecraft:coral",
+        context.remapMeta("minecraft:coral",
                 new RemapMetaEntry(0, "minecraft:tube_coral"),
                 new RemapMetaEntry(1, "minecraft:brain_coral"),
                 new RemapMetaEntry(2, "minecraft:bubble_coral"),

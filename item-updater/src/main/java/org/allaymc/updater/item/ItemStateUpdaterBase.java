@@ -38,7 +38,7 @@ public class ItemStateUpdaterBase extends ItemStateUpdater {
         context.addUpdater()
                 .match("Id", "\\d+", true)
                 .edit("Id", helper -> {
-                    var id = Integer.parseInt(String.valueOf(helper.getTag()));
+                    var id = Integer.parseInt(helper.getTag().toString());
                     helper.replaceWith("Name", LEGACY_ITEM_IDS.get(id));
                 });
     }
