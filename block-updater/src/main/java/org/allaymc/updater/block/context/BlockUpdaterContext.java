@@ -49,7 +49,7 @@ public class BlockUpdaterContext extends UpdaterContext<BlockUpdater, BlockUpdat
     }
 
     public void renameId(String oldId, String newId) {
-        this.addUpdater().renameId("Name", oldId, newId);
+        this.addUpdater().renameId("name", oldId, newId);
     }
 
     public void remapValues(String name, String property, RemapValue... remaps) {

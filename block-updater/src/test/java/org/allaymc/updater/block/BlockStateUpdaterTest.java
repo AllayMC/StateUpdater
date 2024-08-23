@@ -1,6 +1,5 @@
 package org.allaymc.updater.block;
 
-import org.allaymc.updater.block.BlockStateUpdaters;
 import org.cloudburstmc.nbt.NbtMap;
 import org.junit.jupiter.api.Test;
 
@@ -52,5 +51,17 @@ class BlockStateUpdaterTest {
         );
         assertEquals(anvil.getString("name"), "minecraft:damaged_anvil");
         assertEquals(anvil.getCompound("states").getString("minecraft:cardinal_direction"), "east");
+    }
+
+    @Test
+    void testRenameId() {
+        var dandelion = BlockStateUpdaters.updateBlockState(
+                NbtMap.builder()
+                        .putString("name", "minecraft:yellow_flower")
+                        .putCompound("states", NbtMap.EMPTY)
+                        .build(),
+                BlockStateUpdaters.LATEST_VERSION
+        );
+        assertEquals("minecraft:dandelion", dandelion.getString("name"));
     }
 }
