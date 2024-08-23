@@ -103,4 +103,29 @@ class ItemStateUpdaterTest {
         });
 
     }
+
+    @Test
+    void int_and_short_meta() {
+        var resultInt = ItemStateUpdaters.updateItemState(
+                NbtMap.builder()
+                        .putString("Name", "minecraft:coal")
+                        .putInt("Damage", 1)
+                        .build(),
+                ItemStateUpdaters.LATEST_VERSION
+        );
+
+        assertEquals(resultInt.getString("Name"), "minecraft:charcoal");
+        assertEquals(resultInt.getInt("Damage"), 0);
+
+        var resultShort = ItemStateUpdaters.updateItemState(
+                NbtMap.builder()
+                        .putString("Name", "minecraft:coal")
+                        .putShort("Damage", (short) 1)
+                        .build(),
+                ItemStateUpdaters.LATEST_VERSION
+        );
+
+        assertEquals(resultShort.getString("Name"), "minecraft:charcoal");
+        assertEquals(resultShort.getShort("Damage"), 0);
+    }
 }
