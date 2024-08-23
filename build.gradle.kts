@@ -9,16 +9,17 @@ subprojects {
     apply(plugin = "maven-publish")
     apply(plugin = "signing")
 
-    group = "org.cloudburstmc"
-    description = "Updates Minecraft: Bedrock Edition states to the latest revision"
+    group = "org.allaymc"
+    description = "Updates Minecraft: Bedrock Edition block & item states to the latest revision"
 
     repositories {
         mavenCentral()
+        maven("https://www.jitpack.io/")
     }
 
     dependencies {
         implementation("com.fasterxml.jackson.core:jackson-databind:2.17.2")
-        implementation("org.cloudburstmc:nbt:3.0.3.Final")
+        implementation("org.allaymc:NBT:3.0.9")
 
         compileOnly("org.projectlombok:lombok:1.18.34")
         annotationProcessor("org.projectlombok:lombok:1.18.34")
@@ -52,14 +53,14 @@ subprojects {
             create<MavenPublication>("maven") {
                 from(components["java"])
                 pom {
-                    inceptionYear.set("2020")
+                    inceptionYear.set("2022")
                     packaging = "jar"
-                    url.set("https://github.com/CloudburstMC/BlockStateUpdater")
+                    url.set("https://github.com/AllayMC/StateUpdater")
 
                     scm {
-                        connection.set("scm:git:git://github.com/CloudburstMC/BlockStateUpdater.git")
-                        developerConnection.set("scm:git:ssh://github.com/CloudburstMC/BlockStateUpdater.git")
-                        url.set("https://github.com/CloudburstMC/BlockStateUpdater")
+                        connection.set("scm:git:git://github.com/AllayMC/StateUpdater.git")
+                        developerConnection.set("scm:git:ssh://github.com/AllayMC/StateUpdater.git")
+                        url.set("https://github.com/AllayMC/StateUpdater")
                     }
 
                     licenses {

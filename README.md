@@ -2,7 +2,7 @@
 
 Extracted state mappings from the Minecraft: Bedrock Edition used to update state NBT tags to the latest version.
 
-All updaters auto-generated!
+All updaters are auto-generated!
 
 ### Usage
 
