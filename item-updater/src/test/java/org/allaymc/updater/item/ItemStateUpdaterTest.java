@@ -1,7 +1,6 @@
 package org.allaymc.updater.item;
 
 import org.cloudburstmc.nbt.NbtMap;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -54,15 +53,12 @@ class ItemStateUpdaterTest {
 
     @Test
     void unknown_remap_meta_for_coal() {
-        Assertions.assertThrowsExactly(IllegalStateException.class, () -> {
-            ItemStateUpdaters.updateItemState(
-                    NbtMap.builder()
-                            .putString("Name", "minecraft:coal")
-                            .putInt("Damage", 2)
-                            .build(),
-                    ItemStateUpdaters.LATEST_VERSION
-            );
-        });
+        var oldCoal = NbtMap.builder()
+                .putString("Name", "minecraft:coal")
+                .putInt("Damage", 2)
+                .build();
+        var newCoal = ItemStateUpdaters.updateItemState(oldCoal, ItemStateUpdaters.LATEST_VERSION);
+        assertEquals(oldCoal, newCoal);
     }
 
     @Test
