@@ -1,4 +1,4 @@
-group = "org.cloudburstmc.updater.block"
+group = "org.allaymc.updater.block"
 version = "1.21.20"
 
 dependencies {
