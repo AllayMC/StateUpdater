@@ -2,8 +2,8 @@ package org.allaymc.updater.common.context;
 
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.cloudburstmc.nbt.NbtMap;
 import org.allaymc.updater.common.util.TagUtils;
+import org.cloudburstmc.nbt.NbtMap;
 
 import java.util.ArrayList;
 import java.util.List;
