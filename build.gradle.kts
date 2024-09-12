@@ -1,15 +1,12 @@
 plugins {
     id("java-library")
     id("maven-publish")
-    id("signing")
 }
 
 subprojects {
     apply(plugin = "java-library")
     apply(plugin = "maven-publish")
-    apply(plugin = "signing")
 
-    group = "org.allaymc"
     description = "Updates Minecraft: Bedrock Edition block & item states to the latest revision"
 
     repositories {
@@ -36,24 +33,20 @@ subprojects {
 
     publishing {
         repositories {
-            maven {
-                name = "maven-deploy"
-                url = uri(
-                    System.getenv("MAVEN_DEPLOY_URL")
-                        ?: "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-                )
-                credentials {
-                    username = System.getenv("MAVEN_DEPLOY_USERNAME") ?: "username"
-                    password = System.getenv("MAVEN_DEPLOY_PASSWORD") ?: "password"
-                }
-            }
+            // Jitpack requires us to publish artifacts to local maven repo
+            mavenLocal()
         }
 
         publications {
             create<MavenPublication>("maven") {
                 from(components["java"])
+
+                groupId = project.group.toString()
+                artifactId = project.name
+                version = project.version.toString()
+
                 pom {
-                    inceptionYear.set("2022")
+                    inceptionYear.set("2024")
                     packaging = "jar"
                     url.set("https://github.com/AllayMC/StateUpdater")
 
@@ -87,16 +80,13 @@ subprojects {
         }
     }
 
-    signing {
-        val secret = System.getenv("PGP_SECRET")
-        val passphrase = System.getenv("PGP_PASSPHRASE")
-        if (secret != null && passphrase != null) {
-            useInMemoryPgpKeys(secret, passphrase)
-            sign(publishing.publications["maven"])
+    tasks {
+        withType<JavaCompile> {
+            options.encoding = "UTF-8"
         }
-    }
 
-    tasks.test {
-        useJUnitPlatform()
+        withType<Test> {
+            useJUnitPlatform()
+        }
     }
 }
