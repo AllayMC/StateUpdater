@@ -1,8 +1,8 @@
 package org.allaymc.updater.item;
 
 import lombok.experimental.UtilityClass;
-import org.cloudburstmc.nbt.NbtMap;
 import org.allaymc.updater.item.context.ItemUpdaterContext;
+import org.cloudburstmc.nbt.NbtMap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +42,7 @@ public class ItemStateUpdaters {
         updaters.add(ItemStateUpdater_1_20_80.INSTANCE);
         updaters.add(ItemStateUpdater_1_21_0.INSTANCE);
         updaters.add(ItemStateUpdater_1_21_20.INSTANCE);
+        updaters.add(ItemStateUpdater_1_21_30.INSTANCE);
 
         var context = new ItemUpdaterContext();
         updaters.forEach(updater -> {
