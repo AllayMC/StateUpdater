@@ -1,4 +1,4 @@
-# StateUpdater
+# StateUpdater [![](https://jitpack.io/v/AllayMC/StateUpdater.svg)](https://jitpack.io/#AllayMC/StateUpdater)
 
 Extracted state mappings from the Minecraft: Bedrock Edition used to update state NBT tags to the latest version.
 
