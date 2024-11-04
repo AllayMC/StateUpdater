@@ -45,6 +45,7 @@ public class BlockStateUpdaters {
         updaters.add(BlockStateUpdater_1_21_0.INSTANCE);
         updaters.add(BlockStateUpdater_1_21_20.INSTANCE);
         updaters.add(BlockStateUpdater_1_21_30.INSTANCE);
+        updaters.add(BlockStateUpdater_1_21_40.INSTANCE);
 
         var context = new BlockUpdaterContext();
         updaters.forEach(updater -> {

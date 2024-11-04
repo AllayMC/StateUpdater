@@ -12,7 +12,7 @@ public class BlockStateUpdater_1_21_30 extends BlockStateUpdater {
     public static final BlockStateUpdater INSTANCE = new BlockStateUpdater_1_21_30();
 
     private BlockStateUpdater_1_21_30() {
-        super(1, 21, 20);
+        super(1, 21, 30);
     }
 
     @Override
