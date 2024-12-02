@@ -4,7 +4,6 @@ import org.allaymc.updater.block.context.BlockUpdaterContext;
 import org.allaymc.updater.block.context.RemapValue;
 
 /**
- 
  * @author IWareQ
  */
 public class BlockStateUpdater_1_20_20 extends BlockStateUpdater {
