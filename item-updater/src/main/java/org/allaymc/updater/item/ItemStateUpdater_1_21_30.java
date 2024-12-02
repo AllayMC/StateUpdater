@@ -18,7 +18,19 @@ public class ItemStateUpdater_1_21_30 extends ItemStateUpdater {
     @Override
     public void registerUpdaters(ItemUpdaterContext context) {
         context.remapMeta("minecraft:chemistry_table",
-                new RemapMetaEntry(0, "minecraft:compound_creator")
+                new RemapMetaEntry(0, "minecraft:compound_creator"),
+                new RemapMetaEntry(4, "minecraft:material_reducer"),
+                new RemapMetaEntry(5, "minecraft:material_reducer"),
+                new RemapMetaEntry(6, "minecraft:material_reducer"),
+                new RemapMetaEntry(7, "minecraft:material_reducer"),
+                new RemapMetaEntry(8, "minecraft:element_constructor"),
+                new RemapMetaEntry(9, "minecraft:element_constructor"),
+                new RemapMetaEntry(10, "minecraft:element_constructor"),
+                new RemapMetaEntry(11, "minecraft:element_constructor"),
+                new RemapMetaEntry(12, "minecraft:lab_table"),
+                new RemapMetaEntry(13, "minecraft:lab_table"),
+                new RemapMetaEntry(14, "minecraft:lab_table"),
+                new RemapMetaEntry(15, "minecraft:lab_table")
         );
         context.remapMeta("minecraft:cobblestone_wall",
                 new RemapMetaEntry(1, "minecraft:mossy_cobblestone_wall"),
@@ -64,6 +76,10 @@ public class ItemStateUpdater_1_21_30 extends ItemStateUpdater {
         );
         context.remapMeta("minecraft:sponge",
                 new RemapMetaEntry(1, "minecraft:wet_sponge")
+        );
+        context.remapMeta("minecraft:tnt",
+                new RemapMetaEntry(2, "minecraft:underwater_tnt"),
+                new RemapMetaEntry(3, "minecraft:underwater_tnt")
         );
     }
 }
