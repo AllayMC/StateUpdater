@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * StateUpdater Project 27/07/2024
- *
  * @author IWareQ
  */
 @UtilityClass

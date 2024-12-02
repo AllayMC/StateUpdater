@@ -3,8 +3,6 @@ package org.allaymc.updater.item.context;
 import org.allaymc.updater.common.context.BaseUpdater;
 
 /**
- * StateUpdater Project 27/07/2024
- *
  * @author IWareQ
  */
 public class ItemUpdater extends BaseUpdater<ItemUpdater, ItemUpdater.Builder> {

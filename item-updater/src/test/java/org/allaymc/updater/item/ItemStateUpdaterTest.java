@@ -7,8 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * StateUpdater Project 27/07/2024
- *
  * @author IWareQ
  */
 class ItemStateUpdaterTest {
@@ -33,7 +31,7 @@ class ItemStateUpdaterTest {
         assertEquals("minecraft:jungle_planks", result2.getString("Name"));
         assertEquals(0, result2.getInt("Damage"));
 
-        assertEquals(result.getString("Name"), "minecraft:jungle_planks");
+        assertEquals("minecraft:jungle_planks", result.getString("Name"));
         assertEquals(0, result.getInt("Damage"));
     }
 

@@ -13,8 +13,6 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 /**
- * StateUpdater Project 27/07/2024
- *
  * @author IWareQ
  */
 public abstract class BaseUpdater<UPDATER extends BaseUpdater<UPDATER, BUILDER>, BUILDER extends BaseUpdater<UPDATER, BUILDER>.Builder> implements Comparable<BaseUpdater<UPDATER, BUILDER>> {

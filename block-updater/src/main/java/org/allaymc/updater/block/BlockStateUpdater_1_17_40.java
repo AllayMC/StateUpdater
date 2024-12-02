@@ -3,8 +3,6 @@ package org.allaymc.updater.block;
 import org.allaymc.updater.block.context.BlockUpdaterContext;
 
 /**
- * StateUpdater Project 23/08/2024
- *
  * @author IWareQ
  */
 public class BlockStateUpdater_1_17_40 extends BlockStateUpdater {

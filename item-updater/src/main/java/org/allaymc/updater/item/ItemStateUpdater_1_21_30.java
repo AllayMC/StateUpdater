@@ -4,8 +4,6 @@ import org.allaymc.updater.item.context.ItemUpdaterContext;
 import org.allaymc.updater.item.context.RemapMetaEntry;
 
 /**
- * StateUpdater Project 2024/09/12
- *
  * @author IWareQ
  */
 public class ItemStateUpdater_1_21_30 extends ItemStateUpdater {

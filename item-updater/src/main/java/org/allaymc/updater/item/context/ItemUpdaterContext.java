@@ -5,8 +5,6 @@ import org.allaymc.updater.common.context.UpdaterContext;
 import java.util.Arrays;
 
 /**
- * StateUpdater Project 19/08/2024
- *
  * @author IWareQ
  */
 public class ItemUpdaterContext extends UpdaterContext<ItemUpdater, ItemUpdater.Builder> {

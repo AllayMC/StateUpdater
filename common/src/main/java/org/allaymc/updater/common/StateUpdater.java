@@ -4,7 +4,7 @@ import lombok.Getter;
 import org.allaymc.updater.common.context.UpdaterContext;
 
 @Getter
-public abstract class StateUpdater<CONTEXT extends UpdaterContext> {
+public abstract class StateUpdater<CONTEXT extends UpdaterContext<?, ?>> {
     private final int version;
 
     public StateUpdater(int major, int minor, int patch) {

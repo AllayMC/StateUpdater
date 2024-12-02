@@ -10,8 +10,6 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
- * StateUpdater Project 27/07/2024
- *
  * @author IWareQ
  */
 public class BlockUpdater extends BaseUpdater<BlockUpdater, BlockUpdater.Builder> {

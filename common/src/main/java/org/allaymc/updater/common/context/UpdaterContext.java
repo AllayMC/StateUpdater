@@ -11,8 +11,6 @@ import java.util.Map;
 import java.util.function.IntFunction;
 
 /**
- * StateUpdater Project 27/07/2024
- *
  * @author IWareQ
  */
 @Setter

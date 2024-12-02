@@ -5,28 +5,32 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.allaymc.updater.block.context.BlockUpdaterContext;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class BlockStateUpdaterBase extends BlockStateUpdater {
     public static final BlockStateUpdater INSTANCE = new BlockStateUpdaterBase();
 
-    public static final Map<String, Map<String, Object>[]> LEGACY_BLOCK_DATA_MAP = new HashMap<>();
+    private static final Map<String, Map<String, Object>[]> LEGACY_BLOCK_DATA_MAP = new HashMap<>();
     private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
 
     static {
-        try (var stream = BlockStateUpdaterBase.class.getClassLoader().getResourceAsStream("legacy_block_data_map.json")) {
+        try (var stream = Objects.requireNonNull(
+                BlockStateUpdaterBase.class.getClassLoader().getResourceAsStream("legacy_block_data_map.json"),
+                "Resource 'legacy_block_data_map.json' not found")) {
             var node = JSON_MAPPER.readTree(stream);
 
             node.fields().forEachRemaining(entry -> {
                 var name = entry.getKey();
                 var stateNodes = entry.getValue();
 
-                Map<String, Object>[] states = new Map[stateNodes.size()];
-                for (int i = 0; i < stateNodes.size(); i++) {
-                    states[i] = convertStateToCompound(stateNodes.get(i));
-                }
-
+                @SuppressWarnings("unchecked")
+                Map<String, Object>[] states = IntStream.range(0, stateNodes.size())
+                        .mapToObj(i -> convertStateToCompound(stateNodes.get(i)))
+                        .toArray(Map[]::new);
                 LEGACY_BLOCK_DATA_MAP.put(name, states);
             });
         } catch (IOException e) {
@@ -45,20 +49,21 @@ public class BlockStateUpdaterBase extends BlockStateUpdater {
             var value = entry.getValue();
             tag.put(name, switch (value.getNodeType()) {
                 case BOOLEAN -> value.booleanValue();
-                case NUMBER -> value.intValue();
+                case NUMBER -> value.numberValue();
                 case STRING -> value.textValue();
-                default -> throw new UnsupportedOperationException("Invalid state type");
+                default -> throw new UnsupportedOperationException(
+                        "Unsupported node type: " + value.getNodeType() + " for key: " + name
+                );
             });
         });
-
-        return tag;
+        return tag.isEmpty() ? Collections.emptyMap() : tag;
     }
 
     @Override
     public void registerUpdaters(BlockUpdaterContext context) {
         context.addUpdater()
                 .match("name", "minecraft:.+", true)
-                .match("val", "[0-9]+", true)
+                .match("val", "\\d+", true)
                 .addCompound("states")
                 .tryEdit("states", helper -> {
                     var tag = helper.getCompoundTag();

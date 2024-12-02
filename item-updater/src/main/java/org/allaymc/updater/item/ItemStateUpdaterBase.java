@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * StateUpdater Project 27/07/2024
- *
  * @author IWareQ
  */
 public class ItemStateUpdaterBase extends ItemStateUpdater {

@@ -7,8 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * StateUpdater Project 19/08/2024
- *
  * @author IWareQ
  */
 class BlockStateUpdaterTest {
@@ -21,7 +19,7 @@ class BlockStateUpdaterTest {
                         .build(),
                 BlockStateUpdaters.LATEST_VERSION
         );
-        assertEquals(stone.getString("name"), "minecraft:granite");
+        assertEquals("minecraft:granite", stone.getString("name"));
         assertTrue(stone.getCompound("states").isEmpty());
 
         var goldenRail = BlockStateUpdaters.updateBlockState(
@@ -31,7 +29,7 @@ class BlockStateUpdaterTest {
                         .build(),
                 BlockStateUpdaters.LATEST_VERSION
         );
-        assertEquals(goldenRail.getString("name"), "minecraft:golden_rail");
+        assertEquals("minecraft:golden_rail", goldenRail.getString("name"));
         var goldenRailStates = goldenRail.getCompound("states");
         assertEquals(0, goldenRailStates.getByte("rail_data_bit"));
         assertEquals(0, goldenRailStates.getInt("rail_direction"));

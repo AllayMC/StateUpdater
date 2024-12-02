@@ -6,8 +6,6 @@ import java.util.Arrays;
 import java.util.function.Consumer;
 
 /**
- * StateUpdater Project 19/08/2024
- *
  * @author IWareQ
  */
 public class BlockUpdaterContext extends UpdaterContext<BlockUpdater, BlockUpdater.Builder> {
@@ -82,7 +80,7 @@ public class BlockUpdaterContext extends UpdaterContext<BlockUpdater, BlockUpdat
         updater.edit(property, helper -> {
             var oldValue = helper.getTag();
             var remapValue = Arrays.stream(remaps)
-                    .filter(entry -> entry.oldValue().equals(oldValue) || entry.oldValue().equals("default"))
+                    .filter(entry -> entry.oldValue().equals(oldValue))
                     .findFirst()
                     .map(RemapValue::newValue)
                     .orElse(oldValue);

@@ -6,8 +6,6 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 /**
- * StateUpdater Project 27/07/2024
- *
  * @author IWareQ
  */
 public record HasKeyFilter(String name, boolean invert) implements Predicate<CompoundTagEditHelper> {
