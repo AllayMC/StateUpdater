@@ -23,118 +23,11 @@ public class BlockStateUpdater_1_21_20 extends BlockStateUpdater {
                 new RemapValue("undamaged", ""),
                 new RemapValue("very_damaged", "damaged_")
         );
-
-        context.addUpdater()
-                .match("name", "minecraft:coral_fan_hang")
-                .visit("states")
-                .match("coral_hang_type_bit", "0")
-                .match("dead_bit", "0")
-                .removeProperty("coral_hang_type_bit")
-                .removeProperty("dead_bit")
-                .popVisit()
-                .replaceValue("name", "minecraft:tube_coral_wall_fan");
-        context.addUpdater()
-                .match("name", "minecraft:coral_fan_hang")
-                .visit("states")
-                .match("coral_hang_type_bit", "0")
-                .match("dead_bit", "1")
-                .removeProperty("coral_hang_type_bit")
-                .removeProperty("dead_bit")
-                .popVisit()
-                .replaceValue("name", "minecraft:dead_tube_coral_wall_fan");
-        context.addUpdater()
-                .match("name", "minecraft:coral_fan_hang")
-                .visit("states")
-                .match("coral_hang_type_bit", "1")
-                .match("dead_bit", "0")
-                .removeProperty("coral_hang_type_bit")
-                .removeProperty("dead_bit")
-                .popVisit()
-                .replaceValue("name", "minecraft:brain_coral_wall_fan");
-        context.addUpdater()
-                .match("name", "minecraft:coral_fan_hang")
-                .visit("states")
-                .match("coral_hang_type_bit", "1")
-                .match("dead_bit", "1")
-                .removeProperty("coral_hang_type_bit")
-                .removeProperty("dead_bit")
-                .popVisit()
-                .replaceValue("name", "minecraft:dead_brain_coral_wall_fan");
-
-        context.addUpdater()
-                .match("name", "minecraft:coral_fan_hang2")
-                .visit("states")
-                .match("coral_hang_type_bit", "0")
-                .match("dead_bit", "0")
-                .removeProperty("coral_hang_type_bit")
-                .removeProperty("dead_bit")
-                .popVisit()
-                .replaceValue("name", "minecraft:bubble_coral_wall_fan");
-        context.addUpdater()
-                .match("name", "minecraft:coral_fan_hang2")
-                .visit("states")
-                .match("coral_hang_type_bit", "0")
-                .match("dead_bit", "1")
-                .removeProperty("coral_hang_type_bit")
-                .removeProperty("dead_bit")
-                .popVisit()
-                .replaceValue("name", "minecraft:dead_bubble_coral_wall_fan");
-        context.addUpdater()
-                .match("name", "minecraft:coral_fan_hang2")
-                .visit("states")
-                .match("coral_hang_type_bit", "1")
-                .match("dead_bit", "0")
-                .removeProperty("coral_hang_type_bit")
-                .removeProperty("dead_bit")
-                .popVisit()
-                .replaceValue("name", "minecraft:fire_coral_wall_fan");
-        context.addUpdater()
-                .match("name", "minecraft:coral_fan_hang2")
-                .visit("states")
-                .match("coral_hang_type_bit", "1")
-                .match("dead_bit", "1")
-                .removeProperty("coral_hang_type_bit")
-                .removeProperty("dead_bit")
-                .popVisit()
-                .replaceValue("name", "minecraft:dead_fire_coral_wall_fan");
-
-        context.addUpdater()
-                .match("name", "minecraft:coral_fan_hang3")
-                .visit("states")
-                .match("coral_hang_type_bit", "0")
-                .match("dead_bit", "0")
-                .removeProperty("coral_hang_type_bit")
-                .removeProperty("dead_bit")
-                .popVisit()
-                .replaceValue("name", "minecraft:horn_coral_wall_fan");
-        context.addUpdater()
-                .match("name", "minecraft:coral_fan_hang3")
-                .visit("states")
-                .match("coral_hang_type_bit", "0")
-                .match("dead_bit", "1")
-                .removeProperty("coral_hang_type_bit")
-                .removeProperty("dead_bit")
-                .popVisit()
-                .replaceValue("name", "minecraft:dead_horn_coral_wall_fan");
-        context.addUpdater()
-                .match("name", "minecraft:coral_fan_hang3")
-                .visit("states")
-                .match("coral_hang_type_bit", "1")
-                .match("dead_bit", "0")
-                .removeProperty("coral_hang_type_bit")
-                .removeProperty("dead_bit")
-                .popVisit()
-                .replaceValue("name", "minecraft:horn_coral_wall_fan");
-        context.addUpdater()
-                .match("name", "minecraft:coral_fan_hang3")
-                .visit("states")
-                .match("coral_hang_type_bit", "1")
-                .match("dead_bit", "1")
-                .removeProperty("coral_hang_type_bit")
-                .removeProperty("dead_bit")
-                .popVisit()
-                .replaceValue("name", "minecraft:dead_horn_coral_wall_fan");
-
+        context.remapState("minecraft:coral_fan_hang3", "minecraft:", "dead_bit", "horn_coral_wall_fan",
+                new RemapValue("0", ""),
+                new RemapValue("1", "dead_"),
+                new RemapValue("dummy", "map_not_list")
+        );
         context.remapState("minecraft:dirt", "minecraft:", "dirt_type", "dirt",
                 new RemapValue("coarse", "coarse_"),
                 new RemapValue("normal", "")
@@ -150,120 +43,7 @@ public class BlockStateUpdater_1_21_20 extends BlockStateUpdater {
         context.remapState("minecraft:double_stone_block_slab4", "minecraft:", "stone_slab_type_4", "_double_slab",
                 new RemapValue("stone", "normal_stone")
         );
-
-        context.addUpdater()
-                .match("name", "minecraft:light_block")
-                .visit("states")
-                .match("block_light_level", "0")
-                .removeProperty("block_light_level")
-                .popVisit()
-                .replaceValue("name", "minecraft:light_block_0");
-        context.addUpdater()
-                .match("name", "minecraft:light_block")
-                .visit("states")
-                .match("block_light_level", "10")
-                .removeProperty("block_light_level")
-                .popVisit()
-                .replaceValue("name", "minecraft:light_block_10");
-        context.addUpdater()
-                .match("name", "minecraft:light_block")
-                .visit("states")
-                .match("block_light_level", "11")
-                .removeProperty("block_light_level")
-                .popVisit()
-                .replaceValue("name", "minecraft:light_block_11");
-        context.addUpdater()
-                .match("name", "minecraft:light_block")
-                .visit("states")
-                .match("block_light_level", "12")
-                .removeProperty("block_light_level")
-                .popVisit()
-                .replaceValue("name", "minecraft:light_block_12");
-        context.addUpdater()
-                .match("name", "minecraft:light_block")
-                .visit("states")
-                .match("block_light_level", "13")
-                .removeProperty("block_light_level")
-                .popVisit()
-                .replaceValue("name", "minecraft:light_block_13");
-        context.addUpdater()
-                .match("name", "minecraft:light_block")
-                .visit("states")
-                .match("block_light_level", "14")
-                .removeProperty("block_light_level")
-                .popVisit()
-                .replaceValue("name", "minecraft:light_block_14");
-        context.addUpdater()
-                .match("name", "minecraft:light_block")
-                .visit("states")
-                .match("block_light_level", "15")
-                .removeProperty("block_light_level")
-                .popVisit()
-                .replaceValue("name", "minecraft:light_block_15");
-        context.addUpdater()
-                .match("name", "minecraft:light_block")
-                .visit("states")
-                .match("block_light_level", "1")
-                .removeProperty("block_light_level")
-                .popVisit()
-                .replaceValue("name", "minecraft:light_block_1");
-        context.addUpdater()
-                .match("name", "minecraft:light_block")
-                .visit("states")
-                .match("block_light_level", "2")
-                .removeProperty("block_light_level")
-                .popVisit()
-                .replaceValue("name", "minecraft:light_block_2");
-        context.addUpdater()
-                .match("name", "minecraft:light_block")
-                .visit("states")
-                .match("block_light_level", "3")
-                .removeProperty("block_light_level")
-                .popVisit()
-                .replaceValue("name", "minecraft:light_block_3");
-        context.addUpdater()
-                .match("name", "minecraft:light_block")
-                .visit("states")
-                .match("block_light_level", "4")
-                .removeProperty("block_light_level")
-                .popVisit()
-                .replaceValue("name", "minecraft:light_block_4");
-        context.addUpdater()
-                .match("name", "minecraft:light_block")
-                .visit("states")
-                .match("block_light_level", "5")
-                .removeProperty("block_light_level")
-                .popVisit()
-                .replaceValue("name", "minecraft:light_block_5");
-        context.addUpdater()
-                .match("name", "minecraft:light_block")
-                .visit("states")
-                .match("block_light_level", "6")
-                .removeProperty("block_light_level")
-                .popVisit()
-                .replaceValue("name", "minecraft:light_block_6");
-        context.addUpdater()
-                .match("name", "minecraft:light_block")
-                .visit("states")
-                .match("block_light_level", "7")
-                .removeProperty("block_light_level")
-                .popVisit()
-                .replaceValue("name", "minecraft:light_block_7");
-        context.addUpdater()
-                .match("name", "minecraft:light_block")
-                .visit("states")
-                .match("block_light_level", "8")
-                .removeProperty("block_light_level")
-                .popVisit()
-                .replaceValue("name", "minecraft:light_block_8");
-        context.addUpdater()
-                .match("name", "minecraft:light_block")
-                .visit("states")
-                .match("block_light_level", "9")
-                .removeProperty("block_light_level")
-                .popVisit()
-                .replaceValue("name", "minecraft:light_block_9");
-
+        context.remapState("minecraft:light_block", "minecraft:light_block_", "block_light_level", "");
         context.remapState("minecraft:monster_egg", "minecraft:infested_", "monster_egg_stone_type", "",
                 new RemapValue("chiseled_stone_brick", "chiseled_stone_bricks"),
                 new RemapValue("cracked_stone_brick", "cracked_stone_bricks"),
@@ -305,42 +85,37 @@ public class BlockStateUpdater_1_21_20 extends BlockStateUpdater {
         context.remapState("minecraft:stone_block_slab4", "minecraft:", "stone_slab_type_4", "_slab",
                 new RemapValue("stone", "normal_stone")
         );
+        context.remapState("minecraft:stonebrick", "minecraft:", "stone_brick_type", "stone_bricks",
+                new RemapValue("chiseled", "chiseled_"),
+                new RemapValue("cracked", "cracked_"),
+                new RemapValue("default", ""),
+                new RemapValue("mossy", "mossy_"),
+                new RemapValue("smooth", "")
+        );
 
-        context.addUpdater()
-                .match("name", "minecraft:stonebrick")
-                .visit("states")
-                .match("stone_brick_type", "chiseled")
-                .removeProperty("stone_brick_type")
-                .popVisit()
-                .replaceValue("name", "minecraft:chiseled_stone_bricks");
-        context.addUpdater()
-                .match("name", "minecraft:stonebrick")
-                .visit("states")
-                .match("stone_brick_type", "cracked")
-                .removeProperty("stone_brick_type")
-                .popVisit()
-                .replaceValue("name", "minecraft:cracked_stone_bricks");
-        context.addUpdater()
-                .match("name", "minecraft:stonebrick")
-                .visit("states")
-                .match("stone_brick_type", "default")
-                .removeProperty("stone_brick_type")
-                .popVisit()
-                .replaceValue("name", "minecraft:stone_bricks");
-        context.addUpdater()
-                .match("name", "minecraft:stonebrick")
-                .visit("states")
-                .match("stone_brick_type", "mossy")
-                .removeProperty("stone_brick_type")
-                .popVisit()
-                .replaceValue("name", "minecraft:mossy_stone_bricks");
-        context.addUpdater()
-                .match("name", "minecraft:stonebrick")
-                .visit("states")
-                .match("stone_brick_type", "smooth")
-                .removeProperty("stone_brick_type")
-                .popVisit()
-                .replaceValue("name", "minecraft:stone_bricks");
+        context.remapState("minecraft:coral_fan_hang", oldState -> oldState.match("dead_bit", "0"), "minecraft:", "coral_hang_type_bit", "_coral_wall_fan",
+                new RemapValue("0", "tube"),
+                new RemapValue("1", "brain"),
+                new RemapValue("dummy", "map_not_list")
+        );
+        context.remapState("minecraft:coral_fan_hang", oldState -> oldState.match("dead_bit", "1"), "minecraft:dead_", "coral_hang_type_bit", "_coral_wall_fan",
+                new RemapValue("0", "tube"),
+                new RemapValue("1", "brain"),
+                new RemapValue("dummy", "map_not_list")
+        );
+
+        context.remapState("minecraft:coral_fan_hang2", oldState -> oldState.match("dead_bit", "0"), "minecraft:", "coral_hang_type_bit", "e_coral_wall_fan",
+                new RemapValue("0", "bubbl"),
+                new RemapValue("1", "fir"),
+                new RemapValue("dummy", "map_not_list")
+        );
+        context.remapState("minecraft:coral_fan_hang2", oldState -> oldState.match("dead_bit", "1"), "minecraft:dead_", "coral_hang_type_bit", "e_coral_wall_fan",
+                new RemapValue("0", "bubbl"),
+                new RemapValue("1", "fir"),
+                new RemapValue("dummy", "map_not_list")
+        );
+
+        context.removeProperty("minecraft:coral_fan_hang3", "coral_hang_type_bit");
 
         context.renameId("minecraft:yellow_flower", "minecraft:dandelion");
     }

@@ -82,10 +82,11 @@ public class BlockUpdaterContext extends UpdaterContext<BlockUpdater, BlockUpdat
         updater.edit(property, helper -> {
             var oldValue = helper.getTag();
             var remapValue = Arrays.stream(remaps)
-                    .filter(entry -> entry.oldValue().equals(oldValue))
-                    .findFirst();
-            var newValue = remapValue.isPresent() ? remapValue.get().newValue() : oldValue;
-            helper.getRootTag().put("name", prefix + newValue + suffix);
+                    .filter(entry -> entry.oldValue().equals(oldValue) || entry.oldValue().equals("default"))
+                    .findFirst()
+                    .map(RemapValue::newValue)
+                    .orElse(oldValue);
+            helper.getRootTag().put("name", prefix + remapValue + suffix);
         }).removeProperty(property);
     }
 }

@@ -1,7 +1,6 @@
 package org.allaymc.updater.block;
 
 import org.allaymc.updater.block.context.BlockUpdaterContext;
-import org.allaymc.updater.block.context.RemapValue;
 
 /**
  * StateUpdater Project 2024/11/04
@@ -17,6 +16,36 @@ public class BlockStateUpdater_1_21_40 extends BlockStateUpdater {
 
     @Override
     public void registerUpdaters(BlockUpdaterContext context) {
+        context.addUpdater()
+                .match("name", "minecraft:brown_mushroom_block")
+                .visit("states")
+                .match("huge_mushroom_bits", "10")
+                .removeProperty("huge_mushroom_bits")
+                .popVisit()
+                .replaceValue("name", "minecraft:mushroom_stem");
+        context.addUpdater()
+                .match("name", "minecraft:brown_mushroom_block")
+                .visit("states")
+                .match("huge_mushroom_bits", "15")
+                .removeProperty("huge_mushroom_bits")
+                .popVisit()
+                .replaceValue("name", "minecraft:mushroom_stem");
+
+        context.addUpdater()
+                .match("name", "minecraft:red_mushroom_block")
+                .visit("states")
+                .match("huge_mushroom_bits", "10")
+                .removeProperty("huge_mushroom_bits")
+                .popVisit()
+                .replaceValue("name", "minecraft:mushroom_stem");
+        context.addUpdater()
+                .match("name", "minecraft:red_mushroom_block")
+                .visit("states")
+                .match("huge_mushroom_bits", "15")
+                .removeProperty("huge_mushroom_bits")
+                .popVisit()
+                .replaceValue("name", "minecraft:mushroom_stem");
+
         context.removeProperty("minecraft:cherry_wood", "stripped_bit");
         context.removeProperty("minecraft:mangrove_wood", "stripped_bit");
 

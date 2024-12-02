@@ -21,37 +21,16 @@ public class BlockStateUpdater_1_21_30 extends BlockStateUpdater {
         context.remapState("minecraft:cobblestone_wall", "minecraft:", "wall_block_type", "_wall",
                 new RemapValue("end_brick", "end_stone_brick")
         );
-
-        context.addUpdater()
-                .match("name", "minecraft:colored_torch_bp")
-                .visit("states")
-                .match("color_bit", "0")
-                .removeProperty("color_bit")
-                .popVisit()
-                .replaceValue("name", "minecraft:colored_torch_blue");
-        context.addUpdater()
-                .match("name", "minecraft:colored_torch_bp")
-                .visit("states")
-                .match("color_bit", "1")
-                .removeProperty("color_bit")
-                .popVisit()
-                .replaceValue("name", "minecraft:colored_torch_purple");
-
-        context.addUpdater()
-                .match("name", "minecraft:colored_torch_rg")
-                .visit("states")
-                .match("color_bit", "0")
-                .removeProperty("color_bit")
-                .popVisit()
-                .replaceValue("name", "minecraft:colored_torch_red");
-        context.addUpdater()
-                .match("name", "minecraft:colored_torch_rg")
-                .visit("states")
-                .match("color_bit", "1")
-                .removeProperty("color_bit")
-                .popVisit()
-                .replaceValue("name", "minecraft:colored_torch_green");
-
+        context.remapState("minecraft:colored_torch_bp", "minecraft:colored_torch_", "color_bit", "",
+                new RemapValue("0", "blue"),
+                new RemapValue("1", "purple"),
+                new RemapValue("dummy", "map_not_list")
+        );
+        context.remapState("minecraft:colored_torch_rg", "minecraft:colored_torch_", "color_bit", "",
+                new RemapValue("0", "red"),
+                new RemapValue("1", "green"),
+                new RemapValue("dummy", "map_not_list")
+        );
         context.remapState("minecraft:purpur_block", "minecraft:", "chisel_type", "",
                 new RemapValue("chiseled", "deprecated_purpur_block_1"),
                 new RemapValue("default", "purpur_block"),
@@ -62,21 +41,11 @@ public class BlockStateUpdater_1_21_30 extends BlockStateUpdater {
                 new RemapValue("dry", ""),
                 new RemapValue("wet", "wet_")
         );
-
-        context.addUpdater()
-                .match("name", "minecraft:tnt")
-                .visit("states")
-                .match("allow_underwater_bit", "0")
-                .removeProperty("allow_underwater_bit")
-                .popVisit()
-                .replaceValue("name", "minecraft:tnt");
-        context.addUpdater()
-                .match("name", "minecraft:tnt")
-                .visit("states")
-                .match("allow_underwater_bit", "1")
-                .removeProperty("allow_underwater_bit")
-                .popVisit()
-                .replaceValue("name", "minecraft:underwater_tnt");
+        context.remapState("minecraft:tnt", "minecraft:", "allow_underwater_bit", "tnt",
+                new RemapValue("0", ""),
+                new RemapValue("1", "underwater_"),
+                new RemapValue("dummy", "map_not_list")
+        );
 
         context.removeProperty("minecraft:structure_void", "structure_void_type");
     }

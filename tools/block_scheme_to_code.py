@@ -51,6 +51,31 @@ def generate_remap_values(data, code: list[str]):
             code.append(');')
 
 
+def generate_flattened_properties(data, code: list[str]):
+    if 'flattenedProperties' in data:
+        code.append('')
+    else:
+        return
+
+    for block, data in data['flattenedProperties'].items():
+        prefix = data['prefix']
+        flattened_property = data['flattenedProperty']
+        suffix = data['suffix']
+        remaps = data.get('flattenedValueRemaps', {})
+
+        value_remaps_code = []
+        for old, new in sorted(remaps.items()):
+            value_remaps_code.append(f'new RemapValue("{old}", "{new}")')
+
+        code.append(f'context.remapState("{block}", "{prefix}", "{flattened_property}", "{suffix}");')
+        if len(value_remaps_code) > 0:
+            code[-1] = code[-1].replace(');', ',')
+            code.append(',\n'.join(value_remaps_code))
+            code.append(');')
+
+        code.append('')
+
+
 def generate_remap_states(data, code: list[str]):
     if 'remappedStates' in data:
         code.append('')
@@ -161,6 +186,7 @@ with open('scheme.json') as file:
 code = list()
 
 generate_remap_values(data, code)
+generate_flattened_properties(data, code)
 generate_remap_states(data, code)
 generate_add_property(data, code)
 generate_remove_property(data, code)
