@@ -55,16 +55,12 @@ public abstract class BaseUpdater<UPDATER extends BaseUpdater<UPDATER, BUILDER>,
         public BUILDER match(String name, String match, boolean regex) {
             var pattern = regex ? Pattern.compile(match) : null;
             filters.add(helper -> {
-                var tag = helper.getTag();
-                if (!(tag instanceof Map)) return false;
+                var compoundTag = helper.getCompoundTag();
+                if (compoundTag == null || !compoundTag.containsKey(name) || match.isEmpty()) {
+                    return false;
+                }
 
-                var compound = (Map<String, Object>) tag;
-                if (!compound.containsKey(name)) return false;
-
-                if (match.isEmpty()) return true;
-
-                var matchTag = compound.get(name);
-                var value = TagUtils.getTagValue(matchTag);
+                var value = TagUtils.getTagValue(compoundTag.get(name));
                 return regex ? pattern.matcher(value).matches() : match.equals(value);
             });
             return self();

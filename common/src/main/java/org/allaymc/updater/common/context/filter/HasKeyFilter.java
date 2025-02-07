@@ -2,7 +2,6 @@ package org.allaymc.updater.common.context.filter;
 
 import org.allaymc.updater.common.CompoundTagEditHelper;
 
-import java.util.Map;
 import java.util.function.Predicate;
 
 /**
@@ -15,8 +14,11 @@ public record HasKeyFilter(String name, boolean invert) implements Predicate<Com
 
     @Override
     public boolean test(CompoundTagEditHelper helper) {
-        var tag = helper.getTag();
-        if (!(tag instanceof Map)) return false;
-        return invert != ((Map<String, Object>) tag).containsKey(name);
+        var compoundTag = helper.getCompoundTag();
+        if (compoundTag == null) {
+            return false;
+        }
+
+        return invert != compoundTag.containsKey(name);
     }
 }
