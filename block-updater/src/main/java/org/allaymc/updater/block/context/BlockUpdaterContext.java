@@ -78,7 +78,8 @@ public class BlockUpdaterContext extends UpdaterContext<BlockUpdater, BlockUpdat
         filter.accept(updater);
 
         updater.edit(property, helper -> {
-            var oldValue = helper.getTag();
+            // old value on RemapValue always String
+            var oldValue = String.valueOf(helper.getTag());
             var remapValue = Arrays.stream(remaps)
                     .filter(entry -> entry.oldValue().equals(oldValue))
                     .findFirst()

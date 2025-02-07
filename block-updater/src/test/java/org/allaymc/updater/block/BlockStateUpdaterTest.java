@@ -108,4 +108,33 @@ class BlockStateUpdaterTest {
         assertEquals("minecraft:stripped_birch_wood", wood1.getString("name"));
         assertTrue(wood1.getCompound("states").containsKey("pillar_axis"));
     }
+
+    @Test
+    void testRemapTnt() {
+        var tnt0 = BlockStateUpdaters.updateBlockState(
+                NbtMap.builder()
+                        .putString("name", "minecraft:tnt")
+                        .putCompound("states", NbtMap.builder()
+                                .putBoolean("allow_underwater_bit", false)
+                                .build()
+                        )
+                        .build(),
+                BlockStateUpdaters.LATEST_VERSION
+        );
+        assertEquals("minecraft:tnt", tnt0.getString("name"));
+        assertTrue(tnt0.getCompound("states").isEmpty());
+
+        var tnt1 = BlockStateUpdaters.updateBlockState(
+                NbtMap.builder()
+                        .putString("name", "minecraft:tnt")
+                        .putCompound("states", NbtMap.builder()
+                                .putBoolean("allow_underwater_bit", true)
+                                .build()
+                        )
+                        .build(),
+                BlockStateUpdaters.LATEST_VERSION
+        );
+        assertEquals("minecraft:underwater_tnt", tnt1.getString("name"));
+        assertTrue(tnt1.getCompound("states").isEmpty());
+    }
 }
