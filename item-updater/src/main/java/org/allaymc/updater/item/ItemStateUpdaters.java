@@ -18,7 +18,6 @@ public class ItemStateUpdaters {
 
     static {
         List<ItemStateUpdater> updaters = new ArrayList<>();
-        updaters.add(ItemStateUpdaterBase.INSTANCE);
         updaters.add(ItemStateUpdater_1_6_0.INSTANCE);
         updaters.add(ItemStateUpdater_1_12_0.INSTANCE);
         updaters.add(ItemStateUpdater_1_16_100.INSTANCE);

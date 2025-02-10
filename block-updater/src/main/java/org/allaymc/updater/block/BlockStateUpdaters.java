@@ -15,7 +15,6 @@ public class BlockStateUpdaters {
 
     static {
         List<BlockStateUpdater> updaters = new ArrayList<>();
-        updaters.add(BlockStateUpdaterBase.INSTANCE);
         updaters.add(BlockStateUpdater_1_10_0.INSTANCE);
         updaters.add(BlockStateUpdater_1_12_0.INSTANCE);
         updaters.add(BlockStateUpdater_1_13_0.INSTANCE);
@@ -46,6 +45,7 @@ public class BlockStateUpdaters {
         updaters.add(BlockStateUpdater_1_21_20.INSTANCE);
         updaters.add(BlockStateUpdater_1_21_30.INSTANCE);
         updaters.add(BlockStateUpdater_1_21_40.INSTANCE);
+        updaters.add(BlockStateUpdater_1_21_60.INSTANCE);
 
         var context = new BlockUpdaterContext();
         updaters.forEach(updater -> {

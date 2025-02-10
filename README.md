@@ -9,16 +9,6 @@ All updaters are auto-generated!
 #### Update Item
 
 ```java
-// Update legacy items to new latest items (example for update jungle planks)
-NbtMap updatedNbt = ItemStateUpdaters.updateItemState(
-        NbtMap.builder()
-                .putString("Id", "5")
-                .putInt("Damage", 3) // You can use int, short, long and byte
-                .build(),
-        ItemStateUpdaters.LATEST_VERSION
-);
-
-// or update new items to latest
 NbtMap updatedNbt = ItemStateUpdaters.updateItemState(
         NbtMap.builder()
                 .putString("Name", "minecraft:coal")
@@ -31,16 +21,6 @@ NbtMap updatedNbt = ItemStateUpdaters.updateItemState(
 #### Update Block
 
 ```java
-// Update legacy block
-NbtMap updatedNbt = BlockStateUpdaters.updateBlockState(
-        NbtMap.builder()
-                .putString("name", "minecraft:stone")
-                .putInt("val", 1) // You can use int, short, long and byte
-                .build(),
-        BlockStateUpdaters.LATEST_VERSION
-);
-
-// or update block
 NbtMap updatedNbt = BlockStateUpdaters.updateBlockState(
         NbtMap.builder()
                 .putString("name", "minecraft:anvil")

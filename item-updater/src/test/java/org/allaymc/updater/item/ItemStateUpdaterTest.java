@@ -11,31 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class ItemStateUpdaterTest {
     @Test
-    void update_planks_from_legacy() {
-        var result = ItemStateUpdaters.updateItemState(
-                NbtMap.builder()
-                        .putString("Id", "5")
-                        .putInt("Damage", 3)
-                        .build(),
-                ItemStateUpdaters.LATEST_VERSION
-        );
-
-        var result2 = ItemStateUpdaters.updateItemState(
-                NbtMap.builder()
-                        .putInt("Id", 5)
-                        .putInt("Damage", 3)
-                        .build(),
-                ItemStateUpdaters.LATEST_VERSION
-        );
-
-        assertEquals("minecraft:jungle_planks", result2.getString("Name"));
-        assertEquals(0, result2.getInt("Damage"));
-
-        assertEquals("minecraft:jungle_planks", result.getString("Name"));
-        assertEquals(0, result.getInt("Damage"));
-    }
-
-    @Test
     void remap_meta_for_coal() {
         var result = ItemStateUpdaters.updateItemState(
                 NbtMap.builder()

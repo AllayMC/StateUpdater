@@ -5,7 +5,6 @@ import org.allaymc.updater.common.context.BaseUpdater;
 import org.allaymc.updater.common.context.filter.HasKeyFilter;
 
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -13,7 +12,7 @@ import java.util.function.Predicate;
  * @author IWareQ
  */
 public class BlockUpdater extends BaseUpdater<BlockUpdater, BlockUpdater.Builder> {
-    private static final Predicate<CompoundTagEditHelper> COMPOUND_FILTER = helper -> helper.getTag() instanceof Map;
+    private static final Predicate<CompoundTagEditHelper> COMPOUND_FILTER = helper -> helper.getCompoundTag() != null;
 
     public BlockUpdater(int version) {
         super(version);
@@ -58,13 +57,13 @@ public class BlockUpdater extends BaseUpdater<BlockUpdater, BlockUpdater.Builder
 
         public Builder visit(String key) {
             filters.add(helper -> {
-                var tag = helper.getTag();
-                if (tag instanceof Map && ((Map<String, Object>) tag).containsKey(key)) {
-                    helper.pushChild(key);
-                    return true;
+                var compoundTag = helper.getCompoundTag();
+                if (compoundTag == null || !compoundTag.containsKey(key)) {
+                    return false;
                 }
 
-                return false;
+                helper.pushChild(key);
+                return true;
             });
             updaters.add(helper -> helper.pushChild(key));
             return self();
@@ -86,15 +85,14 @@ public class BlockUpdater extends BaseUpdater<BlockUpdater, BlockUpdater.Builder
 
         public Builder tryEdit(String name, Consumer<CompoundTagEditHelper> function) {
             updaters.add(helper -> {
-                var tag = helper.getTag();
-                if (!(tag instanceof Map)) return;
-
-                var compoundTag = (Map<String, Object>) tag;
-                if (compoundTag.containsKey(name)) {
-                    helper.pushChild(name);
-                    function.accept(helper);
-                    helper.popChild();
+                var compoundTag = helper.getCompoundTag();
+                if (compoundTag == null || !compoundTag.containsKey(name)) {
+                    return;
                 }
+
+                helper.pushChild(name);
+                function.accept(helper);
+                helper.popChild();
             });
             return self();
         }
