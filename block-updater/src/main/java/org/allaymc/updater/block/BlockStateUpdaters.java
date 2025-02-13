@@ -15,6 +15,7 @@ public class BlockStateUpdaters {
 
     static {
         List<BlockStateUpdater> updaters = new ArrayList<>();
+        updaters.add(BlockStateUpdaterBase.INSTANCE);
         updaters.add(BlockStateUpdater_1_10_0.INSTANCE);
         updaters.add(BlockStateUpdater_1_12_0.INSTANCE);
         updaters.add(BlockStateUpdater_1_13_0.INSTANCE);

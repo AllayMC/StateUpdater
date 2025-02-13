@@ -11,6 +11,31 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 class BlockStateUpdaterTest {
     @Test
+    void update_from_legacy() {
+        var stone = BlockStateUpdaters.updateBlockState(
+                NbtMap.builder()
+                        .putString("name", "minecraft:stone")
+                        .putInt("val", 1)
+                        .build(),
+                BlockStateUpdaters.LATEST_VERSION
+        );
+        assertEquals("minecraft:granite", stone.getString("name"));
+        assertTrue(stone.getCompound("states").isEmpty());
+
+        var goldenRail = BlockStateUpdaters.updateBlockState(
+                NbtMap.builder()
+                        .putString("name", "minecraft:golden_rail")
+                        .putInt("val", 6)
+                        .build(),
+                BlockStateUpdaters.LATEST_VERSION
+        );
+        assertEquals("minecraft:golden_rail", goldenRail.getString("name"));
+        var goldenRailStates = goldenRail.getCompound("states");
+        assertEquals(0, goldenRailStates.getByte("rail_data_bit"));
+        assertEquals(0, goldenRailStates.getInt("rail_direction"));
+    }
+
+    @Test
     void remapState() {
         var anvil = BlockStateUpdaters.updateBlockState(
                 NbtMap.builder()
