@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.allaymc:stateupdater:master-SNAPSHOT")
+    implementation("org.allaymc:stateupdater:master-SNAPSHOT")
 }
 ```
 
