@@ -55,8 +55,8 @@ public class BlockStateUpdater_1_21_60 extends BlockStateUpdater {
         context.remapValues("minecraft:weathered_copper_door", "direction", direction_00);
         context.remapValues("minecraft:wooden_door", "direction", direction_00);
         context.remapValues("minecraft:creaking_heart", "active",
-                new RemapValue((byte) 0, "dormant"),
-                new RemapValue((byte) 1, "uprooted")
+                new RemapValue((byte) 0, "uprooted"),
+                new RemapValue((byte) 1, "dormant")
         );
 
         context.addUpdater()
