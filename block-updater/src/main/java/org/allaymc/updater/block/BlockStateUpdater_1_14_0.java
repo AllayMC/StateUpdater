@@ -9,7 +9,7 @@ public class BlockStateUpdater_1_14_0 extends BlockStateUpdater {
     public static final BlockStateUpdater INSTANCE = new BlockStateUpdater_1_14_0();
 
     private BlockStateUpdater_1_14_0() {
-        super(1, 15, 0); // IDK why schema use this version
+        super(1, 14, 0);
     }
 
     @Override

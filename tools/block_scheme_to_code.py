@@ -65,6 +65,9 @@ def generate_flattened_properties(data, code: list[str]):
 
         value_remaps_code = []
         for old, new in sorted(remaps.items()):
+            if old == "dummy" and new == "map_not_list":
+                continue
+
             value_remaps_code.append(f'new RemapValue("{old}", "{new}")')
 
         code.append(f'context.remapState("{block}", "{prefix}", "{flattened_property}", "{suffix}");')
@@ -96,6 +99,9 @@ def generate_remap_states(data, code: list[str]):
                 value_remaps_code = []
                 if 'flattenedValueRemaps' in new_flattened_name:
                     for old, new in sorted(new_flattened_name['flattenedValueRemaps'].items()):
+                        if old == "dummy" and new == "map_not_list":
+                            continue
+
                         value_remaps_code.append(f'new RemapValue("{old}", "{new}")')
 
                 old_state_code = ''

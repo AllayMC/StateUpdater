@@ -10,7 +10,7 @@ public class BlockStateUpdater_1_13_0 extends BlockStateUpdater {
     public static final BlockStateUpdater INSTANCE = new BlockStateUpdater_1_13_0();
 
     private BlockStateUpdater_1_13_0() {
-        super(1, 14, 0); // IDK why schema use this version
+        super(1, 13, 0);
     }
 
     @Override
@@ -286,7 +286,6 @@ public class BlockStateUpdater_1_13_0 extends BlockStateUpdater {
                 .removeProperty("direction")
                 .popVisit()
                 .replaceValue("name", "minecraft:log2");
-
 
         context.addProperty("minecraft:coral", "dead_bit", (byte) 0);
         context.addProperty("minecraft:wood", "pillar_axis", "y");

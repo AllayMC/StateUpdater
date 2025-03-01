@@ -23,8 +23,7 @@ public class BlockStateUpdater_1_21_20 extends BlockStateUpdater {
         );
         context.remapState("minecraft:coral_fan_hang3", "minecraft:", "dead_bit", "horn_coral_wall_fan",
                 new RemapValue("0", ""),
-                new RemapValue("1", "dead_"),
-                new RemapValue("dummy", "map_not_list")
+                new RemapValue("1", "dead_")
         );
         context.remapState("minecraft:dirt", "minecraft:", "dirt_type", "dirt",
                 new RemapValue("coarse", "coarse_"),
@@ -93,24 +92,20 @@ public class BlockStateUpdater_1_21_20 extends BlockStateUpdater {
 
         context.remapState("minecraft:coral_fan_hang", oldState -> oldState.match("dead_bit", "0"), "minecraft:", "coral_hang_type_bit", "_coral_wall_fan",
                 new RemapValue("0", "tube"),
-                new RemapValue("1", "brain"),
-                new RemapValue("dummy", "map_not_list")
+                new RemapValue("1", "brain")
         );
         context.remapState("minecraft:coral_fan_hang", oldState -> oldState.match("dead_bit", "1"), "minecraft:dead_", "coral_hang_type_bit", "_coral_wall_fan",
                 new RemapValue("0", "tube"),
-                new RemapValue("1", "brain"),
-                new RemapValue("dummy", "map_not_list")
+                new RemapValue("1", "brain")
         );
 
         context.remapState("minecraft:coral_fan_hang2", oldState -> oldState.match("dead_bit", "0"), "minecraft:", "coral_hang_type_bit", "e_coral_wall_fan",
                 new RemapValue("0", "bubbl"),
-                new RemapValue("1", "fir"),
-                new RemapValue("dummy", "map_not_list")
+                new RemapValue("1", "fir")
         );
         context.remapState("minecraft:coral_fan_hang2", oldState -> oldState.match("dead_bit", "1"), "minecraft:dead_", "coral_hang_type_bit", "e_coral_wall_fan",
                 new RemapValue("0", "bubbl"),
-                new RemapValue("1", "fir"),
-                new RemapValue("dummy", "map_not_list")
+                new RemapValue("1", "fir")
         );
 
         context.removeProperty("minecraft:coral_fan_hang3", "coral_hang_type_bit");
