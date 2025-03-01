@@ -3,8 +3,7 @@ package org.allaymc.updater.block;
 import org.cloudburstmc.nbt.NbtMap;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author IWareQ
@@ -136,5 +135,26 @@ class BlockStateUpdaterTest {
         );
         assertEquals("minecraft:underwater_tnt", tnt1.getString("name"));
         assertTrue(tnt1.getCompound("states").isEmpty());
+    }
+
+    @Test
+    void testRequiredVersionUpdater() {
+        var creakingHeart0 = BlockStateUpdaters.updateBlockState(
+                NbtMap.builder()
+                        .putString("name", "minecraft:creaking_heart")
+                        .putCompound("states", NbtMap.builder()
+                                .putBoolean("active", true)
+                                .putBoolean("natural", true)
+                                .putString("pillar_axis", "x")
+                                .build()
+                        )
+                        .build(),
+                BlockStateUpdater_1_21_60.INSTANCE.getVersion()
+        );
+        assertEquals("minecraft:creaking_heart", creakingHeart0.getString("name"));
+        var states = creakingHeart0.getCompound("states");
+        assertFalse(states.isEmpty());
+        assertFalse(states.containsKey("active"));
+        assertEquals("dormant", states.getString("creaking_heart_state"));
     }
 }

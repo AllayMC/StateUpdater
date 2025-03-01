@@ -8,8 +8,12 @@ public abstract class StateUpdater<CONTEXT extends UpdaterContext<?, ?>> {
     private final int version;
 
     public StateUpdater(int major, int minor, int patch) {
-        this.version = UpdaterContext.makeVersion(major, minor, patch);
+        this.version = makeVersion(major, minor, patch);
     }
 
     public abstract void registerUpdaters(CONTEXT context);
+
+    private int makeVersion(int major, int minor, int patch) {
+        return (patch << 8) | (minor << 16) | (major << 24);
+    }
 }
