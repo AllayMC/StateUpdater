@@ -1,6 +1,8 @@
 package org.allaymc.updater.block;
 
 import org.allaymc.updater.block.context.BlockUpdaterContext;
+import org.allaymc.updater.block.context.CopyStates;
+import org.allaymc.updater.block.context.NewState;
 import org.allaymc.updater.block.context.RemapValue;
 
 /**
@@ -148,144 +150,71 @@ public class BlockStateUpdater_1_13_0 extends BlockStateUpdater {
                 new RemapValue(15, 0)
         );
 
-        context.addUpdater()
-                .match("name", "minecraft:end_rod")
-                .visit("states")
-                .match("facing_direction", "6")
-                .addProperty("block_light_level", 14)
-                .removeProperty("facing_direction")
-                .popVisit()
-                .replaceValue("name", "minecraft:light_block");
-        context.addUpdater()
-                .match("name", "minecraft:end_rod")
-                .visit("states")
-                .match("facing_direction", "7")
-                .addProperty("block_light_level", 14)
-                .removeProperty("facing_direction")
-                .popVisit()
-                .replaceValue("name", "minecraft:light_block");
+        context.remapState("minecraft:end_rod", oldState -> oldState.match("facing_direction", "6"), "minecraft:light_block",
+                new NewState("block_light_level", 14)
+        );
+        context.remapState("minecraft:end_rod", oldState -> oldState.match("facing_direction", "7"), "minecraft:light_block",
+                new NewState("block_light_level", 14)
+        );
+        context.remapState("minecraft:end_rod", "minecraft:end_rod",
+                new CopyStates("facing_direction")
+        );
 
-        context.addUpdater()
-                .match("name", "minecraft:log")
-                .visit("states")
-                .match("direction", "3")
-                .match("old_log_type", "birch")
-                .addProperty("pillar_axis", "y")
-                .addProperty("stripped_bit", (byte) 0)
-                .addProperty("wood_type", "birch")
-                .removeProperty("direction")
-                .removeProperty("old_log_type")
-                .popVisit()
-                .replaceValue("name", "minecraft:wood");
-        context.addUpdater()
-                .match("name", "minecraft:log")
-                .visit("states")
-                .match("direction", "3")
-                .match("old_log_type", "jungle")
-                .addProperty("pillar_axis", "y")
-                .addProperty("stripped_bit", (byte) 0)
-                .addProperty("wood_type", "jungle")
-                .removeProperty("direction")
-                .removeProperty("old_log_type")
-                .popVisit()
-                .replaceValue("name", "minecraft:wood");
-        context.addUpdater()
-                .match("name", "minecraft:log")
-                .visit("states")
-                .match("direction", "3")
-                .match("old_log_type", "oak")
-                .addProperty("pillar_axis", "y")
-                .addProperty("stripped_bit", (byte) 0)
-                .addProperty("wood_type", "oak")
-                .removeProperty("direction")
-                .removeProperty("old_log_type")
-                .popVisit()
-                .replaceValue("name", "minecraft:wood");
-        context.addUpdater()
-                .match("name", "minecraft:log")
-                .visit("states")
-                .match("direction", "3")
-                .match("old_log_type", "spruce")
-                .addProperty("pillar_axis", "y")
-                .addProperty("stripped_bit", (byte) 0)
-                .addProperty("wood_type", "spruce")
-                .removeProperty("direction")
-                .removeProperty("old_log_type")
-                .popVisit()
-                .replaceValue("name", "minecraft:wood");
-        context.addUpdater()
-                .match("name", "minecraft:log")
-                .visit("states")
-                .match("direction", "0")
-                .addProperty("pillar_axis", "y")
-                .removeProperty("direction")
-                .popVisit()
-                .replaceValue("name", "minecraft:log");
-        context.addUpdater()
-                .match("name", "minecraft:log")
-                .visit("states")
-                .match("direction", "1")
-                .addProperty("pillar_axis", "x")
-                .removeProperty("direction")
-                .popVisit()
-                .replaceValue("name", "minecraft:log");
-        context.addUpdater()
-                .match("name", "minecraft:log")
-                .visit("states")
-                .match("direction", "2")
-                .addProperty("pillar_axis", "z")
-                .removeProperty("direction")
-                .popVisit()
-                .replaceValue("name", "minecraft:log");
+        context.remapState("minecraft:log", oldState -> oldState.match("direction", "3").match("old_log_type", "birch"), "minecraft:wood",
+                new NewState("pillar_axis", "y"),
+                new NewState("stripped_bit", (byte) 0),
+                new NewState("wood_type", "birch")
+        );
+        context.remapState("minecraft:log", oldState -> oldState.match("direction", "3").match("old_log_type", "jungle"), "minecraft:wood",
+                new NewState("pillar_axis", "y"),
+                new NewState("stripped_bit", (byte) 0),
+                new NewState("wood_type", "jungle")
+        );
+        context.remapState("minecraft:log", oldState -> oldState.match("direction", "3").match("old_log_type", "oak"), "minecraft:wood",
+                new NewState("pillar_axis", "y"),
+                new NewState("stripped_bit", (byte) 0),
+                new NewState("wood_type", "oak")
+        );
+        context.remapState("minecraft:log", oldState -> oldState.match("direction", "3").match("old_log_type", "spruce"), "minecraft:wood",
+                new NewState("pillar_axis", "y"),
+                new NewState("stripped_bit", (byte) 0),
+                new NewState("wood_type", "spruce")
+        );
+        context.remapState("minecraft:log", oldState -> oldState.match("direction", "0"), "minecraft:log",
+                new CopyStates("old_log_type"),
+                new NewState("pillar_axis", "y")
+        );
+        context.remapState("minecraft:log", oldState -> oldState.match("direction", "1"), "minecraft:log",
+                new CopyStates("old_log_type"),
+                new NewState("pillar_axis", "x")
+        );
+        context.remapState("minecraft:log", oldState -> oldState.match("direction", "2"), "minecraft:log",
+                new CopyStates("old_log_type"),
+                new NewState("pillar_axis", "z")
+        );
 
-        context.addUpdater()
-                .match("name", "minecraft:log2")
-                .visit("states")
-                .match("direction", "3")
-                .match("new_log_type", "acacia")
-                .addProperty("pillar_axis", "y")
-                .addProperty("stripped_bit", (byte) 0)
-                .addProperty("wood_type", "acacia")
-                .removeProperty("direction")
-                .removeProperty("new_log_type")
-                .popVisit()
-                .replaceValue("name", "minecraft:wood");
-        context.addUpdater()
-                .match("name", "minecraft:log2")
-                .visit("states")
-                .match("direction", "3")
-                .match("new_log_type", "dark_oak")
-                .addProperty("pillar_axis", "y")
-                .addProperty("stripped_bit", (byte) 0)
-                .addProperty("wood_type", "dark_oak")
-                .removeProperty("direction")
-                .removeProperty("new_log_type")
-                .popVisit()
-                .replaceValue("name", "minecraft:wood");
-        context.addUpdater()
-                .match("name", "minecraft:log2")
-                .visit("states")
-                .match("direction", "0")
-                .addProperty("pillar_axis", "y")
-                .removeProperty("direction")
-                .popVisit()
-                .replaceValue("name", "minecraft:log2");
-        context.addUpdater()
-                .match("name", "minecraft:log2")
-                .visit("states")
-                .match("direction", "1")
-                .addProperty("pillar_axis", "x")
-                .removeProperty("direction")
-                .popVisit()
-                .replaceValue("name", "minecraft:log2");
-        context.addUpdater()
-                .match("name", "minecraft:log2")
-                .visit("states")
-                .match("direction", "2")
-                .addProperty("pillar_axis", "z")
-                .removeProperty("direction")
-                .popVisit()
-                .replaceValue("name", "minecraft:log2");
+        context.remapState("minecraft:log2", oldState -> oldState.match("direction", "3").match("new_log_type", "acacia"), "minecraft:wood",
+                new NewState("pillar_axis", "y"),
+                new NewState("stripped_bit", (byte) 0),
+                new NewState("wood_type", "acacia")
+        );
+        context.remapState("minecraft:log2", oldState -> oldState.match("direction", "3").match("new_log_type", "dark_oak"), "minecraft:wood",
+                new NewState("pillar_axis", "y"),
+                new NewState("stripped_bit", (byte) 0),
+                new NewState("wood_type", "dark_oak")
+        );
+        context.remapState("minecraft:log2", oldState -> oldState.match("direction", "0"), "minecraft:log2",
+                new CopyStates("new_log_type"),
+                new NewState("pillar_axis", "y")
+        );
+        context.remapState("minecraft:log2", oldState -> oldState.match("direction", "1"), "minecraft:log2",
+                new CopyStates("new_log_type"),
+                new NewState("pillar_axis", "x")
+        );
+        context.remapState("minecraft:log2", oldState -> oldState.match("direction", "2"), "minecraft:log2",
+                new CopyStates("new_log_type"),
+                new NewState("pillar_axis", "z")
+        );
 
         context.addProperty("minecraft:coral", "dead_bit", (byte) 0);
         context.addProperty("minecraft:wood", "pillar_axis", "y");

@@ -84,13 +84,16 @@ class BlockStateUpdaterTest {
                         .putString("name", "minecraft:wood")
                         .putCompound("states", NbtMap.builder()
                                 .putInt("stripped_bit", 0)
-                                .putString("wood_type", "birch")
+                                .putString("wood_type", "oak")
+                                .putString("pillar_axis", "y")
                                 .build()
                         )
                         .build(),
                 BlockStateUpdaters.LATEST_VERSION
         );
-        assertEquals("minecraft:birch_wood", wood0.getString("name"));
+        assertEquals("minecraft:oak_wood", wood0.getString("name"));
+        assertFalse(wood0.getCompound("states").containsKey("stripped_bit"));
+        assertFalse(wood0.getCompound("states").containsKey("wood_type"));
         assertTrue(wood0.getCompound("states").containsKey("pillar_axis"));
 
         var wood1 = BlockStateUpdaters.updateBlockState(
@@ -99,12 +102,15 @@ class BlockStateUpdaterTest {
                         .putCompound("states", NbtMap.builder()
                                 .putInt("stripped_bit", 1)
                                 .putString("wood_type", "birch")
+                                .putString("pillar_axis", "y")
                                 .build()
                         )
                         .build(),
                 BlockStateUpdaters.LATEST_VERSION
         );
         assertEquals("minecraft:stripped_birch_wood", wood1.getString("name"));
+        assertFalse(wood1.getCompound("states").containsKey("stripped_bit"));
+        assertFalse(wood1.getCompound("states").containsKey("wood_type"));
         assertTrue(wood1.getCompound("states").containsKey("pillar_axis"));
     }
 

@@ -7,6 +7,8 @@ import org.cloudburstmc.nbt.NbtMap;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.allaymc.updater.common.util.TagUtils.fnv1a_32_nbt;
+
 @UtilityClass
 public class BlockStateUpdaters {
     public static final int LATEST_VERSION;
@@ -59,6 +61,15 @@ public class BlockStateUpdaters {
     }
 
     public static NbtMap updateBlockState(NbtMap tag, int updateToVersion) {
-        return CONTEXT.updateStates(tag, updateToVersion);
+        var validTagBuilder = NbtMap.builder();
+        validTagBuilder.putString("name", tag.getString("name"));
+        if (tag.containsKey("val")) {
+            validTagBuilder.putInt("val", tag.getInt("val"));
+        } else {
+            validTagBuilder.putCompound("states", tag.getCompound("states"));
+        }
+
+        var updatedState = CONTEXT.updateStates(validTagBuilder.build(), updateToVersion);
+        return updatedState.toBuilder().putInt("version", fnv1a_32_nbt(updatedState)).build();
     }
 }

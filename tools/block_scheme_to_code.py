@@ -90,54 +90,61 @@ def generate_remap_states(data, code: list[str]):
             old_state = remap.get('oldState', [])
             new_state = remap.get('newState', [])
 
+            prefix = ''
+            flattened_property = ''
+            suffix = ''
+            state_editor_code = []
             if 'newFlattenedName' in remap:
                 new_flattened_name = remap['newFlattenedName']
                 prefix = new_flattened_name['prefix']
                 flattened_property = new_flattened_name['flattenedProperty']
                 suffix = new_flattened_name['suffix']
 
-                value_remaps_code = []
                 if 'flattenedValueRemaps' in new_flattened_name:
                     for old, new in sorted(new_flattened_name['flattenedValueRemaps'].items()):
                         if old == "dummy" and new == "map_not_list":
                             continue
 
-                        value_remaps_code.append(f'new RemapValue("{old}", "{new}")')
-
-                old_state_code = ''
-                if old_state:
-                    for state in old_state:
-                        _, value = format_value(old_state[state])
-                        old_state_code = f'oldState -> oldState.match("{state}", "{value}"), '
-
-                code.append(
-                    f'context.remapState("{block}", {old_state_code}"{prefix}", "{flattened_property}", "{suffix}");')
-                if len(value_remaps_code) > 0:
-                    code[-1] = code[-1].replace(');', ',')
-                    code.append(',\n'.join(value_remaps_code))
-                    code.append(');')
+                        state_editor_code.append(f'new RemapValue("{old}", "{new}")')
             elif 'newName' in remap:
-                if not old_state and not new_state:
-                    continue
+                prefix = remap['newName']
 
-                code.append('context.addUpdater()')
-                code.append(f'.match("name", "{block}")')
-                code.append('.visit("states")')
+            if 'copiedState' in remap:
+                copied_state = remap['copiedState']
+                copied_states_code = ', '.join(f'"{state}"' for state in copied_state)
+                state_editor_code.append(f'new CopyStates({copied_states_code})')
 
+            if new_state:
+                for prop, value in new_state.items():
+                    value, _ = format_value(value)
+                    state_editor_code.append(f'new NewState("{prop}", {value})')
+
+            old_state_code = ''
+            if old_state:
+                old_state_code = 'oldState -> oldState'
+                matches_code = []
                 for state in old_state:
                     _, value = format_value(old_state[state])
-                    code.append(f'.match("{state}", "{value}")')
+                    matches_code.append(f'.match("{state}", "{value}")')
 
-                if new_state:
-                    for state in new_state:
-                        value, _ = format_value(new_state[state])
-                        code.append(f'.addProperty("{state}", {value})')
+                old_state_code += ''.join(matches_code) + ', '
 
-                for state in old_state:
-                    code.append(f'.removeProperty("{state}")')
+            pfs = []
+            if prefix:
+                pfs.append(f'"{prefix}"')
 
-                code.append('.popVisit()')
-                code.append(f'.replaceValue("name", "{remap['newName']}");')
+            if flattened_property:
+                pfs.append(f'"{flattened_property}"')
+
+            if suffix:
+                pfs.append(f'"{suffix}"')
+
+            code.append(
+                f'context.remapState("{block}", {old_state_code}{", ".join(pfs)});')
+            if len(state_editor_code) > 0:
+                code[-1] = code[-1].replace(');', ',')
+                code.append(',\n'.join(state_editor_code))
+                code.append(');')
 
         code.append('')
 

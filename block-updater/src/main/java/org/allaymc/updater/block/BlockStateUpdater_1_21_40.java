@@ -1,6 +1,7 @@
 package org.allaymc.updater.block;
 
 import org.allaymc.updater.block.context.BlockUpdaterContext;
+import org.allaymc.updater.block.context.CopyStates;
 
 /**
  * @author IWareQ
@@ -14,35 +15,25 @@ public class BlockStateUpdater_1_21_40 extends BlockStateUpdater {
 
     @Override
     public void registerUpdaters(BlockUpdaterContext context) {
-        context.addUpdater()
-                .match("name", "minecraft:brown_mushroom_block")
-                .visit("states")
-                .match("huge_mushroom_bits", "10")
-                .removeProperty("huge_mushroom_bits")
-                .popVisit()
-                .replaceValue("name", "minecraft:mushroom_stem");
-        context.addUpdater()
-                .match("name", "minecraft:brown_mushroom_block")
-                .visit("states")
-                .match("huge_mushroom_bits", "15")
-                .removeProperty("huge_mushroom_bits")
-                .popVisit()
-                .replaceValue("name", "minecraft:mushroom_stem");
+        context.remapState("minecraft:brown_mushroom_block", oldState -> oldState.match("huge_mushroom_bits", "10"), "minecraft:mushroom_stem",
+                new CopyStates("huge_mushroom_bits")
+        );
+        context.remapState("minecraft:brown_mushroom_block", oldState -> oldState.match("huge_mushroom_bits", "15"), "minecraft:mushroom_stem",
+                new CopyStates("huge_mushroom_bits")
+        );
+        context.remapState("minecraft:brown_mushroom_block", "minecraft:brown_mushroom_block",
+                new CopyStates("huge_mushroom_bits")
+        );
 
-        context.addUpdater()
-                .match("name", "minecraft:red_mushroom_block")
-                .visit("states")
-                .match("huge_mushroom_bits", "10")
-                .removeProperty("huge_mushroom_bits")
-                .popVisit()
-                .replaceValue("name", "minecraft:mushroom_stem");
-        context.addUpdater()
-                .match("name", "minecraft:red_mushroom_block")
-                .visit("states")
-                .match("huge_mushroom_bits", "15")
-                .removeProperty("huge_mushroom_bits")
-                .popVisit()
-                .replaceValue("name", "minecraft:mushroom_stem");
+        context.remapState("minecraft:red_mushroom_block", oldState -> oldState.match("huge_mushroom_bits", "10"), "minecraft:mushroom_stem",
+                new CopyStates("huge_mushroom_bits")
+        );
+        context.remapState("minecraft:red_mushroom_block", oldState -> oldState.match("huge_mushroom_bits", "15"), "minecraft:mushroom_stem",
+                new CopyStates("huge_mushroom_bits")
+        );
+        context.remapState("minecraft:red_mushroom_block", "minecraft:red_mushroom_block",
+                new CopyStates("huge_mushroom_bits")
+        );
 
         context.removeProperty("minecraft:cherry_wood", "stripped_bit");
         context.removeProperty("minecraft:mangrove_wood", "stripped_bit");

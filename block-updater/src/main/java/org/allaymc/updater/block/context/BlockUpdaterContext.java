@@ -3,6 +3,7 @@ package org.allaymc.updater.block.context;
 import org.allaymc.updater.common.context.UpdaterContext;
 
 import java.util.Arrays;
+import java.util.Set;
 import java.util.function.Consumer;
 
 /**
@@ -63,29 +64,60 @@ public class BlockUpdaterContext extends UpdaterContext<BlockUpdater, BlockUpdat
                 });
     }
 
+    public void remapState(String name, String newName, StateEditor... editors) {
+        remapState(name, $ -> {}, newName, editors);
+    }
+
+    public void remapState(String name, Consumer<BlockUpdater.Builder> filter, String newName, StateEditor... editors) {
+        remapState(name, filter, newName, "", "", editors);
+    }
+
     public void remapState(String name, String prefix, String property, String suffix) {
         this.remapState(name, prefix, property, suffix, new RemapValue[0]);
     }
 
-    public void remapState(String name, String prefix, String property, String suffix, RemapValue... remaps) {
-        remapState(name, $ -> {}, prefix, property, suffix, remaps);
+    public void remapState(String name, String prefix, String property, String suffix, StateEditor... editors) {
+        remapState(name, $ -> {}, prefix, property, suffix, editors);
     }
 
-    public void remapState(String name, Consumer<BlockUpdater.Builder> filter, String prefix, String property, String suffix, RemapValue... remaps) {
+    public void remapState(String name, Consumer<BlockUpdater.Builder> filter, String prefix, String property, String suffix, StateEditor... editors) {
         var updater = this.addUpdater()
                 .match("name", name)
                 .visit("states");
         filter.accept(updater);
 
         updater.edit(property, helper -> {
-            // old value on RemapValue always String
             var oldValue = String.valueOf(helper.getTag());
-            var remapValue = Arrays.stream(remaps)
+            var remapValue = Arrays.stream(editors)
+                    .filter(RemapValue.class::isInstance)
+                    .map(RemapValue.class::cast)
                     .filter(entry -> entry.oldValue().equals(oldValue))
                     .findFirst()
                     .map(RemapValue::newValue)
                     .orElse(oldValue);
             helper.getRootTag().put("name", prefix + remapValue + suffix);
         }).removeProperty(property);
+
+        updater.popVisit().edit("states", helper -> {
+            var copiedStates = Arrays.stream(editors)
+                    .filter(CopyStates.class::isInstance)
+                    .map(CopyStates.class::cast)
+                    .map(CopyStates::states).findFirst();
+            copiedStates.ifPresent(states -> {
+                var preservedStates = Set.of(states);
+                var nbt = helper.getCompoundTag();
+                nbt.keySet().removeIf(key -> !preservedStates.contains(key));
+            });
+        });
+
+        var newStates = Arrays.stream(editors)
+                .filter(NewState.class::isInstance)
+                .map(NewState.class::cast).toList();
+        if (!newStates.isEmpty()) {
+            updater.visit("states");
+            newStates.forEach(newState -> {
+                updater.addProperty(newState.name(), newState.value());
+            });
+        }
     }
 }

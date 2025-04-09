@@ -1,6 +1,7 @@
 package org.allaymc.updater.block;
 
 import org.allaymc.updater.block.context.BlockUpdaterContext;
+import org.allaymc.updater.block.context.CopyStates;
 import org.allaymc.updater.block.context.RemapValue;
 
 /**
@@ -92,20 +93,24 @@ public class BlockStateUpdater_1_21_20 extends BlockStateUpdater {
 
         context.remapState("minecraft:coral_fan_hang", oldState -> oldState.match("dead_bit", "0"), "minecraft:", "coral_hang_type_bit", "_coral_wall_fan",
                 new RemapValue("0", "tube"),
-                new RemapValue("1", "brain")
+                new RemapValue("1", "brain"),
+                new CopyStates("coral_direction")
         );
         context.remapState("minecraft:coral_fan_hang", oldState -> oldState.match("dead_bit", "1"), "minecraft:dead_", "coral_hang_type_bit", "_coral_wall_fan",
                 new RemapValue("0", "tube"),
-                new RemapValue("1", "brain")
+                new RemapValue("1", "brain"),
+                new CopyStates("coral_direction")
         );
 
         context.remapState("minecraft:coral_fan_hang2", oldState -> oldState.match("dead_bit", "0"), "minecraft:", "coral_hang_type_bit", "e_coral_wall_fan",
                 new RemapValue("0", "bubbl"),
-                new RemapValue("1", "fir")
+                new RemapValue("1", "fir"),
+                new CopyStates("coral_direction")
         );
         context.remapState("minecraft:coral_fan_hang2", oldState -> oldState.match("dead_bit", "1"), "minecraft:dead_", "coral_hang_type_bit", "e_coral_wall_fan",
                 new RemapValue("0", "bubbl"),
-                new RemapValue("1", "fir")
+                new RemapValue("1", "fir"),
+                new CopyStates("coral_direction")
         );
 
         context.removeProperty("minecraft:coral_fan_hang3", "coral_hang_type_bit");
