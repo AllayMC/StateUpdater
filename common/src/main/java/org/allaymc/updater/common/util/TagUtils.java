@@ -4,10 +4,7 @@ import org.cloudburstmc.nbt.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TagUtils {
     //https://gist.github.com/Alemiz112/504d0f79feac7ef57eda174b668dd345
@@ -61,6 +58,20 @@ public class TagUtils {
             case Boolean bool -> bool ? "1" : "0";
             default -> throw new IllegalArgumentException("Invalid tag: " + tag.getClass().getSimpleName());
         };
+    }
+
+    public static NbtMap generateVersionFor(NbtMap tag) {
+        // From Allay
+        // Make sure that tree map is used
+        // If the map inside states nbt is not tree map
+        // the block state hash will be wrong!
+        // To calculate the hash of the block state
+        // "name" field must be in the first place
+        var newTag = NbtMap.builder()
+                .putString("name", tag.getString("name"))
+                .putCompound("states", NbtMap.fromMap(new TreeMap<>(tag.getCompound("states"))))
+                .build();
+        return newTag.toBuilder().putInt("version", fnv1a_32_nbt(newTag)).build();
     }
 
     /**
