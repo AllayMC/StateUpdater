@@ -1,3 +1,6 @@
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+
 plugins {
     id("java-library")
     id("maven-publish")
@@ -88,5 +91,32 @@ subprojects {
         withType<Test> {
             useJUnitPlatform()
         }
+    }
+
+    val minifyJsonResources by tasks.registering {
+        dependsOn(tasks.processResources)
+
+        doLast {
+            val resourcesDir = layout.buildDirectory.dir("resources/main").get().asFile
+            if (!resourcesDir.exists()) {
+                logger.warn("Resources directory does not exist: ${resourcesDir.absolutePath}")
+                return@doLast
+            }
+
+            resourcesDir.walkTopDown().filter { it.isFile && it.extension == "json" }.forEach { file ->
+                try {
+                    val parsed = JsonSlurper().parse(file)
+                    val minified = JsonOutput.toJson(parsed)
+                    file.writeText(minified)
+                    logger.lifecycle("Minified: ${file.name}")
+                } catch (e: Exception) {
+                    logger.warn("Failed to minify ${file.name}: ${e.message}")
+                }
+            }
+        }
+    }
+
+    tasks.named("classes") {
+        dependsOn(minifyJsonResources)
     }
 }
