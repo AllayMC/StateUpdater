@@ -6,6 +6,7 @@ on:
     paths:
       - .github/workflows/gradle.yml
       - gradle.properties
+      - build.gradle.kts
       - block-updater/**
       - item-updater/**
       - common/**
@@ -13,6 +14,7 @@ on:
     paths:
       - .github/workflows/gradle.yml
       - gradle.properties
+      - build.gradle.kts
       - block-updater/**
       - item-updater/**
       - common/**
