@@ -9,8 +9,12 @@ plugins {
 
 subprojects {
     apply(plugin = "java-library")
+    apply(plugin = "com.vanniktech.maven.publish")
 
     group = "org.allaymc.stateupdater"
+    if (project.name in listOf("block-updater", "item-updater")) {
+        project.version = rootProject.property(project.name + ".version").toString()
+    }
 
     val minifyJsonTask by tasks.registering {
         dependsOn(tasks.processResources)
@@ -40,6 +44,11 @@ subprojects {
             options.encoding = "UTF-8"
         }
 
+        // We already have sources jar, so no need to build Javadoc, which would cause a lot of warnings
+        withType<Javadoc> {
+            enabled = false
+        }
+
         withType<Test> {
             useJUnitPlatform()
         }
@@ -53,6 +62,7 @@ subprojects {
         toolchain {
             languageVersion.set(JavaLanguageVersion.of(21))
         }
+        withSourcesJar()
     }
 
     repositories {
@@ -73,56 +83,41 @@ subprojects {
         testAnnotationProcessor("org.projectlombok:lombok:1.18.38")
     }
 
-    if (project.name in listOf("block-updater", "item-updater")) {
-        apply(plugin = "com.vanniktech.maven.publish")
+    configure<MavenPublishBaseExtension> {
+        publishToMavenCentral()
+        signAllPublications()
 
-        project.version = rootProject.property(project.name + ".version").toString()
+        coordinates(project.group.toString(), project.name, project.version.toString())
 
-        java {
-            withSourcesJar()
-        }
+        pom {
+            name.set(project.name)
+            description.set("Updates Minecraft: Bedrock Edition block & item states to the latest version.")
+            inceptionYear.set("2024")
+            url.set("https://github.com/AllayMC/StateUpdater")
 
-        // We already have sources jar, so no need to build Javadoc, which would cause a lot of warnings
-        tasks.withType<Javadoc> {
-            enabled = false
-        }
-
-        configure<MavenPublishBaseExtension> {
-            publishToMavenCentral()
-            signAllPublications()
-
-            coordinates(project.group.toString(), project.name, project.version.toString())
-
-            pom {
-                name.set(project.name)
-                description.set("Updates Minecraft: Bedrock Edition block & item states to the latest version.")
-                inceptionYear.set("2024")
+            scm {
+                connection.set("scm:git:git://github.com/AllayMC/StateUpdater.git")
+                developerConnection.set("scm:git:ssh://github.com/AllayMC/StateUpdater.git")
                 url.set("https://github.com/AllayMC/StateUpdater")
+            }
 
-                scm {
-                    connection.set("scm:git:git://github.com/AllayMC/StateUpdater.git")
-                    developerConnection.set("scm:git:ssh://github.com/AllayMC/StateUpdater.git")
-                    url.set("https://github.com/AllayMC/StateUpdater")
+            licenses {
+                license {
+                    name.set("LGPL 3.0")
+                    url.set("https://www.gnu.org/licenses/lgpl-3.0.en.html")
                 }
+            }
 
-                licenses {
-                    license {
-                        name.set("LGPL 3.0")
-                        url.set("https://www.gnu.org/licenses/lgpl-3.0.en.html")
-                    }
+            developers {
+                developer {
+                    name.set("CloudburstMC Team")
+                    organization.set("CloudburstMC")
+                    organizationUrl.set("https://github.com/CloudburstMC")
                 }
-
-                developers {
-                    developer {
-                        name.set("CloudburstMC Team")
-                        organization.set("CloudburstMC")
-                        organizationUrl.set("https://github.com/CloudburstMC")
-                    }
-                    developer {
-                        name.set("AllayMC Team")
-                        organization.set("AllayMC")
-                        organizationUrl.set("https://github.com/AllayMC")
-                    }
+                developer {
+                    name.set("AllayMC Team")
+                    organization.set("AllayMC")
+                    organizationUrl.set("https://github.com/AllayMC")
                 }
             }
         }
