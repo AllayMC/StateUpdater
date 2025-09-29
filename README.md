@@ -1,4 +1,7 @@
-# StateUpdater [![](https://jitpack.io/v/AllayMC/StateUpdater.svg)](https://jitpack.io/#AllayMC/StateUpdater)
+# StateUpdater
+
+![Block Updater](https://img.shields.io/maven-central/v/org.allaymc.stateupdater/block-updater?label=block-updater)
+![Item Updater](https://img.shields.io/maven-central/v/org.allaymc.stateupdater/item-updater?label=item-updater)
 
 Extracted state mappings from the Minecraft: Bedrock Edition used to update state NBT tags to the latest version.
 
@@ -8,11 +11,14 @@ All updaters are auto-generated!
 
 ```kotlin
 repositories {
-    maven("https://www.jitpack.io/")
+    mavenCentral()
 }
 
 dependencies {
-    implementation("org.allaymc:stateupdater:master-SNAPSHOT")
+    // block-updater
+    implementation("org.allaymc.stateupdater:block-updater:<version>")
+    // item-updater
+    implementation("org.allaymc.stateupdater:item-updater:<version>")
 }
 ```
 
