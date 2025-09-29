@@ -47,7 +47,7 @@ jobs:
           ./gradlew build
 
       - name: Publish to Maven Central
-        if: success() && github.event_name == 'push' && github.repository == 'AllayMC/Allay' && contains(github.ref_name, 'master')
+        if: success() && github.event_name == 'push' && github.repository == 'AllayMC/StateUpdater' && contains(github.ref_name, 'master')
         run: ./gradlew publishToMavenCentral
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_USERNAME }}
