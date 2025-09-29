@@ -70,15 +70,15 @@ subprojects {
     }
 
     dependencies {
-        implementation("com.fasterxml.jackson.core:jackson-databind:2.17.2")
-        implementation("org.allaymc:NBT:3.0.9")
+        implementation("com.fasterxml.jackson.core:jackson-databind:2.20.0")
+        implementation("org.allaymc:NBT:3.0.10")
 
-        compileOnly("org.projectlombok:lombok:1.18.38")
-        annotationProcessor("org.projectlombok:lombok:1.18.38")
+        compileOnly("org.projectlombok:lombok:1.18.42")
+        annotationProcessor("org.projectlombok:lombok:1.18.42")
 
         testImplementation("org.junit.jupiter:junit-jupiter:5.13.4")
         testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.13.4")
-        testAnnotationProcessor("org.projectlombok:lombok:1.18.38")
+        testAnnotationProcessor("org.projectlombok:lombok:1.18.42")
     }
 
     configure<MavenPublishBaseExtension> {
