@@ -65,13 +65,11 @@ subprojects {
 
     repositories {
         mavenCentral()
-        // TODO: remove jitpack after migrate NBT library
-        maven("https://www.jitpack.io/")
     }
 
     dependencies {
         implementation("com.fasterxml.jackson.core:jackson-databind:2.17.2")
-        implementation("org.allaymc:NBT:3.0.9")
+        implementation("org.allaymc:nbt:3.0.10")
 
         compileOnly("org.projectlombok:lombok:1.18.38")
         annotationProcessor("org.projectlombok:lombok:1.18.38")
