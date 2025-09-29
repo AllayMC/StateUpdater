@@ -44,11 +44,6 @@ subprojects {
             useJUnitPlatform()
         }
 
-        // We already have sources jar, so no need to build Javadoc, which would cause a lot of warnings
-        withType<Javadoc> {
-            enabled = false
-        }
-
         named("classes") {
             dependsOn(minifyJsonTask)
         }
@@ -58,7 +53,6 @@ subprojects {
         toolchain {
             languageVersion.set(JavaLanguageVersion.of(21))
         }
-        withSourcesJar()
     }
 
     repositories {
@@ -71,17 +65,27 @@ subprojects {
         implementation("com.fasterxml.jackson.core:jackson-databind:2.17.2")
         implementation("org.allaymc:NBT:3.0.9")
 
-        compileOnly("org.projectlombok:lombok:1.18.34")
-        annotationProcessor("org.projectlombok:lombok:1.18.34")
+        compileOnly("org.projectlombok:lombok:1.18.38")
+        annotationProcessor("org.projectlombok:lombok:1.18.38")
 
-        testImplementation(platform("org.junit:junit-bom:5.10.3"))
-        testImplementation("org.junit.jupiter:junit-jupiter")
+        testImplementation("org.junit.jupiter:junit-jupiter:5.13.4")
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.13.4")
+        testAnnotationProcessor("org.projectlombok:lombok:1.18.38")
     }
 
     if (project.name in listOf("block-updater", "item-updater")) {
         apply(plugin = "com.vanniktech.maven.publish")
 
         project.version = rootProject.property(project.name + ".version").toString()
+
+        java {
+            withSourcesJar()
+        }
+
+        // We already have sources jar, so no need to build Javadoc, which would cause a lot of warnings
+        tasks.withType<Javadoc> {
+            enabled = false
+        }
 
         configure<MavenPublishBaseExtension> {
             publishToMavenCentral()
