@@ -12,9 +12,7 @@ subprojects {
     apply(plugin = "com.vanniktech.maven.publish")
 
     group = "org.allaymc.stateupdater"
-    if (project.name in listOf("block-updater", "item-updater")) {
-        project.version = rootProject.property(project.name + ".version").toString()
-    }
+    project.version = rootProject.property(project.name + ".version").toString()
 
     val minifyJsonTask by tasks.registering {
         dependsOn(tasks.processResources)
