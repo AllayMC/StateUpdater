@@ -68,14 +68,14 @@ subprojects {
     }
 
     dependencies {
-        implementation("com.fasterxml.jackson.core:jackson-databind:2.20.0")
+        implementation("com.fasterxml.jackson.core:jackson-databind:2.20.1")
         implementation("org.allaymc:nbt:3.0.10")
 
         compileOnly("org.projectlombok:lombok:1.18.42")
         annotationProcessor("org.projectlombok:lombok:1.18.42")
 
-        testImplementation("org.junit.jupiter:junit-jupiter:6.0.0")
-        testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.0.0")
+        testImplementation("org.junit.jupiter:junit-jupiter:6.0.1")
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.0.1")
         testAnnotationProcessor("org.projectlombok:lombok:1.18.42")
     }
 
