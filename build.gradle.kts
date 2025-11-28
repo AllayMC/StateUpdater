@@ -4,7 +4,7 @@ import com.vanniktech.maven.publish.MavenPublishBaseExtension
 
 plugins {
     id("java-library")
-    id("com.vanniktech.maven.publish") version "0.34.0" apply false
+    id("com.vanniktech.maven.publish") version "0.35.0" apply false
 }
 
 subprojects {
