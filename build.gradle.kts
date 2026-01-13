@@ -74,8 +74,8 @@ subprojects {
         compileOnly("org.projectlombok:lombok:1.18.42")
         annotationProcessor("org.projectlombok:lombok:1.18.42")
 
-        testImplementation("org.junit.jupiter:junit-jupiter:6.0.1")
-        testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.0.1")
+        testImplementation("org.junit.jupiter:junit-jupiter:6.0.2")
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.0.2")
         testAnnotationProcessor("org.projectlombok:lombok:1.18.42")
     }
 
