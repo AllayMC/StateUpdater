@@ -4,7 +4,7 @@ import com.vanniktech.maven.publish.MavenPublishBaseExtension
 
 plugins {
     id("java-library")
-    id("com.vanniktech.maven.publish") version "0.35.0" apply false
+    id("com.vanniktech.maven.publish") version "0.36.0" apply false
 }
 
 subprojects {
@@ -68,14 +68,14 @@ subprojects {
     }
 
     dependencies {
-        implementation("com.fasterxml.jackson.core:jackson-databind:2.20.1")
+        implementation("com.fasterxml.jackson.core:jackson-databind:2.21.0")
         implementation("org.allaymc:nbt:3.0.10")
 
         compileOnly("org.projectlombok:lombok:1.18.42")
         annotationProcessor("org.projectlombok:lombok:1.18.42")
 
-        testImplementation("org.junit.jupiter:junit-jupiter:6.0.1")
-        testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.0.1")
+        testImplementation("org.junit.jupiter:junit-jupiter:6.0.2")
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.0.2")
         testAnnotationProcessor("org.projectlombok:lombok:1.18.42")
     }
 
