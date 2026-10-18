@@ -163,4 +163,88 @@ class BlockStateUpdaterTest {
         assertFalse(states.containsKey("active"));
         assertEquals("dormant", states.getString("creaking_heart_state"));
     }
+
+    @Test
+    void addsStraightCornerToStairs() {
+        var stairs = updateToLatest("minecraft:oak_stairs", NbtMap.builder()
+                .putBoolean("upside_down_bit", true)
+                .putInt("weirdo_direction", 2)
+                .build());
+
+        var states = stairs.getCompound("states");
+        assertEquals("minecraft:oak_stairs", stairs.getString("name"));
+        assertEquals("none", states.getString("minecraft:corner"));
+        assertTrue(states.getBoolean("upside_down_bit"));
+        assertEquals(2, states.getInt("weirdo_direction"));
+    }
+
+    @Test
+    void keepsAnExistingStairCorner() {
+        var stairs = updateToLatest("minecraft:oak_stairs", NbtMap.builder()
+                .putString("minecraft:corner", "inner_left")
+                .putBoolean("upside_down_bit", false)
+                .putInt("weirdo_direction", 0)
+                .build());
+
+        assertEquals("inner_left", stairs.getCompound("states").getString("minecraft:corner"));
+    }
+
+    @Test
+    void addsDisconnectedSidesToFencesPanesAndBars() {
+        for (var name : new String[]{"minecraft:oak_fence", "minecraft:glass_pane", "minecraft:iron_bars", "minecraft:poplar_fence"}) {
+            var states = updateToLatest(name, NbtMap.EMPTY).getCompound("states");
+            for (var side : new String[]{"north", "east", "south", "west"}) {
+                assertEquals((byte) 0, states.getByte("minecraft:connection_" + side), name + " " + side);
+            }
+        }
+    }
+
+    @Test
+    void keepsExistingConnections() {
+        var states = updateToLatest("minecraft:oak_fence", NbtMap.builder()
+                .putByte("minecraft:connection_north", (byte) 1)
+                .putByte("minecraft:connection_east", (byte) 0)
+                .putByte("minecraft:connection_south", (byte) 1)
+                .putByte("minecraft:connection_west", (byte) 0)
+                .build()).getCompound("states");
+
+        assertEquals((byte) 1, states.getByte("minecraft:connection_north"));
+        assertEquals((byte) 1, states.getByte("minecraft:connection_south"));
+    }
+
+    @Test
+    void leavesUnrelatedBlocksAlone() {
+        var wall = updateToLatest("minecraft:cobblestone_wall", NbtMap.builder()
+                .putString("wall_connection_type_north", "short")
+                .build()).getCompound("states");
+
+        assertFalse(wall.containsKey("minecraft:connection_north"));
+        assertFalse(wall.containsKey("minecraft:corner"));
+    }
+
+    @Test
+    void doesNotApply12650StatesWhenTargetingAnOlderVersion() {
+        var stairs = BlockStateUpdaters.updateBlockState(
+                NbtMap.builder()
+                        .putString("name", "minecraft:oak_stairs")
+                        .putCompound("states", NbtMap.builder()
+                                .putBoolean("upside_down_bit", false)
+                                .putInt("weirdo_direction", 0)
+                                .build())
+                        .build(),
+                BlockStateUpdater_1_26_30.INSTANCE.getVersion()
+        );
+
+        assertFalse(stairs.getCompound("states").containsKey("minecraft:corner"));
+    }
+
+    private static NbtMap updateToLatest(String name, NbtMap states) {
+        return BlockStateUpdaters.updateBlockState(
+                NbtMap.builder()
+                        .putString("name", name)
+                        .putCompound("states", states)
+                        .build(),
+                BlockStateUpdaters.LATEST_VERSION
+        );
+    }
 }
