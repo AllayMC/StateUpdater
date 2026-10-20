@@ -25,38 +25,46 @@ public class BlockUpdater extends BaseUpdater<BlockUpdater, BlockUpdater.Builder
 
     @SuppressWarnings("UnusedReturnValue")
     public class Builder extends BaseUpdater<BlockUpdater, BlockUpdater.Builder>.Builder {
+        public Builder matchValue(String key, Object value) {
+            BlockUpdater.this.filters.add(helper -> {
+                var states = helper.getCompoundTag();
+                return states != null && value.equals(states.get(key));
+            });
+            return this.self();
+        }
+
         public Builder addProperty(String key, Object value) {
-            filters.add(COMPOUND_FILTER);
-            filters.add(new HasKeyFilter(key, true));
-            updaters.add(helper -> helper.getCompoundTag().put(key, value));
-            return self();
+            BlockUpdater.this.filters.add(COMPOUND_FILTER);
+            BlockUpdater.this.filters.add(new HasKeyFilter(key, true));
+            BlockUpdater.this.updaters.add(helper -> helper.getCompoundTag().put(key, value));
+            return this.self();
         }
 
         public Builder removeProperty(String key) {
-            filters.add(COMPOUND_FILTER);
-            filters.add(new HasKeyFilter(key));
-            updaters.add(helper -> helper.getCompoundTag().remove(key));
-            return self();
+            BlockUpdater.this.filters.add(COMPOUND_FILTER);
+            BlockUpdater.this.filters.add(new HasKeyFilter(key));
+            BlockUpdater.this.updaters.add(helper -> helper.getCompoundTag().remove(key));
+            return this.self();
         }
 
         public Builder renameProperty(String oldKey, String newKey) {
-            filters.add(COMPOUND_FILTER);
-            filters.add(new HasKeyFilter(oldKey));
-            updaters.add(helper -> {
+            BlockUpdater.this.filters.add(COMPOUND_FILTER);
+            BlockUpdater.this.filters.add(new HasKeyFilter(oldKey));
+            BlockUpdater.this.updaters.add(helper -> {
                 var tag = helper.getCompoundTag();
                 tag.put(newKey, tag.remove(oldKey));
             });
-            return self();
+            return this.self();
         }
 
         public Builder addCompound(String key) {
-            filters.add(COMPOUND_FILTER);
-            updaters.add(helper -> helper.getCompoundTag().put(key, new LinkedHashMap<>()));
-            return self();
+            BlockUpdater.this.filters.add(COMPOUND_FILTER);
+            BlockUpdater.this.updaters.add(helper -> helper.getCompoundTag().put(key, new LinkedHashMap<>()));
+            return this.self();
         }
 
         public Builder visit(String key) {
-            filters.add(helper -> {
+            BlockUpdater.this.filters.add(helper -> {
                 var compoundTag = helper.getCompoundTag();
                 if (compoundTag == null || !compoundTag.containsKey(key)) {
                     return false;
@@ -65,12 +73,12 @@ public class BlockUpdater extends BaseUpdater<BlockUpdater, BlockUpdater.Builder
                 helper.pushChild(key);
                 return true;
             });
-            updaters.add(helper -> helper.pushChild(key));
-            return self();
+            BlockUpdater.this.updaters.add(helper -> helper.pushChild(key));
+            return this.self();
         }
 
         public Builder popVisit() {
-            filters.add(helper -> {
+            BlockUpdater.this.filters.add(helper -> {
                 if (helper.canPopChild()) {
                     helper.popChild();
                     return true;
@@ -78,13 +86,13 @@ public class BlockUpdater extends BaseUpdater<BlockUpdater, BlockUpdater.Builder
 
                 return false;
             });
-            updaters.add(CompoundTagEditHelper::popChild);
+            BlockUpdater.this.updaters.add(CompoundTagEditHelper::popChild);
             return this;
         }
 
 
         public Builder tryEdit(String name, Consumer<CompoundTagEditHelper> function) {
-            updaters.add(helper -> {
+            BlockUpdater.this.updaters.add(helper -> {
                 var compoundTag = helper.getCompoundTag();
                 if (compoundTag == null || !compoundTag.containsKey(name)) {
                     return;
@@ -94,17 +102,17 @@ public class BlockUpdater extends BaseUpdater<BlockUpdater, BlockUpdater.Builder
                 function.accept(helper);
                 helper.popChild();
             });
-            return self();
+            return this.self();
         }
 
         public Builder replaceValue(String property, Object newValue) {
-            filters.add(COMPOUND_FILTER);
-            filters.add(new HasKeyFilter(property));
-            updaters.add(helper -> {
+            BlockUpdater.this.filters.add(COMPOUND_FILTER);
+            BlockUpdater.this.filters.add(new HasKeyFilter(property));
+            BlockUpdater.this.updaters.add(helper -> {
                 var tag = helper.getCompoundTag();
                 tag.put(property, newValue);
             });
-            return self();
+            return this.self();
         }
 
         @Override

@@ -46,6 +46,8 @@ public class ItemStateUpdaters {
         updaters.add(ItemStateUpdater_1_21_100.INSTANCE);
         updaters.add(ItemStateUpdater_1_21_110.INSTANCE);
         updaters.add(ItemStateUpdater_1_26_20.INSTANCE);
+        updaters.add(ItemStateUpdater_1_26_40.INSTANCE);
+        updaters.add(ItemStateUpdater_1_26_50.INSTANCE);
 
         var context = new ItemUpdaterContext();
         updaters.forEach(updater -> {

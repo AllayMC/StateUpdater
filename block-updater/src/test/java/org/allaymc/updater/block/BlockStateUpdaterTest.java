@@ -83,7 +83,7 @@ class BlockStateUpdaterTest {
                 NbtMap.builder()
                         .putString("name", "minecraft:wood")
                         .putCompound("states", NbtMap.builder()
-                                .putInt("stripped_bit", 0)
+                                .putBoolean("stripped_bit", false)
                                 .putString("wood_type", "oak")
                                 .putString("pillar_axis", "y")
                                 .build()
@@ -100,7 +100,7 @@ class BlockStateUpdaterTest {
                 NbtMap.builder()
                         .putString("name", "minecraft:wood")
                         .putCompound("states", NbtMap.builder()
-                                .putInt("stripped_bit", 1)
+                                .putBoolean("stripped_bit", true)
                                 .putString("wood_type", "birch")
                                 .putString("pillar_axis", "y")
                                 .build()
@@ -161,6 +161,6 @@ class BlockStateUpdaterTest {
         var states = creakingHeart0.getCompound("states");
         assertFalse(states.isEmpty());
         assertFalse(states.containsKey("active"));
-        assertEquals("dormant", states.getString("creaking_heart_state"));
+        assertEquals("awake", states.getString("creaking_heart_state"));
     }
 }

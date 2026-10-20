@@ -2,8 +2,10 @@ package org.allaymc.updater.block.context;
 
 import org.allaymc.updater.common.context.UpdaterContext;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
 import java.util.function.Consumer;
 
 /**
@@ -12,6 +14,33 @@ import java.util.function.Consumer;
 public class BlockUpdaterContext extends UpdaterContext<BlockUpdater, BlockUpdater.Builder> {
     public BlockUpdaterContext() {
         super(BlockUpdater::new);
+    }
+
+    public void registerSchema(Consumer<BlockUpdaterContext> remaps, Consumer<BlockUpdaterContext> changes) {
+        List<BlockUpdater> remapUpdaters = new ArrayList<>();
+        List<BlockUpdater> changeUpdaters = new ArrayList<>();
+        remaps.accept(collectingContext(remapUpdaters));
+        changes.accept(collectingContext(changeUpdaters));
+        this.addUpdater().edit("states", helper -> {
+            var tag = helper.getRootTag();
+            for (var updater : remapUpdaters) {
+                if (updater.update(tag)) {
+                    return;
+                }
+            }
+            changeUpdaters.forEach(updater -> updater.update(tag));
+        });
+    }
+
+    private static BlockUpdaterContext collectingContext(List<BlockUpdater> updaters) {
+        return new BlockUpdaterContext() {
+            @Override
+            public BlockUpdater.Builder addUpdater(int version) {
+                var updater = new BlockUpdater(version);
+                updaters.add(updater);
+                return updater.builder();
+            }
+        };
     }
 
     public void addProperty(String name, String key, Object value) {
@@ -65,11 +94,11 @@ public class BlockUpdaterContext extends UpdaterContext<BlockUpdater, BlockUpdat
     }
 
     public void remapState(String name, String newName, StateEditor... editors) {
-        remapState(name, $ -> {}, newName, editors);
+        this.remapState(name, $ -> {}, newName, editors);
     }
 
     public void remapState(String name, Consumer<BlockUpdater.Builder> filter, String newName, StateEditor... editors) {
-        remapState(name, filter, newName, "", "", editors);
+        this.remapState(name, filter, newName, null, "", null, editors);
     }
 
     public void remapState(String name, String prefix, String property, String suffix) {
@@ -77,47 +106,63 @@ public class BlockUpdaterContext extends UpdaterContext<BlockUpdater, BlockUpdat
     }
 
     public void remapState(String name, String prefix, String property, String suffix, StateEditor... editors) {
-        remapState(name, $ -> {}, prefix, property, suffix, editors);
+        this.remapState(name, $ -> {}, prefix, property, suffix, editors);
+    }
+
+    public void remapState(String name, String prefix, String property, String suffix, Class<?> propertyType, StateEditor... editors) {
+        this.remapState(name, $ -> {}, prefix, property, suffix, propertyType, editors);
     }
 
     public void remapState(String name, Consumer<BlockUpdater.Builder> filter, String prefix, String property, String suffix, StateEditor... editors) {
+        this.remapState(name, filter, prefix, property, suffix, null, editors);
+    }
+
+    public void remapState(String name, Consumer<BlockUpdater.Builder> filter, String prefix, String property, String suffix, Class<?> propertyType, StateEditor... editors) {
+        var copiedStates = Arrays.stream(editors)
+                .filter(CopyStates.class::isInstance)
+                .map(CopyStates.class::cast)
+                .map(copy -> new HashSet<>(Arrays.asList(copy.states())))
+                .findFirst().orElse(null);
+        var newStates = Arrays.stream(editors)
+                .filter(NewState.class::isInstance)
+                .map(NewState.class::cast).toList();
+        var valueRemaps = Arrays.stream(editors)
+                .filter(RemapValue.class::isInstance)
+                .map(RemapValue.class::cast).toList();
+
         var updater = this.addUpdater()
                 .match("name", name)
                 .visit("states");
         filter.accept(updater);
-
-        updater.edit(property, helper -> {
-            var oldValue = String.valueOf(helper.getTag());
-            var remapValue = Arrays.stream(editors)
-                    .filter(RemapValue.class::isInstance)
-                    .map(RemapValue.class::cast)
-                    .filter(entry -> entry.oldValue().equals(oldValue))
-                    .findFirst()
-                    .map(RemapValue::newValue)
-                    .orElse(oldValue);
-            helper.getRootTag().put("name", prefix + remapValue + suffix);
-        }).removeProperty(property);
-
         updater.popVisit().edit("states", helper -> {
-            var copiedStates = Arrays.stream(editors)
-                    .filter(CopyStates.class::isInstance)
-                    .map(CopyStates.class::cast)
-                    .map(CopyStates::states).findFirst();
-            copiedStates.ifPresent(states -> {
-                var preservedStates = Set.of(states);
-                var nbt = helper.getCompoundTag();
-                nbt.keySet().removeIf(key -> !preservedStates.contains(key));
-            });
-        });
+            var states = helper.getCompoundTag();
+            if (states == null) {
+                return;
+            }
 
-        var newStates = Arrays.stream(editors)
-                .filter(NewState.class::isInstance)
-                .map(NewState.class::cast).toList();
-        if (!newStates.isEmpty()) {
-            updater.visit("states");
-            newStates.forEach(newState -> {
-                updater.addProperty(newState.name(), newState.value());
-            });
-        }
+            if (property == null) {
+                helper.getRootTag().put("name", prefix);
+            } else if (states.containsKey(property) && (propertyType == null || propertyType.isInstance(states.get(property)))) {
+                var oldValue = String.valueOf(states.get(property));
+                var remappedValue = valueRemaps.stream()
+                        .filter(entry -> entry.oldValue().equals(oldValue))
+                        .findFirst()
+                        .map(RemapValue::newValue)
+                        .orElse(oldValue);
+                helper.getRootTag().put("name", prefix + remappedValue + suffix);
+                if (copiedStates == null) {
+                    states.remove(property);
+                }
+            }
+
+            if (copiedStates != null) {
+                states.keySet().retainAll(copiedStates);
+            }
+            for (var state : newStates) {
+                if (copiedStates == null || !copiedStates.contains(state.name()) || !states.containsKey(state.name())) {
+                    states.put(state.name(), state.value());
+                }
+            }
+        });
     }
 }
