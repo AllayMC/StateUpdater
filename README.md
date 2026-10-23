@@ -117,6 +117,17 @@ Each run performs these steps:
 
 Running the generator again for the same normalized version replaces the generated class. Multiple input schemas targeting that version are not merged. Change the source JSON and regenerate instead of editing generated Java files manually. Output paths are resolved relative to the scripts, so they also work when invoked from another directory.
 
+## Publishing
+
+Keep `common.version` at its published release version while `common` is unchanged. The CI workflow checks the exact
+version's POM on Maven Central before publishing: an existing version is skipped, and a missing version is automatically
+published and awaited before the block and item updaters are uploaded. Network errors and unexpected HTTP responses fail
+the workflow instead of being treated as a missing version. Publishing runs on the same branch are serialized.
+
+To release a changed `common` module, increment `common.version` to a new release version without `-SNAPSHOT` and push to
+`master`. Keep the block and item updater versions suffixed with `-SNAPSHOT` during development. Their existing publication
+behavior is unchanged; formal updater releases still require confirmation in the Central Portal.
+
 ## Acknowledgements
 
 * [BedrockItemUpgradeSchema](https://github.com/pmmp/BedrockItemUpgradeSchema)

@@ -22,7 +22,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # Maven Central can take up to an hour to finish publishing a new common version.
+    timeout-minutes: 90
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -44,6 +48,7 @@ jobs:
           build-scan-terms-of-use-agree: "yes"
 
       - name: Build
+        timeout-minutes: 10
         run: |
           chmod +x gradlew
           ./gradlew build
@@ -51,7 +56,33 @@ jobs:
       - name: Publish to Maven Central
         if: success() && github.event_name == 'push' && github.repository == 'AllayMC/StateUpdater' && contains(github.ref_name, 'master')
         run: |
-          ./gradlew common:publishToMavenCentral
+          set -euo pipefail
+
+          COMMON_VERSION="$(sed -n 's/^common\.version=//p' gradle.properties | tr -d '\r')"
+          if [[ ! "$COMMON_VERSION" =~ ^[0-9A-Za-z][0-9A-Za-z._-]*$ || "$COMMON_VERSION" == *-SNAPSHOT ]]; then
+            echo "::error::common.version must be a non-empty release version"
+            exit 1
+          fi
+
+          COMMON_POM_URL="https://repo.maven.apache.org/maven2/org/allaymc/stateupdater/common/${COMMON_VERSION}/common-${COMMON_VERSION}.pom"
+          HTTP_STATUS="$(curl --silent --show-error --location \
+            --connect-timeout 10 --max-time 30 --retry 3 --retry-delay 5 \
+            --output /dev/null --write-out '%{http_code}' "$COMMON_POM_URL")"
+
+          case "$HTTP_STATUS" in
+            200)
+              echo "common:${COMMON_VERSION} is already published; skipping common"
+              ;;
+            404)
+              # Wait for common to be published before uploading modules that depend on it.
+              ./gradlew common:publishAndReleaseToMavenCentral -PmavenCentralDeploymentValidation=PUBLISHED
+              ;;
+            *)
+              echo "::error::Cannot check common:${COMMON_VERSION} on Maven Central (HTTP ${HTTP_STATUS})"
+              exit 1
+              ;;
+          esac
+
           ./gradlew block-updater:publishToMavenCentral
           ./gradlew item-updater:publishToMavenCentral
         env:
