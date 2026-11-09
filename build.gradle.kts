@@ -68,7 +68,7 @@ subprojects {
     }
 
     dependencies {
-        implementation("com.fasterxml.jackson.core:jackson-databind:2.22.2")
+        implementation("com.fasterxml.jackson.core:jackson-databind:2.22.4")
         implementation("org.allaymc:nbt:3.0.12")
 
         compileOnly("org.projectlombok:lombok:1.18.48")
